@@ -23,13 +23,13 @@ module.exports = {
       template: './index.html',
     }),
     new CleanWebpackPlugin(),
-    /*new CopyWebpackPlugin(
+    new CopyWebpackPlugin(
       {
         patterns: [
           { from: './assets', to: 'assets' },
         ],
       },
-    ),*/
+    ),
   ],
   module: {
     rules: [
