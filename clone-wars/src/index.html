@@ -1,13 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet" />
-  <title></title>
-</head>
-<body>
-</body>
+<html lang="en" class="h-100">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- <link rel="stylesheet" href="./Bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./style/baseLayout.css" /> -->
+    <title></title>
+  </head>
+  <body class="d-flex flex-column h-100">
+    <header>
+      <nav
+        class="navbar navbar-expand-lg navbar-light bg-white header border-bottom"
+      >
+        <div class="container">
+          <div class="col-2">
+            <p>Итого:</p>
+            <p><span id="current-amount">000.00</span> Br</p>
+          </div>
+          <div>
+            <img
+              class="nav-image"
+              src="./assets/calendar4-week.svg"
+              alt="icon calendar"
+            />
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="bg-light">
+      <div id="main-content"></div>
+    </main>
+    <footer class="bg-white border-top">
+      <div class="container">
+        <div class="row justify-content-sm-between align-items-center mt-3">
+          <div class="col-md-2">
+            <button class="btn-sm">
+              <p>Операции</p>
+            </button>
+          </div>
+          <div class="col-md-2">
+            <button class="btn-sm">
+              <p>Отчет</p>
+            </button>
+          </div>
+          <div class="col-md-2">
+            <button class="btn-sm">
+              <p>Добавить расход</p>
+            </button>
+          </div>
+          <div class="col-md-2">
+            <button class="btn-sm">
+              <p>Добавить приход</p>
+            </button>
+          </div>
+          <div class="col-md-2">
+            <button class="btn-sm">
+              <p>Категории</p>
+            </button>
+          </div>
+          <div class="col-md-2">
+            <button class="btn-sm">
+              <p>Настройки</p>
+            </button>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>
