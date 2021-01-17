@@ -19,16 +19,42 @@
           <p><span id="current-amount">000.00</span> Br</p>
         </div>
         <div>
-          <img
-            class="nav-image"
-            src="./assets/calendar4-week.svg"
-            alt="icon calendar"
-          />
+          <select class="form-select" name="interval" id="interval-select">
+            <option value="day">Day</option>
+            <option value="week">Week</option>
+            <option value="month">Month</option>
+            <option value="year">Year</option>
+            <option value="all">All</option>
+          </select>
         </div>
       </div>
     </header>
     <main class="bg-light">
-      <div id="main-content"></div>
+      <div id="mainСontent">
+        <!-- тут все содержимое -->
+        <form>
+          <div class="mb-3">
+            <label for="addExpense" class="form-label">Введите сумму</label>
+            <input
+              type="number"
+              class="form-control updated-form-control"
+              id="addExpense"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label"
+              >Введите категорию</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="exampleInputPassword1"
+            />
+          </div>
+
+          <button type="submit" class="btn btn-primary">Сохранить</button>
+        </form>
+      </div>
     </main>
     <footer class="bg-white border-top">
       <div class="container">
