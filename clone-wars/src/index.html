@@ -1,13 +1,108 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet" />
-  <title></title>
-</head>
-<body>
-</body>
+<html lang="en" class="h-100">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="./assets/favicon.svg" type="image/x-icon" />
+    <title>Clone Wars</title>
+  </head>
+  <body class="d-flex flex-column h-100">
+    <header class="navbar navbar-light bg-white header border-bottom">
+      <div class="container">
+        <div class="col-3">
+          <p>Balance:</p>
+          <p class="fw-bold">
+            <span id="current-amount" class="text-success">000.00 </span
+            ><span id="current-currency">BYN</span>
+          </p>
+        </div>
+        <div>
+          <select class="form-select" name="interval" id="interval-select">
+            <option value="day">Day</option>
+            <option value="week">Week</option>
+            <option value="month">Month</option>
+            <option value="year">Year</option>
+            <option value="all">All</option>
+          </select>
+        </div>
+      </div>
+    </header>
+    <main class="bg-light">
+      <div class="d-flex justify-content-center" id="main-content">
+        <!-- тут все содержимое -->
+        <div class="d-flex flex-column text-center mt-5">
+          <label for="category-select" class="mb-1 text-success fw-bold"
+            >Select category</label
+          >
+          <select
+            class="form-select col-5 mb-4"
+            name="categories"
+            id="category-select"
+          >
+            <option value="none">-- choose one --</option>
+            <option value="food">Food</option>
+            <option value="house">House</option>
+            <option value="dress">Dress</option>
+            <option value="car">Car</option>
+            <option value="health">Health</option>
+          </select>
+          <label for="add-amount" class="mb-1 text-success fw-bold"
+            >Add amount</label
+          >
+          <input
+            id="add-amount"
+            class="form-control input-expense mb-5"
+            placeholder="-- enter the amount --"
+            disabled
+          />
+          <button id="save" class="btn btn-success mx-auto w-100" disabled>
+            Save expense
+          </button>
+          <audio id="audio" src="./assets/audio/expense.mp3"></audio>
+        </div>
+      </div>
+    </main>
+    <footer class="bg-white border-top">
+      <div class="container">
+        <div
+          class="row justify-content-sm-between align-items-center mt-3 text-center"
+        >
+          <div class="col-md-2">
+            <button class="btn btn-success">
+              <p>Операции</p>
+            </button>
+          </div>
+          <div class="col-md-2">
+            <button class="btn btn-success">
+              <p>Отчет</p>
+            </button>
+          </div>
+          <div class="col-md-2">
+            <button class="btn btn-success">
+              <p>Добавить расход</p>
+            </button>
+          </div>
+          <div class="col-md-2">
+            <button class="btn btn-success">
+              <p>Добавить приход</p>
+            </button>
+          </div>
+          <div class="col-md-2">
+            <button class="btn btn-success">
+              <p>Категории</p>
+            </button>
+          </div>
+          <div class="col-md-2">
+            <button class="btn btn-success">
+              <p>Настройки</p>
+            </button>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

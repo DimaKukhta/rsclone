@@ -1,0 +1,32 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  font-size: 1rem;
+  font-family: "Montserrat", sans-serif;
+}
+
+.header {
+  height: 7rem;
+}
+
+.nav-image {
+  width: 4rem;
+}
+
+main {
+  height: calc(100% - 14rem);
+}
+
+footer {
+  height: 7rem;
+  margin-top: auto;
+}
+
+button {
+  width: 7rem;
+}
