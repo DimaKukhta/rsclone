@@ -7,16 +7,18 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
-    <!-- <link rel="stylesheet" href="./Bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="./style/baseLayout.css" /> -->
-    <title></title>
+    <link rel="shortcut icon" href="./assets/favicon.svg" type="image/x-icon" />
+    <title>Clone Wars</title>
   </head>
   <body class="d-flex flex-column h-100">
     <header class="navbar navbar-light bg-white header border-bottom">
       <div class="container">
-        <div class="col-2">
-          <p>Итого:</p>
-          <p><span id="current-amount">000.00</span> Br</p>
+        <div class="col-3">
+          <p>Balance:</p>
+          <p class="fw-bold">
+            <span id="current-amount" class="text-success">000.00 </span
+            ><span id="current-currency">BYN</span>
+          </p>
         </div>
         <div>
           <select class="form-select" name="interval" id="interval-select">
@@ -30,30 +32,34 @@
       </div>
     </header>
     <main class="bg-light">
-      <div id="mainСontent">
+      <div class="d-flex justify-content-center" id="main-content">
         <!-- тут все содержимое -->
-        <form>
-          <div class="mb-3">
-            <label for="addExpense" class="form-label">Введите сумму</label>
-            <input
-              type="number"
-              class="form-control updated-form-control"
-              id="addExpense"
-            />
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label"
-              >Введите категорию</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="exampleInputPassword1"
-            />
-          </div>
-
-          <button type="submit" class="btn btn-primary">Сохранить</button>
-        </form>
+        <div class="d-flex flex-column text-center mt-5">
+          <label for="category-select">Select category</label>
+          <select
+            class="form-select col-5 mb-4"
+            name="categories"
+            id="category-select"
+          >
+            <option value="none" class="">-- choose one --</option>
+            <option value="food">Food</option>
+            <option value="house">House</option>
+            <option value="dress">Dress</option>
+            <option value="car">Car</option>
+            <option value="health">Health</option>
+          </select>
+          <label for="add-amount">Add amount</label>
+          <input
+            id="add-amount"
+            class="input-expense mb-4"
+            placeholder="-- enter the expense --"
+            disabled
+          />
+          <button id="save" class="btn btn-success mx-auto w-100">
+            Save expense
+          </button>
+          <audio id="audio" src="./assets/audio/expense.mp3"></audio>
+        </div>
       </div>
     </main>
     <footer class="bg-white border-top">
