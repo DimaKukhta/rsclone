@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?> <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42">
+  <defs>
+    <style>
+      .a {
+        fill: #198754;
+      }
+    </style>
+  </defs>
+  <title>4 Calendar</title>
+  <g>
+    <path class="a" d="M37,5H35V3a3,3,0,0,0-6,0V5H13V3A3,3,0,0,0,7,3V5H5a5,5,0,0,0-5,5V37a5,5,0,0,0,5,5H37a5,5,0,0,0,5-5V10A5,5,0,0,0,37,5Zm0,31a1,1,0,0,1-1,1H6a1,1,0,0,1-1-1V16a1,1,0,0,1,1-1H36a1,1,0,0,1,1,1Z"/>
+    <circle class="a" cx="12" cy="22" r="2"/>
+    <circle class="a" cx="12" cy="30" r="2"/>
+    <circle class="a" cx="21" cy="22" r="2"/>
+    <circle class="a" cx="21" cy="30" r="2"/>
+    <circle class="a" cx="30" cy="22" r="2"/>
+    <circle class="a" cx="30" cy="30" r="2"/>
+  </g>
+</svg>

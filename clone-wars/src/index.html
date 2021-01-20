@@ -20,7 +20,7 @@
             ><span id="current-currency">BYN</span>
           </p>
         </div>
-        <div>
+        <div class="d-flex">
           <select class="form-select" name="interval" id="interval-select">
             <option value="day">Day</option>
             <option value="week">Week</option>
@@ -28,6 +28,7 @@
             <option value="year">Year</option>
             <option value="all">All</option>
           </select>
+          <img class="header-image" src="./assets/007.svg" alt="" />
         </div>
       </div>
     </header>
@@ -69,38 +70,35 @@
     <footer class="bg-white border-top">
       <div class="container">
         <div
-          class="row justify-content-sm-between align-items-center mt-3 text-center"
+          class="row d-flex flex-row justify-content-sm-between align-items-center mt-3 text-center"
         >
-          <div class="col-md-2">
-            <button class="btn btn-success">
-              <p>Operations</p>
-            </button>
-          </div>
-          <div class="col-md-2">
-            <button class="btn btn-success">
-              <p>Report</p>
-            </button>
-          </div>
-          <div class="col-md-2">
-            <button class="btn btn-success">
-              <p>Add expense</p>
-            </button>
-          </div>
-          <div class="col-md-2">
-            <button class="btn btn-success">
-              <p>Add income</p>
-            </button>
-          </div>
-          <div class="col-md-2">
-            <button class="btn btn-success">
-              <p>Сategories</p>
-            </button>
-          </div>
-          <div class="col-md-2">
-            <button class="btn btn-success">
-              <p>Settings</p>
-            </button>
-          </div>
+          <button type="button" class="btn btn-success nav-button col-md-1">
+            <img width="50px" src="./assets/001.svg" alt="" />
+            Operations
+          </button>
+
+          <button type="button" class="btn btn-success nav-button col-md-1">
+            <img src="./assets/002.svg" alt="" />
+            Report
+          </button>
+
+          <button type="button" class="btn btn-success nav-button col-md-1">
+            Add expense
+          </button>
+
+          <button type="button" class="btn btn-success col-md-1">
+            Add income
+          </button>
+
+          <button type="button" class="btn btn-success col-md-1">
+            <img src="./assets/003.svg" alt="" />
+            Categories
+          </button>
+
+          <button type="button" class="btn btn-success col-md-1">
+            <img src="./assets/004.svg" alt="" />
+            Settings
+          </button>
         </div>
       </div>
     </footer>

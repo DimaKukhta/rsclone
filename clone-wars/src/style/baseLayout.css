@@ -14,8 +14,8 @@ body {
   height: 7rem;
 }
 
-.nav-image {
-  width: 4rem;
+.header-image {
+  margin-left: 1rem;
 }
 
 main {
@@ -27,6 +27,6 @@ footer {
   margin-top: auto;
 }
 
-button {
-  width: 7rem;
-}
+/* .nav-button {
+  width: 2rem;
+} */
