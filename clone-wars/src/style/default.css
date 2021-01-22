@@ -1,5 +1,13 @@
 :root {
-  --color-bg-main: #000000;
+  --color-blue: #0d6efd;
+  --color-green: #198754;
+  --color-red: #dc3545;
+  --color-yellow: #ffc107;
+  --color-light-blue: #0dcaf0;
+  --color-light: #f8f9fa;
+  --color-dark: #212529;
+  --color-grey: #6c757d;
+  --color-white: white;
 
   color: var(--color-text-white);
   font-weight: 400;
