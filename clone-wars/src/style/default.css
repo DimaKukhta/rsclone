@@ -9,8 +9,6 @@
   --color-grey: #6c757d;
   --color-white: white;
 
-  color: var(--color-text-white);
-  font-weight: 400;
   font-size: 1rem;
   font-family: "Montserrat Mono", Verdana, Geneva, Tahoma, sans-serif;
 }
