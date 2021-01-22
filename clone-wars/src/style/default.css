@@ -1,0 +1,14 @@
+:root {
+  --color-bg-main: #000000;
+
+  color: var(--color-text-white);
+  font-weight: 400;
+  font-size: 1rem;
+  font-family: "Montserrat Mono", Verdana, Geneva, Tahoma, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
