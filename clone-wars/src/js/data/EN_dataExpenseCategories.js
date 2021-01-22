@@ -1,4 +1,4 @@
-const EnExpenseCategories = [
+export default [
   {
     name: 'Home',
     icon: '../../assets/home.svg',
@@ -48,5 +48,3 @@ const EnExpenseCategories = [
     icon: '../../assets/Entertainment.svg',
   },
 ];
-
-export { EnExpenseCategories };

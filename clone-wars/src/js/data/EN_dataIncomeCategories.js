@@ -1,4 +1,4 @@
-const EnIncomeCategories = [
+export default [
   {
     name: 'Deposit',
     icon: '../../assets/Deposit.svg',
@@ -12,5 +12,3 @@ const EnIncomeCategories = [
     icon: '../../assets/Saving.svg',
   },
 ];
-
-export { EnIncomeCategories };
