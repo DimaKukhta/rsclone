@@ -5,14 +5,12 @@ import EnIncomeCategories from './js/data/EN_dataIncomeCategories';
 
 const mainContent = document.querySelector('#main-content');
 
-// перевешу обработчик событий на контейнер с кнопками
-const btnAddExpense = document.querySelector('#btn-add-expense');
-const btnAddIncome = document.querySelector('#btn-add-income');
-btnAddExpense.addEventListener('click', addExpense);
-btnAddIncome.addEventListener('click', addIncome);
+// нужно перевесит обработчик событий на контейнер с кнопками
+const btnAddOperation = document.querySelector('#btn-add-operation');
+btnAddOperation.addEventListener('click', addOperation);
 
 // начало огромной функции, которая будет разбита на части и перенесена в отдельные файлы :)
-function addExpense() {
+function addOperation() {
   mainContent.innerHTML = '';
 
   const fragment = new DocumentFragment();
@@ -63,8 +61,6 @@ function addExpense() {
   mainContent.append(fragment);
 }
 
-function addIncome() {
-  mainContent.innerHTML = '';
-}
-
 // конец огромной функции, которая будет разбита на части и перенесена в отдельные файлы :)
+
+window.onload = addOperation;
