@@ -44,6 +44,12 @@ function addOperation() {
   input.placeholder = '-- enter the amount --';
   input.disabled = true;
 
+  const inputDate = document.createElement('input');
+  inputDate.type = 'date';
+  inputDate.id = 'expense-date';
+  inputDate.max = '2021-01-22';
+  inputDate.classList.add('form-control', 'mb-5');
+
   const btn = document.createElement('button');
   btn.classList.add('btn', 'btn-success', 'mx-auto', 'w-100');
   btn.id = 'save';
@@ -55,7 +61,7 @@ function addOperation() {
   audio.src = './assets/audio/expense.mp3';
 
   select.append(firstOption);
-  container.append(labelCategory, select, labelAmount, input, btn, audio);
+  container.append(labelCategory, select, labelAmount, input, inputDate, btn, audio);
   fragment.append(container);
 
   mainContent.append(fragment);
