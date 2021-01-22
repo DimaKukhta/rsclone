@@ -4,9 +4,10 @@ import EnExpenseCategories from './js/data/EN_dataExpenseCategories';
 import EnIncomeCategories from './js/data/EN_dataIncomeCategories';
 
 const mainContent = document.querySelector('#main-content');
+
+// перевешу обработчик событий на контейнер с кнопками
 const btnAddExpense = document.querySelector('#btn-add-expense');
 const btnAddIncome = document.querySelector('#btn-add-income');
-
 btnAddExpense.addEventListener('click', addExpense);
 btnAddIncome.addEventListener('click', addIncome);
 
@@ -32,7 +33,8 @@ function addExpense() {
   firstOption.value = 'none';
   firstOption.textContent = '-- choose one --';
 
-  // const listOptions = EnExpenseCategories.map() тут допишу создание опций из файлы с данными категорий
+  // const listOptions = EnExpenseCategories.map()
+  // тут допишу создание опций из файлы с данными категорий
   const labelAmount = document.createElement('label');
   labelAmount.classList.add('mb-1', 'text-success', 'fw-bold');
   labelAmount.for = 'add-amount';
