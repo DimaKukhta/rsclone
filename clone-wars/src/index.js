@@ -1,7 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 import style from './style/style.css';
-import { expenseCategoriesEN } from './js/data/DataExpenseCategories';
+import { EnExpenseCategories } from './js/data/EN_dataExpenseCategories';
+import { EnIncomeCategories } from './js/data/EN_dataIncomeCategories';
 
 const mainContent = document.querySelector('#main-content');
-const elem = expenseCategoriesEN[0].icon;
+const elem = EnIncomeCategories[1].name;
 mainContent.append(elem);

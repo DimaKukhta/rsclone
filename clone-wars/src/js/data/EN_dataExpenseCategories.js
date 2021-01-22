@@ -1,4 +1,4 @@
-const expenseCategoriesEN = [
+const EnExpenseCategories = [
   {
     name: 'Home',
     icon: '../../assets/home.svg',
@@ -49,4 +49,4 @@ const expenseCategoriesEN = [
   },
 ];
 
-export { expenseCategoriesEN };
+export { EnExpenseCategories };
