@@ -2,6 +2,7 @@
 import style from './style/style.css';
 import EnExpenseCategories from './js/data/EN_dataExpenseCategories';
 import EnIncomeCategories from './js/data/EN_dataIncomeCategories';
+import Settings from './js/settings/Settings';
 
 const mainContent = document.querySelector('#main-content');
 
@@ -70,3 +71,7 @@ function addOperation() {
 // конец огромной функции, которая будет разбита на части и перенесена в отдельные файлы :)
 
 window.onload = addOperation;
+
+// settings init
+// eslint-disable-next-line no-unused-vars
+const settings = new Settings();
