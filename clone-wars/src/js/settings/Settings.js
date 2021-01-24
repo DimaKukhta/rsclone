@@ -5,7 +5,7 @@ export default class Settings {
     this.language = 'Language';
 
     this.render();
-    this.handler();
+    this.handlers();
   }
 
   render() {
@@ -50,15 +50,15 @@ export default class Settings {
 
                 <div>
                   <input type="radio" class="settings_radio form-check-input" name="language" id="language_en" checked>
-                  <label for="language_ru"><span>EN</span></label>
+                  <label for="language_en"><span>EN</span></label>
                 </div>
                 <div>
                   <input type="radio" class="settings_radio form-check-input" name="language" id="language_ru">
-                  <label for="language_by"><span>RU</span></label>
+                  <label for="language_ru"><span>RU</span></label>
                 </div>
                 <div>
                   <input type="radio" class="settings_radio form-check-input" name="language" id="language_by">
-                  <label for="language_en"><span>BY</span></label>
+                  <label for="language_by"><span>BY</span></label>
                 </div>
               </div>
             </div>
@@ -80,10 +80,19 @@ export default class Settings {
     console.log(this.id);
   }
 
-  handler() {
-    this.footerButtons = document.getElementById('settings');
+  themeChange() {
+    console.log(this);
+  }
+
+  closeSettings() {
+    console.log(this);
+  }
+
+  handlers() {
+    this.ButtonSettings = document.getElementById('settings');
     this.currencyName = document.getElementsByName('currency');
     this.languageName = document.getElementsByName('language');
+    this.closeButton = document.querySelector('.close_settings');
     for (let i = 0; i < this.languageName.length; i += 1) {
       this.languageName[i].onchange = this.changeLang;
     }
@@ -92,10 +101,20 @@ export default class Settings {
       this.currencyName[i].onchange = this.changeCurrency;
     }
 
-    this.footerButtons.onclick = (event) => {
-      console.log(event);
-      console.log(this.byn);
-      console.log(this.currencyName);
+    this.ButtonSettings.onclick = () => {
+      this.render();
     };
+
+    this.themeToggler = document.getElementsByName('onoffswitch');
+    console.log(this.themeToggler);
+
+    for (let i = 0; i < this.themeToggler.length; i += 1) {
+      this.themeToggler[i].onchange = () => {
+        this.themeChange();
+        console.log(this.themeToggler[i].checked);
+      };
+    }
+
+    this.closeButton.addEventListener('click', this.closeSettings);
   }
 }
