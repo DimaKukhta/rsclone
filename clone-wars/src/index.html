@@ -20,6 +20,11 @@
             ><span id="current-currency">BYN</span>
           </p>
         </div>
+        <div class="navigate-interval d-flex align-items-center">
+          <button class = "iteration-button btn btn-outline-success" id = "prev"> &lt; </button>
+          <div id="interval" class="me-1 ms-1">current interval</div>
+          <button class = "iteration-button btn btn-outline-success" id = "next"> &gt; </button>
+        </div>
         <div class="d-flex">
           <select class="form-select" name="interval" id="interval-select">
             <option value="day">Day</option>
@@ -29,11 +34,6 @@
           </select>
           <img class="header-image" src="./assets/icons/007.svg" alt="" />
           <!-- need to add appropriate styles by using bootstrap -->
-          <div class="navigate-interval">
-            <button class = "iteration-button" id = "prev">prev</button>
-            <div id="interval">current interval</div>
-            <button class = "iteration-button" id = "next">next</button>
-          </div>
         </div>
       </div>
     </header>
