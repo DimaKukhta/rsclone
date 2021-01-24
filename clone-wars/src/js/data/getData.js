@@ -6,7 +6,6 @@ export function getExpenses() {
 }
 
 export function getIntervalData(interval = 'all', currentDatestamp) {
-  // console.log(currentIntervalDate)
   const expensesArray = getExpenses();
   let intervalArray;
 
@@ -31,4 +30,8 @@ export function getIntervalData(interval = 'all', currentDatestamp) {
     default:
       return expensesArray;
   }
+}
+
+export function getSummaryExpensesForInterval() {
+  
 }

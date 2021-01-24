@@ -2,9 +2,6 @@
 /* eslint-disable import/prefer-default-export */
 import addZeroes from '../utils/addZeroes';
 
-// const intervalSelect = document.querySelector('#interval-select');
-// const currentInterval = document.querySelector('#interval');
-
 export function setIntervalDate(stamp) {
   const currentInterval = document.querySelector('#interval');
 
