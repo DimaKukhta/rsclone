@@ -1,72 +1,78 @@
 // eslint-disable-next-line no-unused-vars
 import style from './style/style.css';
-import EnExpenseCategories from './js/data/EN_dataExpenseCategories';
-import EnIncomeCategories from './js/data/EN_dataIncomeCategories';
 
-const mainContent = document.querySelector('#main-content');
+import addOperation from './js/addOperation/addOperation';
+import {
+  getIntervalText,
+  setIntervalDate,
+  getPreviousDatestampForInterval,
+  getNextDatestampForInterval,
+} from './js/interval/interval';
+
+import Operations from './js/operations/Operations';
+
+const intervalSelect = document.querySelector('#interval-select');
+const intervalReport = document.querySelector('#interval');
+const navigateInterval = document.querySelector('.navigate-interval');
 
 // нужно перевесит обработчик событий на контейнер с кнопками
 const btnAddOperation = document.querySelector('#btn-add-operation');
+const btnOperations = document.querySelector('#btn-operations');
+
 btnAddOperation.addEventListener('click', addOperation);
 
-// начало огромной функции, которая будет разбита на части и перенесена в отдельные файлы :)
-function addOperation() {
-  mainContent.innerHTML = '';
+document.addEventListener('DOMContentLoaded', () => {
+  // create add operation tab;
+  addOperation();
 
-  const fragment = new DocumentFragment();
-  const container = document.createElement('div');
-  container.classList.add('d-flex', 'flex-column', 'text-center', 'mt-5');
+  const currentDatestamp = new Date().getTime();
 
-  const labelCategory = document.createElement('labelCategory');
-  labelCategory.classList.add('mb-1', 'text-success', 'fw-bold');
-  labelCategory.for = 'category-select';
-  labelCategory.textContent = 'Select category';
+  intervalReport.textContent = getIntervalText(currentDatestamp);
+  setIntervalDate(currentDatestamp);
 
-  const select = document.createElement('select');
-  select.classList.add('form-select', 'col-5', 'mb-4');
-  select.name = 'categories';
-  select.id = 'category-select';
+  const operations = new Operations();
 
-  const firstOption = document.createElement('option');
-  firstOption.value = 'none';
-  firstOption.textContent = '-- choose one --';
+  btnOperations.addEventListener('click', () => {
+    const main = document.querySelector('#main-content>div');
+    operations.renderIn(main);
+  });
 
-  // const listOptions = EnExpenseCategories.map()
-  // тут допишу создание опций из файлы с данными категорий
-  const labelAmount = document.createElement('label');
-  labelAmount.classList.add('mb-1', 'text-success', 'fw-bold');
-  labelAmount.for = 'add-amount';
-  labelAmount.textContent = 'Add amount';
+  intervalSelect.addEventListener('change', () => {
+    // eslint-disable-next-line no-shadow
+    const currentDatestamp = new Date().getTime();
 
-  const input = document.createElement('input');
-  input.classList.add('form-control', 'input-expense', 'mb-5');
-  input.id = 'add-amount';
-  input.placeholder = '-- enter the amount --';
-  input.disabled = true;
+    intervalReport.textContent = getIntervalText(currentDatestamp);
+    setIntervalDate(currentDatestamp);
 
-  const inputDate = document.createElement('input');
-  inputDate.type = 'date';
-  inputDate.id = 'expense-date';
-  inputDate.max = '2021-01-22';
-  inputDate.classList.add('form-control', 'mb-5');
+    const isOperationsTab = document.querySelector('#operations');
+    if (isOperationsTab) {
+      operations.updateOperations();
+    }
+  });
 
-  const btn = document.createElement('button');
-  btn.classList.add('btn', 'btn-success', 'mx-auto', 'w-100');
-  btn.id = 'save';
-  btn.disabled = true;
-  btn.textContent = 'Save expense';
+  navigateInterval.addEventListener('click', ({ target }) => {
+    const intervalDatestamp = +intervalReport.dataset.date;
+    const interval = intervalSelect.value;
 
-  const audio = document.createElement('audio');
-  audio.id = 'audio';
-  audio.src = './assets/audio/expense.mp3';
+    let updatedStamp;
 
-  select.append(firstOption);
-  container.append(labelCategory, select, labelAmount, input, inputDate, btn, audio);
-  fragment.append(container);
+    switch (target.id) {
+      case 'prev':
+        updatedStamp = getPreviousDatestampForInterval(interval, intervalDatestamp);
+        break;
+      case 'next':
+        updatedStamp = getNextDatestampForInterval(interval, intervalDatestamp);
+        break;
+      default:
+        break;
+    }
+    setIntervalDate(updatedStamp);
 
-  mainContent.append(fragment);
-}
+    intervalReport.textContent = getIntervalText(updatedStamp);
 
-// конец огромной функции, которая будет разбита на части и перенесена в отдельные файлы :)
-
-window.onload = addOperation;
+    const isOperationsTab = document.querySelector('#operations');
+    if (isOperationsTab) {
+      operations.updateOperations();
+    }
+  });
+});
