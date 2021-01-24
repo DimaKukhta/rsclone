@@ -3,7 +3,7 @@
 /* eslint-disable no-shadow */
 /* eslint-disable no-prototype-builtins */
 /* eslint-disable class-methods-use-this */
-import { getIntervalData } from '../data/getData';
+import { getIntervalData, getSummaryExpensesForInterval, groupExpensesByCategory } from '../data/getData';
 import addZeroes from '../utils/addZeroes';
 
 const intervalOperations = document.querySelector('#interval-select');
@@ -20,23 +20,6 @@ const monthNames = {
 export default class Operations {
   constructor() {
     this.createOperations();
-  }
-
-  groupExpenses() {
-    const interval = document.querySelector('#interval');
-
-    const currentDatestamp = +interval.dataset.date;
-
-    const expensesArray = getIntervalData(intervalOperations.value, currentDatestamp);
-
-    return expensesArray.reduce((accum, { category }, ind, arr) => {
-      const key = category;
-      if (!accum.hasOwnProperty(key)) {
-        accum[key] = arr.filter(({ category }) => category === key);
-        return accum;
-      }
-      return accum;
-    }, {});
   }
 
   deleteRecord(target) {
@@ -61,7 +44,12 @@ export default class Operations {
     this.operations.classList.add('operations');
     this.operations.id = 'operations';
 
-    const operationsObject = this.groupExpenses();
+    const interval = document.querySelector('#interval');
+
+    const currentDatestamp = +interval.dataset.date;
+
+    const expensesArray = getIntervalData(intervalOperations.value, currentDatestamp);
+    const operationsObject = groupExpensesByCategory(expensesArray);
 
     const isIntervalHasData = JSON.stringify(operationsObject) !== JSON.stringify({});
 
@@ -135,11 +123,8 @@ export default class Operations {
       fragment.append(categoryOperations);
     });
 
-    // create another func for this calc
-    const allExpensesForInterval = Object.values(operationsObject).reduce((accum, arrOfExpenses) => {
-      const sum = arrOfExpenses.reduce((acc, { value }) => acc + value, 0);
-      return accum + sum;
-    }, 0);
+    const allExpensesForInterval = getSummaryExpensesForInterval(intervalOperations.value, currentDatestamp);
+
     const summaryExpenses = document.createElement('div');
     summaryExpenses.textContent = `All expenses for interval: -${allExpensesForInterval} ${currency}`;
 
