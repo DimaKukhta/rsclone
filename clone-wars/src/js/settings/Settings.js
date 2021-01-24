@@ -3,6 +3,8 @@ export default class Settings {
     this.theme = 'Theme';
     this.currency = 'Currency';
     this.language = 'Language';
+    this.set = document.querySelector('.settings');
+    this.countButtonSettings = false;
 
     this.render();
     this.handlers();
@@ -11,6 +13,7 @@ export default class Settings {
   render() {
     this.settingsWindow = document.createElement('templete');
     this.settingsWindow.innerHTML = `
+    <div class="outer"></div>
     <div class="container settings" width="400px">
           <div class="close_settings">x</div>
           <div>
@@ -69,7 +72,6 @@ export default class Settings {
     this.main = document.querySelector('.bg-light');
     console.log(this.settingsWindow);
     this.main.appendChild(this.settingsWindow);
-    // this.main.insertAdjacentHTML('beforeend', this.settingsWindow);
   }
 
   changeCurrency() {
@@ -84,8 +86,24 @@ export default class Settings {
     console.log(this);
   }
 
+  openSettings() {
+    this.set = document.querySelector('.settings');
+    this.outer = document.querySelector('.outer');
+    this.outer.classList.add('settings_outer');
+    this.set.classList.add('set_on_slide');
+    this.countButtonSettings = true;
+
+    this.outer.addEventListener('mouseup', () => this.closeSettings());
+  }
+
   closeSettings() {
-    console.log(this);
+    this.set = document.querySelector('.settings');
+    this.outer = document.querySelector('.outer');
+    this.outer.classList.remove('settings_outer');
+    this.countButtonSettings = false;
+    this.set.classList.remove('set_on_slide');
+    this.countButtonSettings = false;
+    this.outer.removeEventListener('mouseup', () => this.closeSettings());
   }
 
   handlers() {
@@ -93,6 +111,7 @@ export default class Settings {
     this.currencyName = document.getElementsByName('currency');
     this.languageName = document.getElementsByName('language');
     this.closeButton = document.querySelector('.close_settings');
+
     for (let i = 0; i < this.languageName.length; i += 1) {
       this.languageName[i].onchange = this.changeLang;
     }
@@ -102,7 +121,12 @@ export default class Settings {
     }
 
     this.ButtonSettings.onclick = () => {
-      this.render();
+      // eslint-disable-next-line no-unused-expressions
+      if (!this.countButtonSettings) {
+        this.openSettings();
+      } else if (this.countButtonSettings) {
+        this.closeSettings();
+      }
     };
 
     this.themeToggler = document.getElementsByName('onoffswitch');
@@ -115,6 +139,6 @@ export default class Settings {
       };
     }
 
-    this.closeButton.addEventListener('click', this.closeSettings);
+    this.closeButton.addEventListener('click', () => this.closeSettings());
   }
 }

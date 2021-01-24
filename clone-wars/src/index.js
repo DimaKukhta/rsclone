@@ -5,7 +5,6 @@ import EnExpenseCategories from './js/data/EN_dataExpenseCategories';
 import EnIncomeCategories from './js/data/EN_dataIncomeCategories';
 import Settings from './js/settings/Settings';
 
-
 import addOperation from './js/addOperation/addOperation';
 import {
   getIntervalText,
@@ -26,64 +25,63 @@ const btnOperations = document.querySelector('#btn-operations');
 
 btnAddOperation.addEventListener('click', addOperation);
 
-
 // начало огромной функции, которая будет разбита на части и перенесена в отдельные файлы :)
-function addOperation() {
-  mainContent.innerHTML = '';
+// function addOperation() {
+//   mainContent.innerHTML = '';
 
-  const fragment = new DocumentFragment();
-  const container = document.createElement('div');
-  container.classList.add('d-flex', 'flex-column', 'text-center', 'mt-5');
+//   const fragment = new DocumentFragment();
+//   const container = document.createElement('div');
+//   container.classList.add('d-flex', 'flex-column', 'text-center', 'mt-5');
 
-  const labelCategory = document.createElement('labelCategory');
-  labelCategory.classList.add('mb-1', 'text-success', 'fw-bold');
-  labelCategory.for = 'category-select';
-  labelCategory.textContent = 'Select category';
+//   const labelCategory = document.createElement('labelCategory');
+//   labelCategory.classList.add('mb-1', 'text-success', 'fw-bold');
+//   labelCategory.for = 'category-select';
+//   labelCategory.textContent = 'Select category';
 
-  const select = document.createElement('select');
-  select.classList.add('form-select', 'col-5', 'mb-4');
-  select.name = 'categories';
-  select.id = 'category-select';
+//   const select = document.createElement('select');
+//   select.classList.add('form-select', 'col-5', 'mb-4');
+//   select.name = 'categories';
+//   select.id = 'category-select';
 
-  const firstOption = document.createElement('option');
-  firstOption.value = 'none';
-  firstOption.textContent = '-- choose one --';
+//   const firstOption = document.createElement('option');
+//   firstOption.value = 'none';
+//   firstOption.textContent = '-- choose one --';
 
-  // const listOptions = EnExpenseCategories.map()
-  // тут допишу создание опций из файлы с данными категорий
-  const labelAmount = document.createElement('label');
-  labelAmount.classList.add('mb-1', 'text-success', 'fw-bold');
-  labelAmount.for = 'add-amount';
-  labelAmount.textContent = 'Add amount';
+//   // const listOptions = EnExpenseCategories.map()
+//   // тут допишу создание опций из файлы с данными категорий
+//   const labelAmount = document.createElement('label');
+//   labelAmount.classList.add('mb-1', 'text-success', 'fw-bold');
+//   labelAmount.for = 'add-amount';
+//   labelAmount.textContent = 'Add amount';
 
-  const input = document.createElement('input');
-  input.classList.add('form-control', 'input-expense', 'mb-5');
-  input.id = 'add-amount';
-  input.placeholder = '-- enter the amount --';
-  input.disabled = true;
+//   const input = document.createElement('input');
+//   input.classList.add('form-control', 'input-expense', 'mb-5');
+//   input.id = 'add-amount';
+//   input.placeholder = '-- enter the amount --';
+//   input.disabled = true;
 
-  const inputDate = document.createElement('input');
-  inputDate.type = 'date';
-  inputDate.id = 'expense-date';
-  inputDate.max = '2021-01-22';
-  inputDate.classList.add('form-control', 'mb-5');
+//   const inputDate = document.createElement('input');
+//   inputDate.type = 'date';
+//   inputDate.id = 'expense-date';
+//   inputDate.max = '2021-01-22';
+//   inputDate.classList.add('form-control', 'mb-5');
 
-  const btn = document.createElement('button');
-  btn.classList.add('btn', 'btn-success', 'mx-auto', 'w-100');
-  btn.id = 'save';
-  btn.disabled = true;
-  btn.textContent = 'Save expense';
+//   const btn = document.createElement('button');
+//   btn.classList.add('btn', 'btn-success', 'mx-auto', 'w-100');
+//   btn.id = 'save';
+//   btn.disabled = true;
+//   btn.textContent = 'Save expense';
 
-  const audio = document.createElement('audio');
-  audio.id = 'audio';
-  audio.src = './assets/audio/expense.mp3';
+//   const audio = document.createElement('audio');
+//   audio.id = 'audio';
+//   audio.src = './assets/audio/expense.mp3';
 
-  select.append(firstOption);
-  container.append(labelCategory, select, labelAmount, input, inputDate, btn, audio);
-  fragment.append(container);
+//   select.append(firstOption);
+//   container.append(labelCategory, select, labelAmount, input, inputDate, btn, audio);
+//   fragment.append(container);
 
-  mainContent.append(fragment);
-}
+//   mainContent.append(fragment);
+// }
 
 // конец огромной функции, которая будет разбита на части и перенесена в отдельные файлы :)
 
@@ -148,4 +146,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
-
