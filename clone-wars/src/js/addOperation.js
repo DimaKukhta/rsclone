@@ -48,7 +48,7 @@ export default function () {
 
   const audio = document.createElement('audio');
   audio.id = 'audio';
-  audio.src = './assets/audio/expense.mp3';
+  audio.src = './assets/audio/income.mp3';
 
   select.append(firstOption);
   container.append(labelCategory, select, labelAmount, input, inputDate, btn, audio);
