@@ -24,6 +24,9 @@ btnAddOperation.addEventListener('click', addOperation);
 document.addEventListener('DOMContentLoaded', () => {
   // create add operation tab;
   addOperation();
+
+  const currentDatestamp = new Date().getTime();
+
   intervalReport.textContent = getIntervalText(currentDatestamp);
   setIntervalDate(currentDatestamp);
 
@@ -73,4 +76,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
-

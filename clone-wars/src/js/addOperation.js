@@ -5,7 +5,7 @@ export default function () {
 
   const fragment = new DocumentFragment();
   const container = document.createElement('div');
-  container.classList.add('d-flex', 'flex-column', 'text-center', 'mt-5');
+  container.classList.add('d-flex', 'flex-column', 'text-center', 'mt-5 me-5 ms-5 ps-5 pe-5');
 
   const labelCategory = document.createElement('labelCategory');
   labelCategory.classList.add('mb-1', 'text-success', 'fw-bold');
@@ -44,7 +44,7 @@ export default function () {
   btn.classList.add('btn', 'btn-success', 'mx-auto', 'w-100');
   btn.id = 'save';
   btn.disabled = true;
-  btn.textContent = 'Save expense';
+  btn.textContent = 'Save income';
 
   const audio = document.createElement('audio');
   audio.id = 'audio';

@@ -1,11 +1,11 @@
 export default [
   {
-    name: 'Home',
-    // {
-    //   en: 'Home',
-    //   ru: 'Дом',
-    //   by: 'Хата',
-    // },
+    name:
+    {
+      en: 'Home',
+      ru: 'Дом',
+      by: 'Хата',
+    },
     icon: '../../assets/home.svg',
   },
   {
