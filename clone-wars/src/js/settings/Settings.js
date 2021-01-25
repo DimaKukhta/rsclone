@@ -8,6 +8,7 @@ export default class Settings {
 
     this.render();
     this.handlers();
+    this.themeChange();
   }
 
   render() {
@@ -76,14 +77,24 @@ export default class Settings {
 
   changeCurrency() {
     console.log(this.id);
+    localStorage.setItem('currency', this.id);
   }
 
   changeLang() {
     console.log(this.id);
+    localStorage.setItem('language', this.id);
   }
 
   themeChange() {
-    console.log(this);
+    this.themeToggler = document.getElementsByName('onoffswitch');
+
+    for (let i = 0; i < this.themeToggler.length; i += 1) {
+      this.themeToggler[i].onchange = () => {
+        this.themeChange();
+        console.log(this.themeToggler[i].checked);
+        localStorage.setItem('theme', this.themeToggler[i].checked);
+      };
+    }
   }
 
   openSettings() {
@@ -131,13 +142,6 @@ export default class Settings {
 
     this.themeToggler = document.getElementsByName('onoffswitch');
     console.log(this.themeToggler);
-
-    for (let i = 0; i < this.themeToggler.length; i += 1) {
-      this.themeToggler[i].onchange = () => {
-        this.themeChange();
-        console.log(this.themeToggler[i].checked);
-      };
-    }
 
     this.closeButton.addEventListener('click', () => this.closeSettings());
   }
