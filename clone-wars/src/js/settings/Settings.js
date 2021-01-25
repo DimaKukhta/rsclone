@@ -5,10 +5,36 @@ export default class Settings {
     this.language = 'Language';
     this.set = document.querySelector('.settings');
     this.countButtonSettings = false;
+    this.themeLocal = localStorage.getItem('theme');
+    if (this.themeLocal === undefined) {
+      this.checkedToggler = 'checked';
+    }
+    if (this.themeLocal === 'false') {
+      this.checkedToggler = '';
+    } else {
+      this.checkedToggler = 'checked';
+    }
+
+    this.themeToggler = document.getElementsByName('onoffswitch');
+
+    this.textP = document.querySelectorAll('p');
+    this.textSpan = document.querySelectorAll('span');
+
+    this.buttons = document.querySelectorAll('.btn');
+    // this.btnOperation = document.getElementById('btn-add-operation');
+    this.btnOperation = document.querySelector('btn-add-operation');
+    this.header = document.querySelector('header');
+    this.main = document.querySelector('main');
+    this.footer = document.querySelector('footer');
+    this.currentAmount = document.getElementById('current-amount');
+    this.interval = document.getElementById('interval');
 
     this.render();
     this.handlers();
     this.themeChange();
+
+    this.set = document.querySelector('.settings');
+    this.outer = document.querySelector('.outer');
   }
 
   render() {
@@ -20,7 +46,7 @@ export default class Settings {
           <div>
             <span class="theme_app">${this.theme} 
               <div class="onoffswitch">
-                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" tabindex="0" checked>
+                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" tabindex="0" ${this.checkedToggler}>
                 <label class="onoffswitch-label" for="myonoffswitch">
                     <span class="onoffswitch-inner"></span>
                     <span class="onoffswitch-switch"></span>
@@ -81,25 +107,78 @@ export default class Settings {
   }
 
   changeLang() {
+    this.textP = document.querySelectorAll('p');
+    this.textSpan = document.querySelectorAll('span');
     console.log(this.id);
     localStorage.setItem('language', this.id);
   }
 
   themeChange() {
-    this.themeToggler = document.getElementsByName('onoffswitch');
+    console.log(this.buttons);
+    console.log(this.textP.length);
+
+    this.themeChangeLocalS = function () {
+      this.themeLocal = localStorage.getItem('theme');
+      if (this.themeLocal === 'false') {
+        this.header.classList.add('bgc_dark');
+        this.main.classList.add('bgc_dark');
+        this.footer.classList.add('bgc_dark');
+        this.currentAmount.classList.add('text_dark');
+        this.interval.classList.add('text_dark');
+
+        // this.btnOperation.classList.add('btnOperation_dark');
+        // this.textSpan.forEach((elem) => {
+        //   elem.classList.add('btnOperation_dark');
+        // });
+        // console.log(this.textSpan);
+        this.textSpan[4].classList.add('btnOperation_dark');
+        // this.textP.forEach((elem) => {
+        //   elem.classList.add('text_dark');
+        // });
+
+        console.log(this.themeLocal);
+        this.buttons.forEach((btn) => {
+          btn.classList.add('dark_btn');
+        // btn.classList.remove('btn-success');
+        });
+      }
+      if (this.themeLocal === 'true') {
+        console.log(this.themeLocal);
+        this.header.classList.remove('bgc_dark');
+        this.main.classList.remove('bgc_dark');
+        this.footer.classList.remove('bgc_dark');
+        this.currentAmount.classList.remove('text_dark');
+        this.interval.classList.remove('text_dark');
+
+        this.textP.forEach((elem) => {
+          elem.classList.remove('text_dark');
+        });
+
+        this.buttons.forEach((btn) => {
+          btn.classList.remove('dark_btn');
+        // btn.classList.remove('btn-success');
+        });
+      }
+    };
 
     for (let i = 0; i < this.themeToggler.length; i += 1) {
       this.themeToggler[i].onchange = () => {
-        this.themeChange();
         console.log(this.themeToggler[i].checked);
         localStorage.setItem('theme', this.themeToggler[i].checked);
+        setTimeout(this.themeChangeLocalS(), 0);
+        this.themeChange();
+        // this.buttons.forEach((btn) => {
+        //   btn.classList.add('darck_btn');
+        //   // btn.classList.remove('btn-success');
+        // });
       };
     }
+    this.themeChangeLocalS();
   }
 
   openSettings() {
-    this.set = document.querySelector('.settings');
-    this.outer = document.querySelector('.outer');
+    // this.set = document.querySelector('.settings');
+    // this.outer = document.querySelector('.outer');
     this.outer.classList.add('settings_outer');
     this.set.classList.add('set_on_slide');
     this.countButtonSettings = true;

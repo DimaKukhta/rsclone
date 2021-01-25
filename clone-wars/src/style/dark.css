@@ -1,0 +1,46 @@
+@import "./default.css";
+
+.dark_btn {
+    background-color: rgba(0, 82, 82, 0.788);
+    color: var(--color-light-purple);
+}
+
+.dark_btn:hover {
+    background-color: rgba(2, 109, 109, 0.788);
+}
+
+.dark_btn:active {
+    background-color: rgba(7, 197, 197, 0.788);
+}
+
+.dark_btn:after {
+    background-color: rgba(7, 197, 197, 0.788);
+}
+
+.dark_btn:focus {
+    background-color: rgba(7, 197, 197, 0.788);
+}
+
+.bgc_dark {
+    background-color: var(--color-dark) !important;
+}
+
+.header_dark {
+    background-color: var(--color-grey) !important;
+}
+
+.text_dark {
+    color: var(--color-light-purple) !important;
+}
+
+.btnOperation_dark {
+    /* background-color: var(--color-grey) !important; */
+    color: var(--color-red) !important;
+    
+}
+.btnOperation_dark:hover {
+    /* background-color: var(--color-grey) !important; */
+    
+    color: var(--color-red) !important;
+    
+}
