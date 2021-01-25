@@ -3,7 +3,7 @@
 /* eslint-disable no-shadow */
 /* eslint-disable no-prototype-builtins */
 /* eslint-disable class-methods-use-this */
-import { getIntervalData, getSummaryExpensesForInterval, groupExpensesByCategory } from '../data/getData';
+import { getIntervalData, getSummaryOperationsForInterval, groupOperationsByCategory } from '../data/getData';
 import addZeroes from '../utils/addZeroes';
 
 const intervalOperations = document.querySelector('#interval-select');
@@ -18,38 +18,18 @@ const monthNames = {
 };
 
 export default class Operations {
-  constructor() {
-    this.createOperations();
-  }
-
-  deleteRecord(target) {
-    if (target.classList.contains('delete-record')) {
-      const interval = document.querySelector('#interval');
-
-      const currentDatestamp = +interval.dataset.date;
-
-      const expensesCopy = [...getIntervalData(intervalOperations.value, currentDatestamp)];
-      const deleteId = target.dataset.id;
-      const deleteRecordIndex = expensesCopy.findIndex(({ id }) => id === deleteId);
-      expensesCopy.splice(deleteRecordIndex, 1);
-
-      localStorage.setItem('expenses', JSON.stringify(expensesCopy));
-
-      this.updateOperations();
-    }
-  }
-
-  createOperations() {
+  createOperations(operationType) {
     this.operations = document.createElement('ul');
-    this.operations.classList.add('operations');
-    this.operations.id = 'operations';
+    this.operations.classList.add('operations', `operations-${operationType}`);
+    this.operations.id = `operations-${operationType}`;
 
     const interval = document.querySelector('#interval');
 
     const currentDatestamp = +interval.dataset.date;
 
-    const expensesArray = getIntervalData(intervalOperations.value, currentDatestamp);
-    const operationsObject = groupExpensesByCategory(expensesArray);
+    const expensesArray = getIntervalData(operationType, intervalOperations.value, currentDatestamp);
+
+    const operationsObject = groupOperationsByCategory(expensesArray);
 
     const isIntervalHasData = JSON.stringify(operationsObject) !== JSON.stringify({});
 
@@ -59,15 +39,16 @@ export default class Operations {
       emptyFolder.style.width = '100px';
 
       const noDataText = document.createElement('div');
-      noDataText.textContent = 'no data for this interval...';
+      noDataText.textContent = `no ${operationType} for this interval...`;
 
       this.operations.append(noDataText, emptyFolder);
 
       return this.operations;
     }
+    const sign = (operationType === 'expense') ? '-' : '+';
 
     this.operations.addEventListener('click', ({ target }) => {
-      this.deleteRecord(target);
+      this.deleteRecord(target, operationType);
     });
     // function getCurrencyFromSettings
     const currency = 'BYN';
@@ -82,7 +63,8 @@ export default class Operations {
       const dataByCategory = operationsObject[category];
 
       const totalExpenseByCategory = dataByCategory.reduce((accum, { value }) => accum + value, 0);
-      categoryOperations.textContent = `${category}: -${totalExpenseByCategory} ${currency}`;
+
+      categoryOperations.textContent = `${category}: ${sign}${totalExpenseByCategory} ${currency}`;
 
       const sortedExpensesByCategories = dataByCategory.sort((a, b) => new Date(b.date) - new Date(a.date));
 
@@ -104,7 +86,7 @@ export default class Operations {
 
         const expenseDate = `${addZeroes(day)} ${monthNames[lang][monthIndex]} ${year}`;
         expenseLi.textContent = `
-          -${sortedExpensesByCategories[index].value} ${currency};
+          ${sign}${sortedExpensesByCategories[index].value} ${currency};
           ${expenseDate}`;
 
         const deleteBtn = document.createElement('button');
@@ -123,10 +105,10 @@ export default class Operations {
       fragment.append(categoryOperations);
     });
 
-    const allExpensesForInterval = getSummaryExpensesForInterval(intervalOperations.value, currentDatestamp);
+    const allExpensesForInterval = getSummaryOperationsForInterval(operationType, intervalOperations.value, currentDatestamp);
 
     const summaryExpenses = document.createElement('div');
-    summaryExpenses.textContent = `All expenses for interval: -${allExpensesForInterval} ${currency}`;
+    summaryExpenses.textContent = `Summary ${operationType} for interval: ${sign}${allExpensesForInterval} ${currency}`;
 
     this.operations.append(summaryExpenses);
     this.operations.append(horisontalLine.cloneNode());
@@ -135,12 +117,37 @@ export default class Operations {
     return this.operations;
   }
 
+  createReport() {
+    this.container = document.createElement('div');
+    this.container.classList.add('operations-container');
+    this.container.append(this.createOperations('expense'));
+    this.container.append(this.createOperations('income'));
+    return this.container;
+  }
+
   updateOperations() {
-    const operationsEl = document.querySelector('#operations');
-    operationsEl.replaceWith(this.createOperations());
+    const operationsEl = document.querySelector('.operations-container');
+    operationsEl.replaceWith(this.createReport());
+  }
+
+  deleteRecord(target, operationType) {
+    if (target.classList.contains('delete-record')) {
+      const interval = document.querySelector('#interval');
+
+      const currentDatestamp = +interval.dataset.date;
+
+      const operationsCopy = [...getIntervalData(operationType, intervalOperations.value, currentDatestamp)];
+      const deleteId = target.dataset.id;
+      const deleteRecordIndex = operationsCopy.findIndex(({ id }) => id === deleteId);
+      operationsCopy.splice(deleteRecordIndex, 1);
+
+      localStorage.setItem(operationType, JSON.stringify(operationsCopy));
+
+      this.updateOperations(operationType);
+    }
   }
 
   renderIn(element) {
-    element.replaceWith(this.createOperations());
+    element.append(this.createReport());
   }
 }

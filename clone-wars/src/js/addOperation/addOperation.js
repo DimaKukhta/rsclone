@@ -1,4 +1,5 @@
-import { saveExpenseToLocalStorage, setDefaultExpense, isInputValid, enableInput, setCurrentDateByDefault, validateInput } from './expense';
+import { saveOperationToLocalStorage, setDefaultOperation, isInputValid, enableInput, setCurrentDateByDefault, validateInput } from './processingOperation';
+
 import expenseCategories from '../data/dataExpenseCategories';
 import incomeCategories from '../data/dataIncomeCategories';
 
@@ -7,7 +8,7 @@ const mainContent = document.querySelector('#main-content');
 function drawAddExpense() {
   const fragment = new DocumentFragment();
   const container = document.createElement('div');
-  container.id = 'add-operation';
+  container.id = 'add-expense';
   container.classList.add('d-flex', 'flex-column', 'text-center', 'mt-5', 'pe-5', 'add-expense');
 
   const title = document.createElement('p');
@@ -16,19 +17,19 @@ function drawAddExpense() {
 
   const labelCategory = document.createElement('labelCategory');
   labelCategory.classList.add('mb-1', 'text-danger', 'fw-bold');
-  labelCategory.for = 'category-select';
+  labelCategory.for = 'category-select-expense';
   labelCategory.textContent = 'Category';
 
   const select = document.createElement('select');
 
   select.addEventListener('change', () => {
-    enableInput();
-    setCurrentDateByDefault();
+    enableInput('expense');
+    setCurrentDateByDefault('expense');
   });
 
   select.classList.add('form-select', 'col-5', 'mb-4');
   select.name = 'categories';
-  select.id = 'category-select';
+  select.id = 'category-select-expense';
 
   const firstOption = document.createElement('option');
   firstOption.value = 'none';
@@ -50,7 +51,9 @@ function drawAddExpense() {
 
   const input = document.createElement('input');
 
-  input.addEventListener('input', validateInput);
+  input.addEventListener('input', () => {
+    validateInput('expense');
+  });
 
   input.classList.add('form-control', 'input-expense', 'mb-5');
   input.id = 'add-expense';
@@ -67,7 +70,7 @@ function drawAddExpense() {
   const btn = document.createElement('button');
 
   btn.classList.add('btn', 'btn-danger', 'mx-auto', 'w-100');
-  btn.id = 'save';
+  btn.id = 'save-expense';
   btn.disabled = true;
   btn.textContent = 'Save expense';
 
@@ -76,10 +79,10 @@ function drawAddExpense() {
   audio.src = './assets/audio/expense.mp3';
 
   btn.addEventListener('click', () => {
-    if (isInputValid()) {
+    if (isInputValid('expense')) {
       audio.play();
-      saveExpenseToLocalStorage();
-      setDefaultExpense();
+      saveOperationToLocalStorage('expense');
+      setDefaultOperation('expense');
     }
   });
 
@@ -92,7 +95,7 @@ function drawAddExpense() {
 function drawAddIncome() {
   const fragment = new DocumentFragment();
   const container = document.createElement('div');
-  container.id = 'add-operation';
+  container.id = 'add-income';
   container.classList.add('d-flex', 'flex-column', 'text-center', 'mt-5', 'ps-5', 'add-income');
 
   const title = document.createElement('p');
@@ -101,19 +104,19 @@ function drawAddIncome() {
 
   const labelCategory = document.createElement('labelCategory');
   labelCategory.classList.add('mb-1', 'text-warning', 'fw-bold');
-  labelCategory.for = 'category-select';
+  labelCategory.for = 'category-select-income';
   labelCategory.textContent = 'Category';
 
   const select = document.createElement('select');
 
   select.addEventListener('change', () => {
-    enableInput();
-    setCurrentDateByDefault();
+    enableInput('income');
+    setCurrentDateByDefault('income');
   });
 
   select.classList.add('form-select', 'col-5', 'mb-4');
   select.name = 'categories';
-  select.id = 'category-select';
+  select.id = 'category-select-income';
 
   const firstOption = document.createElement('option');
   firstOption.value = 'none';
@@ -135,16 +138,18 @@ function drawAddIncome() {
 
   const input = document.createElement('input');
 
-  input.addEventListener('input', validateInput);
+  input.addEventListener('input', () => {
+    validateInput('income');
+  });
 
-  input.classList.add('form-control', 'input-expense', 'mb-5');
+  input.classList.add('form-control', 'input-income', 'mb-5');
   input.id = 'add-income';
   input.placeholder = '-- enter the amount --';
   input.disabled = true;
 
   const inputDate = document.createElement('input');
   inputDate.type = 'date';
-  inputDate.id = 'expense-date';
+  inputDate.id = 'income-date';
   inputDate.max = '2021-01-22';
   inputDate.disabled = true;
   inputDate.classList.add('form-control', 'mb-5');
@@ -152,7 +157,7 @@ function drawAddIncome() {
   const btn = document.createElement('button');
 
   btn.classList.add('btn', 'btn-warning', 'mx-auto', 'w-100');
-  btn.id = 'save';
+  btn.id = 'save-income';
   btn.disabled = true;
   btn.textContent = 'Save income';
 
@@ -161,10 +166,10 @@ function drawAddIncome() {
   audio.src = './assets/audio/expense.mp3';
 
   btn.addEventListener('click', () => {
-    if (isInputValid()) {
+    if (isInputValid('income')) {
       audio.play();
-      saveExpenseToLocalStorage();
-      setDefaultExpense();
+      saveOperationToLocalStorage('income');
+      setDefaultOperation('income');
     }
   });
 
