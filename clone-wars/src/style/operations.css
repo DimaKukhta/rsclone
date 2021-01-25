@@ -1,0 +1,8 @@
+.operations-container {
+  display: flex;
+}
+
+.operations {
+  max-height: 600px;
+  overflow-y: auto;
+}

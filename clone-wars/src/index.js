@@ -43,7 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const operations = new Operations();
 
   btnOperations.addEventListener('click', () => {
-    const main = document.querySelector('#main-content>div');
+    const main = document.querySelector('#main-content');
+    main.innerHTML = '';
     operations.renderIn(main);
   });
 
@@ -54,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     intervalReport.textContent = getIntervalText(currentDatestamp);
     setIntervalDate(currentDatestamp);
 
-    const isOperationsTab = document.querySelector('#operations');
+    const isOperationsTab = document.querySelector('.operations-container');
     if (isOperationsTab) {
       operations.updateOperations();
     }
@@ -80,7 +81,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     intervalReport.textContent = getIntervalText(updatedStamp);
 
-    const isOperationsTab = document.querySelector('#operations');
+    const isOperationsTab = document.querySelector('.operations-container');
+
     if (isOperationsTab) {
       operations.updateOperations();
     }

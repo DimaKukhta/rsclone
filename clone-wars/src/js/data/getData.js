@@ -1,39 +1,39 @@
 /* eslint-disable consistent-return */
 /* eslint-disable max-len */
 /* eslint-disable no-case-declarations */
-export function getExpenses() {
-  return JSON.parse(localStorage.getItem('expenses')) || [];
+export function getOperations(operationType) {
+  return JSON.parse(localStorage.getItem(operationType)) || [];
 }
 
-export function getIntervalData(interval = 'all', currentDatestamp) {
-  const expensesArray = getExpenses();
+export function getIntervalData(operationType, interval = 'all', currentDatestamp) {
+  const operationsArray = getOperations(operationType);
   let intervalArray;
 
   switch (interval) {
     case 'day':
-      intervalArray = expensesArray.filter(({ date }) => new Date(date).getDate() === new Date(currentDatestamp).getDate()
+      intervalArray = operationsArray.filter(({ date }) => new Date(date).getDate() === new Date(currentDatestamp).getDate()
         && new Date(date).getMonth() === new Date(currentDatestamp).getMonth()
         && new Date(date).getFullYear() === new Date(currentDatestamp).getFullYear());
       return intervalArray;
 
     case 'month':
-      intervalArray = expensesArray.filter(({ date }) => new Date(date).getMonth() === new Date(currentDatestamp).getMonth()
+      intervalArray = operationsArray.filter(({ date }) => new Date(date).getMonth() === new Date(currentDatestamp).getMonth()
       && new Date(date).getFullYear() === new Date(currentDatestamp).getFullYear());
       return intervalArray;
 
     case 'year':
-      intervalArray = expensesArray.filter(({ date }) => new Date(date).getFullYear() === new Date(currentDatestamp).getFullYear());
+      intervalArray = operationsArray.filter(({ date }) => new Date(date).getFullYear() === new Date(currentDatestamp).getFullYear());
       return intervalArray;
 
     case 'all':
-      return expensesArray;
+      return operationsArray;
     default:
-      return expensesArray;
+      return operationsArray;
   }
 }
 
-export function groupExpensesByCategory(arrayOfExpenses) {
-  return arrayOfExpenses.reduce((accum, { category }, ind, arr) => {
+export function groupOperationsByCategory(arrayOfOperations) {
+  return arrayOfOperations.reduce((accum, { category }, ind, arr) => {
     const key = category;
     if (!accum.hasOwnProperty(key)) {
       accum[key] = arr.filter(({ category }) => category === key);
@@ -51,10 +51,10 @@ export function groupExpensesByCategory(arrayOfExpenses) {
 // const currentInterval = document.querySelector('#interval');
 // const currentDatestamp = +currentInterval.dataset.date; (2-й параметр ф-ии)
 
-export function getExpensesForChart(interval, stamp) {
-  const expensesArray = getIntervalData(interval, stamp);
+export function getOperationsForChart(operationType, interval, stamp) {
+  const operationsArray = getIntervalData(operationType, interval, stamp);
 
-  return expensesArray.reduce((accum, { category }, ind, arr) => {
+  return operationsArray.reduce((accum, { category }, ind, arr) => {
     const key = category;
     if (!accum.hasOwnProperty(key)) {
       accum[key] = arr.reduce((accum, { category, value }) => {
@@ -69,9 +69,9 @@ export function getExpensesForChart(interval, stamp) {
   }, {});
 }
 
-export function getSummaryExpensesForInterval(interval, stamp) {
-  const expensesArray = getIntervalData(interval, stamp);
-  const summaryExpense = expensesArray.reduce((accum, { value }) => accum + value, 0);
+export function getSummaryOperationsForInterval(operationType, interval, stamp) {
+  const operationsArray = getIntervalData(operationType, interval, stamp);
+  const summaryOperation = operationsArray.reduce((accum, { value }) => accum + value, 0);
 
-  return summaryExpense;
+  return summaryOperation;
 }
