@@ -10,10 +10,14 @@ function drawAddExpense() {
   container.id = 'add-operation';
   container.classList.add('d-flex', 'flex-column', 'text-center', 'mt-5', 'pe-5');
 
+  const title = document.createElement('p');
+  title.classList.add('text-danger', 'text-uppercase', 'fs-4', 'mb-4');
+  title.textContent = 'Add Expense';
+
   const labelCategory = document.createElement('labelCategory');
   labelCategory.classList.add('mb-1', 'text-danger', 'fw-bold');
   labelCategory.for = 'category-select';
-  labelCategory.textContent = 'Select category';
+  labelCategory.textContent = 'Category';
 
   const select = document.createElement('select');
 
@@ -42,7 +46,7 @@ function drawAddExpense() {
   const labelAmount = document.createElement('label');
   labelAmount.classList.add('mb-1', 'text-danger', 'fw-bold');
   labelAmount.for = 'add-expense';
-  labelAmount.textContent = 'Add amount';
+  labelAmount.textContent = 'Amount';
 
   const input = document.createElement('input');
 
@@ -79,7 +83,7 @@ function drawAddExpense() {
     }
   });
 
-  container.append(labelCategory, select, labelAmount, input, inputDate, btn, audio);
+  container.append(title, labelCategory, select, labelAmount, input, inputDate, btn, audio);
   fragment.append(container);
 
   mainContent.append(fragment);
@@ -91,10 +95,14 @@ function drawAddIncome() {
   container.id = 'add-operation';
   container.classList.add('d-flex', 'flex-column', 'text-center', 'mt-5', 'ps-5');
 
+  const title = document.createElement('p');
+  title.classList.add('text-warning', 'text-uppercase', 'fs-4', 'mb-4');
+  title.textContent = 'Add Income';
+
   const labelCategory = document.createElement('labelCategory');
   labelCategory.classList.add('mb-1', 'text-warning', 'fw-bold');
   labelCategory.for = 'category-select';
-  labelCategory.textContent = 'Select category';
+  labelCategory.textContent = 'Сategory';
 
   const select = document.createElement('select');
 
@@ -123,7 +131,7 @@ function drawAddIncome() {
   const labelAmount = document.createElement('label');
   labelAmount.classList.add('mb-1', 'text-warning', 'fw-bold');
   labelAmount.for = 'add-income';
-  labelAmount.textContent = 'Add amount';
+  labelAmount.textContent = 'Amount';
 
   const input = document.createElement('input');
 
@@ -160,7 +168,7 @@ function drawAddIncome() {
     }
   });
 
-  container.append(labelCategory, select, labelAmount, input, inputDate, btn, audio);
+  container.append(title, labelCategory, select, labelAmount, input, inputDate, btn, audio);
   fragment.append(container);
 
   mainContent.append(fragment);
@@ -168,7 +176,6 @@ function drawAddIncome() {
 
 export default function addOperation() {
   mainContent.innerHTML = '';
-
 
   drawAddExpense();
   drawAddIncome();
