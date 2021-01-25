@@ -7,40 +7,39 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="shortcut icon" href="./assets/Saving.svg" type="image/x-icon" />
+    <link rel="shortcut icon" href="./assets/icons/Saving.svg" type="image/x-icon" />
     <title>Clone Wars</title>
   </head>
   <body class="d-flex flex-column h-100">
     <header class="navbar navbar-light bg-white header border-bottom">
       <div class="container">
-        <div class="col-3">
+        <div class="col-2">
           <p>Balance:</p>
           <p class="fw-bold">
             <span id="current-amount" class="text-success">000.00 </span
             ><span id="current-currency">BYN</span>
           </p>
         </div>
-        <div class="d-flex">
+        <div class="navigate-interval d-flex align-items-center">
+          <button class = "iteration-button btn btn-outline-success" id = "prev"> &lt; </button>
+          <div id="interval" class="me-1 ms-1">current interval</div>
+          <button class = "iteration-button btn btn-outline-success" id = "next"> &gt; </button>
+        </div>
+        <div class="d-flex col-2">
           <select class="form-select" name="interval" id="interval-select">
             <option value="day">Day</option>
             <option value="month" selected>Month</option>
             <option value="year">Year</option>
             <option value="all">All</option>
           </select>
-          <img class="header-image" src="./assets/007.svg" alt="" />
-          <!-- need to add appropriate styles by using bootstrap -->
-          <div class="navigate-interval">
-            <button class = "iteration-button" id = "prev">prev</button>
-            <div id="interval">current interval</div>
-            <button class = "iteration-button" id = "next">next</button>
-          </div>
+          <img class="header-image" src="./assets/icons/007.svg" alt="" />
         </div>
       </div>
     </header>
     <main class="bg-light">
-      <div class="d-flex justify-content-center" id="main-content">
+      <div class="d-flex justify-content-center flex-wrap" id="main-content">
         
-        <!-- тут все содержимое -->
+        <!-- all content is here -->
 
       </div>
     </main>
@@ -49,28 +48,29 @@
         <nav
           class="row d-flex flex-row justify-content-sm-between align-items-center mt-3 text-center"
         >
-          <button type="button" id = "btn-operations" class="btn btn-success nav-button col-md-1">
-            <img width="50px" src="./assets/001.svg" alt="" />
-            <span>Operations</span>
+          <button type="button" id = "btn-operations" class="btn btn-success nav-button col-2">
+            <img class="footer-btn-image" src="./assets/icons/001.svg" alt="Operation" />
+            <span class="d-block">Operations</span>
           </button>
 
-          <button type="button" class="btn btn-success nav-button col-md-1">
-            <img src="./assets/002.svg" alt="" />
-            <span>Reports</span>
+          <button type="button" class="btn btn-success nav-button col-2">
+            <img class="footer-btn-image" src="./assets/icons/002.svg" alt="Report" />
+            <span class="d-block">Reports</span>
           </button>
 
-          <button type="button" id="btn-add-operation" class="btn btn-success nav-button col-md-1">
-            <span>Add operation</span>
+          <button type="button" id="btn-add-operation" class="col-2 btn-add-operation">
+            <img class="footer-btn-image" src="./assets/icons/005.svg" alt="add">
+            <span class="text-nowrap d-block text-success fw-bold">Add operation</span>
           </button>
 
-          <button type="button" class="btn btn-success col-md-1">
-            <img src="./assets/003.svg" alt="" />
-            <span>Categories</span>
+          <button type="button" class="btn btn-success col-2">
+            <img class="footer-btn-image" src="./assets/icons/003.svg" alt="Category" />
+            <span class="d-block">Categories</span>
           </button>
 
-          <button type="button" class="btn btn-success col-md-1" id = "settings">
-            <img src="./assets/004.svg" alt="" />
-            <span>Settings</span>
+          <button type="button" class="btn btn-success col-2">
+            <img class="footer-btn-image" src="./assets/icons/004.svg" alt="Settings" />
+            <span class="d-block">Settings</span>
           </button>
         </nav>
       </div>
