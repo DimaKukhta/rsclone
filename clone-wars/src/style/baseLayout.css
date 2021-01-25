@@ -46,4 +46,5 @@ footer {
 
 .btn-add-operation:hover {
   background-color: rgba(211, 212, 237, 1);
+  border: none;
 }

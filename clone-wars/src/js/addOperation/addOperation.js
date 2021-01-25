@@ -8,7 +8,7 @@ function drawAddExpense() {
   const fragment = new DocumentFragment();
   const container = document.createElement('div');
   container.id = 'add-operation';
-  container.classList.add('d-flex', 'flex-column', 'text-center', 'mt-5', 'pe-5');
+  container.classList.add('d-flex', 'flex-column', 'text-center', 'mt-5', 'pe-5', 'add-expense');
 
   const title = document.createElement('p');
   title.classList.add('text-danger', 'text-uppercase', 'fs-4', 'mb-4');
@@ -93,7 +93,7 @@ function drawAddIncome() {
   const fragment = new DocumentFragment();
   const container = document.createElement('div');
   container.id = 'add-operation';
-  container.classList.add('d-flex', 'flex-column', 'text-center', 'mt-5', 'ps-5');
+  container.classList.add('d-flex', 'flex-column', 'text-center', 'mt-5', 'ps-5', 'add-income');
 
   const title = document.createElement('p');
   title.classList.add('text-warning', 'text-uppercase', 'fs-4', 'mb-4');
@@ -102,7 +102,7 @@ function drawAddIncome() {
   const labelCategory = document.createElement('labelCategory');
   labelCategory.classList.add('mb-1', 'text-warning', 'fw-bold');
   labelCategory.for = 'category-select';
-  labelCategory.textContent = 'Сategory';
+  labelCategory.textContent = 'Category';
 
   const select = document.createElement('select');
 
@@ -174,9 +174,23 @@ function drawAddIncome() {
   mainContent.append(fragment);
 }
 
+function drawImage() {
+  const fragment = new DocumentFragment();
+  const container = document.createElement('div');
+  container.classList.add('add-operation-image');
+
+  const image = document.createElement('img');
+  image.classList.add('w-100', 'mt-5');
+  image.src = './assets/icons/Saving.svg';
+  container.append(image);
+  fragment.append(container);
+  mainContent.append(fragment);
+}
+
 export default function addOperation() {
   mainContent.innerHTML = '';
 
   drawAddExpense();
   drawAddIncome();
+  drawImage();
 }
