@@ -27,9 +27,9 @@ export default class Operations {
 
     const currentDatestamp = +interval.dataset.date;
 
-    const expensesArray = getIntervalData(operationType, intervalOperations.value, currentDatestamp);
+    const operationsArray = getIntervalData(operationType, intervalOperations.value, currentDatestamp);
 
-    const operationsObject = groupOperationsByCategory(expensesArray);
+    const operationsObject = groupOperationsByCategory(operationsArray);
 
     const isIntervalHasData = JSON.stringify(operationsObject) !== JSON.stringify({});
 
@@ -62,55 +62,55 @@ export default class Operations {
       const categoryOperations = document.createElement('li');
       const dataByCategory = operationsObject[category];
 
-      const totalExpenseByCategory = dataByCategory.reduce((accum, { value }) => accum + value, 0);
+      const totalByCategory = dataByCategory.reduce((accum, { value }) => accum + value, 0);
 
-      categoryOperations.textContent = `${category}: ${sign}${totalExpenseByCategory} ${currency}`;
+      categoryOperations.textContent = `${category}: ${sign}${totalByCategory} ${currency}`;
 
-      const sortedExpensesByCategories = dataByCategory.sort((a, b) => new Date(b.date) - new Date(a.date));
+      const sortedByCategories = dataByCategory.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-      const expenseUl = document.createElement('ul');
+      const operationUl = document.createElement('ul');
 
-      sortedExpensesByCategories.forEach((expense, index) => {
+      sortedByCategories.forEach((expense, index) => {
         const recordContainer = document.createElement('div');
         recordContainer.classList.add('record-container');
 
-        const dateExpense = new Date(sortedExpensesByCategories[index].date);
-        const day = dateExpense.getDate();
-        const monthIndex = dateExpense.getMonth();
-        const year = dateExpense.getFullYear();
+        const dateOperation = new Date(sortedByCategories[index].date);
+        const day = dateOperation.getDate();
+        const monthIndex = dateOperation.getMonth();
+        const year = dateOperation.getFullYear();
 
-        const expenseLi = document.createElement('li');
+        const operationLi = document.createElement('li');
 
         // here will be function than returns lang from seetings
         const lang = 'en';
 
-        const expenseDate = `${addZeroes(day)} ${monthNames[lang][monthIndex]} ${year}`;
-        expenseLi.textContent = `
-          ${sign}${sortedExpensesByCategories[index].value} ${currency};
-          ${expenseDate}`;
+        const dateText = `${addZeroes(day)} ${monthNames[lang][monthIndex]} ${year}`;
+        operationLi.textContent = `
+          ${sign}${sortedByCategories[index].value} ${currency};
+          ${dateText}`;
 
         const deleteBtn = document.createElement('button');
         deleteBtn.classList.add('delete-record');
-        deleteBtn.dataset.id = sortedExpensesByCategories[index].id;
+        deleteBtn.dataset.id = sortedByCategories[index].id;
         deleteBtn.textContent = '✖';
 
         recordContainer.append(deleteBtn);
-        recordContainer.append(expenseLi);
+        recordContainer.append(operationLi);
 
-        expenseUl.append(recordContainer);
+        operationUl.append(recordContainer);
       });
 
-      categoryOperations.append(expenseUl);
+      categoryOperations.append(operationUl);
       categoryOperations.append(horisontalLine.cloneNode());
       fragment.append(categoryOperations);
     });
 
-    const allExpensesForInterval = getSummaryOperationsForInterval(operationType, intervalOperations.value, currentDatestamp);
+    const totalForInterval = getSummaryOperationsForInterval(operationType, intervalOperations.value, currentDatestamp);
 
-    const summaryExpenses = document.createElement('div');
-    summaryExpenses.textContent = `Summary ${operationType} for interval: ${sign}${allExpensesForInterval} ${currency}`;
+    const summary = document.createElement('div');
+    summary.textContent = `Summary ${operationType} for interval: ${sign}${totalForInterval} ${currency}`;
 
-    this.operations.append(summaryExpenses);
+    this.operations.append(summary);
     this.operations.append(horisontalLine.cloneNode());
     this.operations.append(fragment);
 

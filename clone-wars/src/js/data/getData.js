@@ -70,8 +70,8 @@ export function getOperationsForChart(operationType, interval, stamp) {
 }
 
 export function getSummaryOperationsForInterval(operationType, interval, stamp) {
-  const expensesArray = getIntervalData(operationType, interval, stamp);
-  const summaryExpense = expensesArray.reduce((accum, { value }) => accum + value, 0);
+  const operationsArray = getIntervalData(operationType, interval, stamp);
+  const summaryOperation = operationsArray.reduce((accum, { value }) => accum + value, 0);
 
-  return summaryExpense;
+  return summaryOperation;
 }
