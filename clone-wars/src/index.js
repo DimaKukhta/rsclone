@@ -27,9 +27,13 @@ btnAddOperation.addEventListener('click', addOperation);
 
 window.onload = addOperation;
 
-// settings init
-// eslint-disable-next-line no-unused-vars
-const settings = new Settings();
+const settingsRewrite = () => {
+  const oldSettings = document.querySelector('templete');
+  oldSettings.parentNode.removeChild(oldSettings);
+  const operationsSettings = document.querySelectorAll('.operations');
+  // eslint-disable-next-line no-unused-vars
+  const settings = new Settings(operationsSettings);
+};
 
 document.addEventListener('DOMContentLoaded', () => {
   // create add operation tab;
@@ -46,6 +50,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const main = document.querySelector('#main-content');
     main.innerHTML = '';
     operations.renderIn(main);
+
+    // settings rewrite
+    settingsRewrite();
   });
 
   intervalSelect.addEventListener('change', () => {
@@ -86,5 +93,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isOperationsTab) {
       operations.updateOperations();
     }
+    // settings init
+    settingsRewrite();
   });
 });
+
+// settings init
+// eslint-disable-next-line no-unused-vars
+const settings = new Settings();
