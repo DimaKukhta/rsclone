@@ -10,6 +10,9 @@
   --color-white: white;
   --color-light-purple: #d3d4ed;
 
+  --color-dark-them-btn:  rgba(0, 82, 82, 0.788);
+  --color-dark-them-blue: rgba(7, 197, 197, 0.788);
+
   font-size: 1rem;
   font-family: "Montserrat Mono", Verdana, Geneva, Tahoma, sans-serif;
 }
