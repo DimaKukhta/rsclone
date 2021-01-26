@@ -49,6 +49,10 @@ footer {
   border: none;
 }
 
+.form-select {
+  min-width: 100px;
+}
+
 .balance {
   margin-right: 5px;
 }

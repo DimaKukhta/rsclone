@@ -111,3 +111,18 @@ export function updateBalance() {
 
   balanceElem.textContent = balanceValue.toFixed(2);
 }
+
+function addClassForMS(elem, className, ms) {
+  elem.classList.add(className);
+  setTimeout(() => {
+    elem.classList.remove(className);
+    elem.textContent = '';
+  }, ms);
+}
+
+export function pigAnimation(operationType, value) {
+  const pigAmount = document.querySelector('.animation-container');
+  pigAmount.textContent = (operationType === 'expense') ? `-${value}` : value;
+  const removeClassAfterMS = 4000;
+  addClassForMS(pigAmount, `${operationType}-animation`, removeClassAfterMS);
+}

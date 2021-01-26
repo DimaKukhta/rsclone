@@ -1,4 +1,13 @@
-import { saveOperationToLocalStorage, setDefaultOperation, isInputValid, enableInput, setCurrentDateByDefault, validateInput, updateBalance } from './processingOperation';
+import { 
+  saveOperationToLocalStorage,
+  setDefaultOperation,
+  isInputValid,
+  enableInput,
+  setCurrentDateByDefault,
+  validateInput,
+  updateBalance,
+  pigAnimation,
+} from './processingOperation';
 
 import expenseCategories from '../data/dataExpenseCategories';
 import incomeCategories from '../data/dataIncomeCategories';
@@ -81,6 +90,7 @@ function drawAddExpense() {
   btn.addEventListener('click', () => {
     if (isInputValid('expense')) {
       audio.play();
+      pigAnimation('expense', (+input.value).toFixed(2));
       saveOperationToLocalStorage('expense');
       setDefaultOperation('expense');
       updateBalance();
@@ -169,6 +179,7 @@ function drawAddIncome() {
   btn.addEventListener('click', () => {
     if (isInputValid('income')) {
       audio.play();
+      pigAnimation('income', (+input.value).toFixed(2));
       saveOperationToLocalStorage('income');
       setDefaultOperation('income');
       updateBalance();
@@ -187,9 +198,11 @@ function drawImage() {
   container.classList.add('add-operation-image');
 
   const image = document.createElement('img');
-  image.classList.add('w-100', 'mt-5');
+  const animationContainer = document.createElement('span');
+  animationContainer.classList.add('animation-container');
+  image.classList.add('w-100', 'mt-5', 'pig');
   image.src = './assets/icons/Saving.svg';
-  container.append(image);
+  container.append(animationContainer, image);
   fragment.append(container);
   mainContent.append(fragment);
 }
