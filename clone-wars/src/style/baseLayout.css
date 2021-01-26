@@ -15,6 +15,25 @@ footer {
   margin-top: auto;
 }
 
+ul {  
+  list-style: none;
+  padding: 0;
+  margin: 0;  
+}
+
+button {
+  border: none;
+}
+
+button:active {
+  outline: none;
+  border: none;
+}
+
+button:focus {
+  outline: 0;
+}
+
 .footer-btn-image {
   height: 3rem;
 }
