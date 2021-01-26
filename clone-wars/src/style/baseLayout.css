@@ -48,3 +48,15 @@ footer {
   background-color: rgba(211, 212, 237, 1);
   border: none;
 }
+
+.balance {
+  margin-right: 5px;
+}
+
+.red {
+  color: var(--color-red)!important;
+}
+
+.green {
+  color: var(--color-green)!important;
+}

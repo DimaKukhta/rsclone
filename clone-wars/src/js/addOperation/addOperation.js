@@ -1,4 +1,4 @@
-import { saveOperationToLocalStorage, setDefaultOperation, isInputValid, enableInput, setCurrentDateByDefault, validateInput } from './processingOperation';
+import { saveOperationToLocalStorage, setDefaultOperation, isInputValid, enableInput, setCurrentDateByDefault, validateInput, updateBalance } from './processingOperation';
 
 import expenseCategories from '../data/dataExpenseCategories';
 import incomeCategories from '../data/dataIncomeCategories';
@@ -83,6 +83,7 @@ function drawAddExpense() {
       audio.play();
       saveOperationToLocalStorage('expense');
       setDefaultOperation('expense');
+      updateBalance();
     }
   });
 
@@ -163,13 +164,14 @@ function drawAddIncome() {
 
   const audio = document.createElement('audio');
   audio.id = 'audio';
-  audio.src = './assets/audio/expense.mp3';
+  audio.src = './assets/audio/income.mp3';
 
   btn.addEventListener('click', () => {
     if (isInputValid('income')) {
       audio.play();
       saveOperationToLocalStorage('income');
       setDefaultOperation('income');
+      updateBalance();
     }
   });
 

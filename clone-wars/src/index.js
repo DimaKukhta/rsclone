@@ -10,6 +10,7 @@ import {
 } from './js/interval/interval';
 
 import Operations from './js/operations/Operations';
+import { updateBalance } from './js/addOperation/processingOperation';
 
 const intervalSelect = document.querySelector('#interval-select');
 const intervalReport = document.querySelector('#interval');
@@ -24,6 +25,7 @@ btnAddOperation.addEventListener('click', addOperation);
 document.addEventListener('DOMContentLoaded', () => {
   // create add operation tab;
   addOperation();
+  updateBalance();
 
   const currentDatestamp = new Date().getTime();
 
