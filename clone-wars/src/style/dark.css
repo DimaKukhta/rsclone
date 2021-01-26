@@ -1,0 +1,40 @@
+@import "./default.css";
+
+.header-image {
+    fill: blue !important;
+}
+
+.dark_btn {
+    background-color: var(--color-dark-them-btn);
+    color: var(--color-light-purple);
+}
+
+.dark_btn:hover {
+    background-color: var(--color-dark-them-blue);}
+
+.dark_btn:active {
+    background-color: var(--color-dark-them-blue);}
+
+.dark_btn:focus {
+    background-color: var(--color-dark-them-blue);
+}
+
+.bgc_dark {
+    background-color: var(--color-dark) !important;
+}
+
+.bgc_dark_settings {
+    background: linear-gradient(to left top, var(--color-dark), var(--color-dark-them-blue));
+}
+.header_dark {
+    background-color: var(--color-grey) !important;
+}
+
+.text_dark {
+    color: var(--color-light-purple) !important;
+}
+
+.btnOperation_dark {
+    color: var(--color-red) !important;
+    
+}

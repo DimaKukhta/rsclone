@@ -1,6 +1,10 @@
 // eslint-disable-next-line no-unused-vars
 import style from './style/style.css';
 
+import EnExpenseCategories from './js/data/dataExpenseCategories';
+import EnIncomeCategories from './js/data/dataIncomeCategories';
+import Settings from './js/settings/Settings';
+
 import addOperation from './js/addOperation/addOperation';
 import {
   getIntervalText,
@@ -21,6 +25,12 @@ const btnAddOperation = document.querySelector('#btn-add-operation');
 const btnOperations = document.querySelector('#btn-operations');
 
 btnAddOperation.addEventListener('click', addOperation);
+
+window.onload = addOperation;
+
+// settings init
+// eslint-disable-next-line no-unused-vars
+const settings = new Settings();
 
 document.addEventListener('DOMContentLoaded', () => {
   // create add operation tab;
