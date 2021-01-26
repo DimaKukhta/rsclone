@@ -1,30 +1,31 @@
 @import "./default.css";
 
+.header-image {
+    fill: blue !important;
+}
+
 .dark_btn {
-    background-color: rgba(0, 82, 82, 0.788);
+    background-color: var(--color-dark-them-btn);
     color: var(--color-light-purple);
 }
 
 .dark_btn:hover {
-    background-color: rgba(2, 109, 109, 0.788);
-}
+    background-color: var(--color-dark-them-blue);}
 
 .dark_btn:active {
-    background-color: rgba(7, 197, 197, 0.788);
-}
-
-.dark_btn:after {
-    background-color: rgba(7, 197, 197, 0.788);
-}
+    background-color: var(--color-dark-them-blue);}
 
 .dark_btn:focus {
-    background-color: rgba(7, 197, 197, 0.788);
+    background-color: var(--color-dark-them-blue);
 }
 
 .bgc_dark {
     background-color: var(--color-dark) !important;
 }
 
+.bgc_dark_settings {
+    background: linear-gradient(to left top, var(--color-dark), var(--color-dark-them-blue));
+}
 .header_dark {
     background-color: var(--color-grey) !important;
 }
@@ -34,13 +35,6 @@
 }
 
 .btnOperation_dark {
-    /* background-color: var(--color-grey) !important; */
-    color: var(--color-red) !important;
-    
-}
-.btnOperation_dark:hover {
-    /* background-color: var(--color-grey) !important; */
-    
     color: var(--color-red) !important;
     
 }

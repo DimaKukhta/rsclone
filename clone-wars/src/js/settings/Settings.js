@@ -21,7 +21,6 @@ export default class Settings {
     this.textSpan = document.querySelectorAll('span');
 
     this.buttons = document.querySelectorAll('.btn');
-    // this.btnOperation = document.getElementById('btn-add-operation');
     this.btnOperation = document.querySelector('btn-add-operation');
     this.header = document.querySelector('header');
     this.main = document.querySelector('main');
@@ -31,10 +30,12 @@ export default class Settings {
 
     this.render();
     this.handlers();
-    this.themeChange();
+    // this.themeChange();
 
     this.set = document.querySelector('.settings');
     this.outer = document.querySelector('.outer');
+
+    this.themeChange();
   }
 
   render() {
@@ -119,29 +120,24 @@ export default class Settings {
 
     this.themeChangeLocalS = function () {
       this.themeLocal = localStorage.getItem('theme');
+      // dark on
       if (this.themeLocal === 'false') {
         this.header.classList.add('bgc_dark');
         this.main.classList.add('bgc_dark');
         this.footer.classList.add('bgc_dark');
         this.currentAmount.classList.add('text_dark');
         this.interval.classList.add('text_dark');
-
-        // this.btnOperation.classList.add('btnOperation_dark');
-        // this.textSpan.forEach((elem) => {
-        //   elem.classList.add('btnOperation_dark');
-        // });
-        // console.log(this.textSpan);
+        // settings
+        this.set.classList.add('bgc_dark_settings');
+        // add operation
         this.textSpan[4].classList.add('btnOperation_dark');
-        // this.textP.forEach((elem) => {
-        //   elem.classList.add('text_dark');
-        // });
 
         console.log(this.themeLocal);
         this.buttons.forEach((btn) => {
           btn.classList.add('dark_btn');
-        // btn.classList.remove('btn-success');
         });
       }
+      // dark off
       if (this.themeLocal === 'true') {
         console.log(this.themeLocal);
         this.header.classList.remove('bgc_dark');
@@ -150,13 +146,15 @@ export default class Settings {
         this.currentAmount.classList.remove('text_dark');
         this.interval.classList.remove('text_dark');
 
+        this.set.classList.remove('bgc_dark_settings');
+
+        this.textSpan[4].classList.remove('btnOperation_dark');
         this.textP.forEach((elem) => {
           elem.classList.remove('text_dark');
         });
 
         this.buttons.forEach((btn) => {
           btn.classList.remove('dark_btn');
-        // btn.classList.remove('btn-success');
         });
       }
     };
@@ -187,8 +185,8 @@ export default class Settings {
   }
 
   closeSettings() {
-    this.set = document.querySelector('.settings');
-    this.outer = document.querySelector('.outer');
+    // this.set = document.querySelector('.settings');
+    // this.outer = document.querySelector('.outer');
     this.outer.classList.remove('settings_outer');
     this.countButtonSettings = false;
     this.set.classList.remove('set_on_slide');
