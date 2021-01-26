@@ -17,27 +17,31 @@
   margin-right: 800px;
   margin-left: 800px;
 
-  text-align: center;
   font-size: 1px;
+
+  text-align: center;
 }
 
 .animation-container {
   position: absolute;
   top: 60%;
   left: 50%;
+
   font-weight: 900;
 }
 
 .income-animation {
   color: var(--color-green);
-  animation-duration: 6s;
+
   animation-name: scale-opacity;
+  animation-duration: 6s;
 }
 
 .expense-animation {
   color: var(--color-red);
-  animation-duration: 6s;
+
   animation-name: scale-opacity;
+  animation-duration: 6s;
 }
 
 @keyframes scale-opacity {

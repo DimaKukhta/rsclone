@@ -4,6 +4,7 @@
 /* eslint-disable no-prototype-builtins */
 /* eslint-disable class-methods-use-this */
 import { getIntervalData, getSummaryOperationsForInterval, groupOperationsByCategory } from '../data/getData';
+import { updateBalance } from '../addOperation/processingOperation';
 import addZeroes from '../utils/addZeroes';
 
 const intervalOperations = document.querySelector('#interval-select');
@@ -144,6 +145,7 @@ export default class Operations {
       localStorage.setItem(operationType, JSON.stringify(operationsCopy));
 
       this.updateOperations(operationType);
+      updateBalance();
     }
   }
 

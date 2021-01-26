@@ -5,8 +5,9 @@
 }
 
 .dark_btn {
-    background-color: var(--color-dark-them-btn);
     color: var(--color-light-purple);
+
+    background-color: var(--color-dark-them-btn);
 }
 
 .dark_btn:hover {
