@@ -40,8 +40,9 @@ export default class Operations {
       emptyFolder.style.width = '100px';
 
       const noDataText = document.createElement('div');
-      noDataText.textContent = `no ${operationType} for this interval...`;
-
+      const noDataTextInner = document.createElement('p');
+      noDataTextInner.textContent = `no ${operationType} for this interval...`;
+      noDataText.append(noDataTextInner);
       this.operations.append(noDataText, emptyFolder);
 
       return this.operations;
