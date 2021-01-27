@@ -63,14 +63,11 @@ export default class Operations {
       const categoryContainer = document.createElement('div');
       categoryContainer.classList.add('category-container');
 
-      categoryContainer.addEventListener('click', expandAndCollapseList)
+      categoryContainer.addEventListener('click', expandAndCollapseList);
 
       const expander = document.createElement('button');
       expander.classList.add('record-expander');
       expander.textContent = '▼';
-
-      // expander.addEventListener('click', expandAndCollapseList)
-      // ▲▼
 
       const categoryOperations = document.createElement('li');
       categoryOperations.classList.add('category');
@@ -107,6 +104,7 @@ export default class Operations {
         const deleteBtn = document.createElement('button');
         deleteBtn.classList.add('delete-record');
         deleteBtn.dataset.id = sortedByCategories[index].id;
+        deleteBtn.dataset.value = sortedByCategories[index].value;
         deleteBtn.textContent = '✖';
 
         recordContainer.append(deleteBtn);
@@ -126,7 +124,7 @@ export default class Operations {
     const totalForInterval = getSummaryOperationsForInterval(operationType, intervalOperations.value, currentDatestamp);
 
     const summary = document.createElement('div');
-    summary.textContent = `Summary ${operationType} for interval: ${sign}${totalForInterval} ${currency}`;
+    summary.innerHTML = `<span>Summary ${operationType} for interval: ${sign}</span><span class='interval-total'>${totalForInterval}</span> <span>${currency}</span>`;
 
     this.operations.append(summary);
     this.operations.append(horisontalLine.cloneNode());
@@ -162,7 +160,6 @@ export default class Operations {
       localStorage.setItem(operationType, JSON.stringify(operationsCopy));
 
       const record = target.parentElement;
-
       const categoryRecords = target.closest('.records').children;
       const isOneRecord = Array.from(categoryRecords).length === 1;
 
@@ -173,6 +170,8 @@ export default class Operations {
         record.remove();
       }
 
+      const deleteValue = target.dataset.value;
+      updateSummaryForInterval(deleteValue);
       updateBalance();
     }
   }
@@ -199,4 +198,11 @@ function expandAndCollapseList({ target }) {
       target.textContent = '▲';
     }
   }
+}
+
+function updateSummaryForInterval(val) {
+  const total = document.querySelector('.interval-total');
+  const currentValue = +total.textContent;
+  const updateValue = currentValue - val;
+  total.textContent = updateValue;
 }
