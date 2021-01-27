@@ -14,6 +14,7 @@ import {
 } from './js/interval/interval';
 
 import Operations from './js/operations/Operations';
+import { updateBalance } from './js/addOperation/processingOperation';
 
 const intervalSelect = document.querySelector('#interval-select');
 const intervalReport = document.querySelector('#interval');
@@ -34,6 +35,7 @@ const settings = new Settings();
 document.addEventListener('DOMContentLoaded', () => {
   // create add operation tab;
   addOperation();
+  updateBalance();
 
   const currentDatestamp = new Date().getTime();
 
