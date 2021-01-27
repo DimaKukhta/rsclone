@@ -1,5 +1,5 @@
 export default class Settings {
-  constructor() {
+  constructor(operationsSettings, recordExpander) {
     this.theme = 'Theme';
     this.currency = 'Currency';
     this.language = 'Language';
@@ -35,6 +35,8 @@ export default class Settings {
     this.set = document.querySelector('.settings');
     this.outer = document.querySelector('.outer');
 
+    this.operations = operationsSettings;
+    this.recordExpander = recordExpander;
     this.themeChange();
   }
 
@@ -98,7 +100,6 @@ export default class Settings {
     `;
 
     this.main = document.querySelector('.bg-light');
-    console.log(this.settingsWindow);
     this.main.appendChild(this.settingsWindow);
   }
 
@@ -122,6 +123,11 @@ export default class Settings {
       this.themeLocal = localStorage.getItem('theme');
       // dark on
       if (this.themeLocal === 'false') {
+        // ===================================================================================
+        this.rr = Array.from(document.documentElement.textContent);
+        console.log(this.rr);
+        // ==================================================================================
+        this.textSpan[1].classList.add('text_dark');
         this.header.classList.add('bgc_dark');
         this.main.classList.add('bgc_dark');
         this.footer.classList.add('bgc_dark');
@@ -131,15 +137,19 @@ export default class Settings {
         this.set.classList.add('bgc_dark_settings');
         // add operation
         this.textSpan[4].classList.add('btnOperation_dark');
-
-        console.log(this.themeLocal);
+        // operations
+        if (this.operations) this.operations.forEach((el) => el.classList.add('text_dark'));
+        if (this.recordExpander) this.recordExpander.forEach((el) => el.classList.add('text_dark'));
+        // console.log(this.themeLocal);
+        this.textP.forEach((el) => el.classList.add('text_dark'));
         this.buttons.forEach((btn) => {
           btn.classList.add('dark_btn');
         });
       }
       // dark off
       if (this.themeLocal === 'true') {
-        console.log(this.themeLocal);
+        this.textSpan[1].classList.remove('text_dark');
+        // console.log(this.themeLocal);
         this.header.classList.remove('bgc_dark');
         this.main.classList.remove('bgc_dark');
         this.footer.classList.remove('bgc_dark');
@@ -152,6 +162,10 @@ export default class Settings {
         this.textP.forEach((elem) => {
           elem.classList.remove('text_dark');
         });
+        // operations
+        if (this.operations) this.operations.forEach((el) => el.classList.remove('text_dark'));
+        if (this.recordExpander) this.recordExpander.forEach((el) => el.classList.remove('text_dark'));
+
 
         this.buttons.forEach((btn) => {
           btn.classList.remove('dark_btn');
@@ -161,22 +175,16 @@ export default class Settings {
 
     for (let i = 0; i < this.themeToggler.length; i += 1) {
       this.themeToggler[i].onchange = () => {
-        console.log(this.themeToggler[i].checked);
+        // console.log(this.themeToggler[i].checked);
         localStorage.setItem('theme', this.themeToggler[i].checked);
         setTimeout(this.themeChangeLocalS(), 0);
         this.themeChange();
-        // this.buttons.forEach((btn) => {
-        //   btn.classList.add('darck_btn');
-        //   // btn.classList.remove('btn-success');
-        // });
       };
     }
     this.themeChangeLocalS();
   }
 
   openSettings() {
-    // this.set = document.querySelector('.settings');
-    // this.outer = document.querySelector('.outer');
     this.outer.classList.add('settings_outer');
     this.set.classList.add('set_on_slide');
     this.countButtonSettings = true;
@@ -185,8 +193,6 @@ export default class Settings {
   }
 
   closeSettings() {
-    // this.set = document.querySelector('.settings');
-    // this.outer = document.querySelector('.outer');
     this.outer.classList.remove('settings_outer');
     this.countButtonSettings = false;
     this.set.classList.remove('set_on_slide');
@@ -218,7 +224,6 @@ export default class Settings {
     };
 
     this.themeToggler = document.getElementsByName('onoffswitch');
-    console.log(this.themeToggler);
 
     this.closeButton.addEventListener('click', () => this.closeSettings());
   }
