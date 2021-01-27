@@ -171,7 +171,7 @@ export default class Operations {
       }
 
       const deleteValue = target.dataset.value;
-      updateSummaryForInterval(deleteValue);
+      updateSummaryForInterval(operationType, deleteValue);
       updateBalance();
     }
   }
@@ -200,9 +200,10 @@ function expandAndCollapseList({ target }) {
   }
 }
 
-function updateSummaryForInterval(val) {
-  const total = document.querySelector('.interval-total');
+function updateSummaryForInterval(operationType, deleteValue) {
+  const operations = document.querySelector(`.operations-${operationType}`);
+  const total = operations.querySelector('.interval-total');
   const currentValue = +total.textContent;
-  const updateValue = currentValue - val;
+  const updateValue = currentValue - deleteValue;
   total.textContent = updateValue;
 }
