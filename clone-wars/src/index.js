@@ -11,6 +11,8 @@ import {
 
 import Operations from './js/operations/Operations';
 
+import { getAuthorizationWindow } from './js/authorization/authorization';
+
 const intervalSelect = document.querySelector('#interval-select');
 const intervalReport = document.querySelector('#interval');
 const navigateInterval = document.querySelector('.navigate-interval');
