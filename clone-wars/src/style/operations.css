@@ -6,3 +6,33 @@
   max-height: 600px;
   overflow-y: auto;
 }
+
+.operations-expense {
+  margin-right: 50px;
+}
+
+.collapse {
+  display: none;
+}
+
+.expande {
+  display: block;
+}
+
+.record-container {
+  display: flex;
+  padding-left: 15px;
+  margin-bottom: 5px;
+}
+
+.category-container {
+  display: flex;
+  align-items: flex-start;
+}
+
+.delete-record,
+.record-expander {
+  margin-right: 10px;
+  background: none;
+}
+

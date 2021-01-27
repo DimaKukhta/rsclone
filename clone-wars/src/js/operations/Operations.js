@@ -4,13 +4,14 @@
 /* eslint-disable no-prototype-builtins */
 /* eslint-disable class-methods-use-this */
 import { getIntervalData, getSummaryOperationsForInterval, groupOperationsByCategory } from '../data/getData';
+import { updateBalance } from '../addOperation/processingOperation';
 import addZeroes from '../utils/addZeroes';
 
 const intervalOperations = document.querySelector('#interval-select');
 
 const monthNames = {
-  en: ['January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'],
+  en: ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'Jun.',
+    'Jul.', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'],
   ru: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
     'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
   by: ['Студзень', 'Люты', 'Сакавик', 'Красавик', 'Май', 'Чэрвень',
@@ -59,7 +60,20 @@ export default class Operations {
     const operationsCatetegories = Object.keys(operationsObject).sort();
 
     operationsCatetegories.forEach((category) => {
+      const categoryContainer = document.createElement('div');
+      categoryContainer.classList.add('category-container');
+
+      categoryContainer.addEventListener('click', expandAndCollapseList)
+
+      const expander = document.createElement('button');
+      expander.classList.add('record-expander');
+      expander.textContent = '▼';
+
+      // expander.addEventListener('click', expandAndCollapseList)
+      // ▲▼
+
       const categoryOperations = document.createElement('li');
+      categoryOperations.classList.add('category');
       const dataByCategory = operationsObject[category];
 
       const totalByCategory = dataByCategory.reduce((accum, { value }) => accum + value, 0);
@@ -69,6 +83,7 @@ export default class Operations {
       const sortedByCategories = dataByCategory.sort((a, b) => new Date(b.date) - new Date(a.date));
 
       const operationUl = document.createElement('ul');
+      operationUl.classList.add('collapse', 'records');
 
       sortedByCategories.forEach((expense, index) => {
         const recordContainer = document.createElement('div');
@@ -102,7 +117,10 @@ export default class Operations {
 
       categoryOperations.append(operationUl);
       categoryOperations.append(horisontalLine.cloneNode());
-      fragment.append(categoryOperations);
+
+      categoryContainer.append(expander, categoryOperations);
+
+      fragment.append(categoryContainer);
     });
 
     const totalForInterval = getSummaryOperationsForInterval(operationType, intervalOperations.value, currentDatestamp);
@@ -144,10 +162,30 @@ export default class Operations {
       localStorage.setItem(operationType, JSON.stringify(operationsCopy));
 
       this.updateOperations(operationType);
+      updateBalance();
     }
   }
 
   renderIn(element) {
     element.append(this.createReport());
+  }
+}
+
+function expandAndCollapseList({ target }) {
+  if (target.classList.contains('record-expander')) {
+    const category = target.nextElementSibling;
+    const records = category.querySelector('.records');
+
+    const isRecordsExpande = records.classList.contains('expande');
+
+    if (isRecordsExpande) {
+      records.classList.remove('expande');
+      records.classList.add('collapse');
+      target.textContent = '▼';
+    } else {
+      records.classList.remove('collapse');
+      records.classList.add('expande');
+      target.textContent = '▲';
+    }
   }
 }
