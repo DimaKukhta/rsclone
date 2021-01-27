@@ -1,5 +1,5 @@
 export default class Settings {
-  constructor(operationsSettings) {
+  constructor(operationsSettings, recordExpander) {
     this.theme = 'Theme';
     this.currency = 'Currency';
     this.language = 'Language';
@@ -34,8 +34,9 @@ export default class Settings {
 
     this.set = document.querySelector('.settings');
     this.outer = document.querySelector('.outer');
-    this.operations = operationsSettings;
 
+    this.operations = operationsSettings;
+    this.recordExpander = recordExpander;
     this.themeChange();
   }
 
@@ -122,6 +123,10 @@ export default class Settings {
       this.themeLocal = localStorage.getItem('theme');
       // dark on
       if (this.themeLocal === 'false') {
+        // ===================================================================================
+        this.rr = Array.from(document.documentElement.textContent);
+        console.log(this.rr);
+        // ==================================================================================
         this.textSpan[1].classList.add('text_dark');
         this.header.classList.add('bgc_dark');
         this.main.classList.add('bgc_dark');
@@ -134,8 +139,9 @@ export default class Settings {
         this.textSpan[4].classList.add('btnOperation_dark');
         // operations
         if (this.operations) this.operations.forEach((el) => el.classList.add('text_dark'));
-
+        if (this.recordExpander) this.recordExpander.forEach((el) => el.classList.add('text_dark'));
         // console.log(this.themeLocal);
+        this.textP.forEach((el) => el.classList.add('text_dark'));
         this.buttons.forEach((btn) => {
           btn.classList.add('dark_btn');
         });
@@ -158,6 +164,8 @@ export default class Settings {
         });
         // operations
         if (this.operations) this.operations.forEach((el) => el.classList.remove('text_dark'));
+        if (this.recordExpander) this.recordExpander.forEach((el) => el.classList.remove('text_dark'));
+
 
         this.buttons.forEach((btn) => {
           btn.classList.remove('dark_btn');

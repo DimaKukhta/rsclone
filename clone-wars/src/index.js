@@ -32,8 +32,9 @@ const settingsRewrite = () => {
   const oldSettings = document.querySelector('templete');
   oldSettings.parentNode.removeChild(oldSettings);
   const operationsSettings = document.querySelectorAll('.operations');
+  const recordExpander = document.querySelectorAll('.record-expander');
   // eslint-disable-next-line no-unused-vars
-  const settings = new Settings(operationsSettings);
+  const settings = new Settings(operationsSettings, recordExpander);
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -68,6 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isOperationsTab) {
       operations.updateOperations();
     }
+    // settings rewrite
+    settingsRewrite();
   });
 
   navigateInterval.addEventListener('click', ({ target }) => {
