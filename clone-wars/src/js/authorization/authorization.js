@@ -5,7 +5,7 @@ export default class Authorization {
   }
 
   render() {
-    const htmlCode = `<div class="container-form style="z-index: 10">
+    const htmlCode = `<div class="container-form">
     <form class="authorization-form">
       <div class="mb-3">
         <label for="InputLogin" class="form-label">Логин</label>
@@ -77,7 +77,7 @@ export default class Authorization {
 
     const logPlace = document.querySelector('.log-place');
 
-    const containerForm = document.querySelector('#main-content');
+    const containerForm = document.querySelector('.container-form');
 
     signInButton.addEventListener('click', (e) => {
       e.preventDefault();
