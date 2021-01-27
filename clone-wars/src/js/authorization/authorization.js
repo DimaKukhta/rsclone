@@ -5,7 +5,7 @@ export default class Authorization {
   }
 
   render() {
-    const htmlCode = `<div class="container-form">
+    const htmlCode = `<div class="container-form style="z-index: 10">
     <form class="authorization-form">
       <div class="mb-3">
         <label for="InputLogin" class="form-label">Логин</label>
@@ -26,24 +26,30 @@ export default class Authorization {
     </form>
     </div>`;
     const container = document.querySelector('#main-content');
+    console.log(container);
     container.insertAdjacentHTML('beforeend', htmlCode);
   }
 
-  async signIn(login, password, log) {
+  hidden(element) {
+    element.classList.add('hidden');
+  }  
+
+  async signIn(login, password, log, container) {
     console.log(login, password);
     let response = await fetch(`https://rs-clone-be1.herokuapp.com/authorization/${login}/${password}`);
     const json = await response.json();
     if (json.statusCode) {
-      log.innerHTML = 'Нет такого пользователя';
+      log.innerHTML = '<p class="warning">Нет такого пользователя</p>';
     } else {
       console.log(json);
+      this.hidden(container);
     }
   }
 
-   async signUp(login, password, log) {
+  async signUp(login, password, log, container) {
     const user = {
-      login: login,
-      password: password
+     login: login,
+     password: password
     }
     let response = await fetch('https://rs-clone-be1.herokuapp.com/', {
       method: 'POST',
@@ -52,12 +58,14 @@ export default class Authorization {
       },
       body: JSON.stringify(user)
     });
+
     let result = await response.json();
-      if(result.statusCode) {
-        log.innerHTML = 'Логин уже занят';
-      } else {
-        console.log(result);
-      }
+    if(result.statusCode) {
+      log.innerHTML = '<p class="warning">Логин уже занят</p>';
+    } else {
+      console.log(result);
+      this.hidden(container);
+    }
   }
 
   handlers() {
@@ -68,15 +76,16 @@ export default class Authorization {
     const signUpButton = document.querySelector('.sign-up-button');
 
     const logPlace = document.querySelector('.log-place');
-    
+
+    const containerForm = document.querySelector('#main-content');
+
     signInButton.addEventListener('click', (e) => {
       e.preventDefault();
-      this.signIn(loginInput.value, passwordInput.value, logPlace);
+      this.signIn(loginInput.value, passwordInput.value, logPlace, containerForm);
     });
     signUpButton.addEventListener('click', (e) => {
       e.preventDefault();
-      this.signUp(loginInput.value, passwordInput.value, logPlace);
+      this.signUp(loginInput.value, passwordInput.value, logPlace, containerForm);
     });
   }
 }
-

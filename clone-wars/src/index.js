@@ -90,6 +90,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isOperationsTab) {
       operations.updateOperations();
     }
-    const authorization = new Authorization();
   });
 });
+setTimeout(() => {
+  const authorization = new Authorization();
+}, 200);
