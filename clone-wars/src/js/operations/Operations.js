@@ -161,7 +161,18 @@ export default class Operations {
 
       localStorage.setItem(operationType, JSON.stringify(operationsCopy));
 
-      this.updateOperations(operationType);
+      const record = target.parentElement;
+
+      const categoryRecords = target.closest('.records').children;
+      const isOneRecord = Array.from(categoryRecords).length === 1;
+
+      if (isOneRecord) {
+        const categoryContainer = target.closest('.category-container');
+        categoryContainer.remove();
+      } else {
+        record.remove();
+      }
+
       updateBalance();
     }
   }
