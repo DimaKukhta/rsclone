@@ -1,4 +1,4 @@
-import { getOperations } from '../data/getData';
+import { getOperations, getSummaryOperationsForInterval } from '../data/getData';
 import addZeroes from '../utils/addZeroes';
 
 function generateId() {
@@ -50,16 +50,16 @@ export function saveOperationToLocalStorage(operationType) {
   const category = document.querySelector(`#category-select-${operationType}`);
   const date = document.querySelector(`#${operationType}-date`);
   const input = document.querySelector(`.input-${operationType}`);
-  const expenseArray = getOperations(operationType);
+  const operationArray = getOperations(operationType);
 
-  expenseArray.push({
-    value: +input.value,
+  operationArray.push({
+    value: +(+input.value).toFixed(2),
     category: category.value,
     date: date.value,
     id: generateId(),
   });
 
-  localStorage.setItem(operationType, JSON.stringify(expenseArray));
+  localStorage.setItem(operationType, JSON.stringify(operationArray));
 }
 
 export function setDefaultOperation(operationType) {
@@ -89,4 +89,40 @@ export function validateInput(operationType) {
   } else {
     input.style.color = 'black';
   }
+}
+
+export function updateBalance() {
+  const allExpense = getSummaryOperationsForInterval('expense', 'all');
+  const allIncome = getSummaryOperationsForInterval('income', 'all');
+  const balanceValue = allIncome - allExpense;
+
+  const balanceElem = document.querySelector('#current-amount');
+
+  const setColorClassForElem = (elem, className) => {
+    elem.classList.remove('red', 'green');
+    elem.classList.add(className);
+  };
+
+  if (balanceValue >= 0) {
+    setColorClassForElem(balanceElem, 'green');
+  } else {
+    setColorClassForElem(balanceElem, 'red');
+  }
+
+  balanceElem.textContent = balanceValue.toFixed(2);
+}
+
+function addClassForMS(elem, className, ms) {
+  elem.classList.add(className);
+  setTimeout(() => {
+    elem.classList.remove(className);
+    elem.textContent = '';
+  }, ms);
+}
+
+export function pigAnimation(operationType, value) {
+  const pigAmount = document.querySelector('.animation-container');
+  pigAmount.textContent = (operationType === 'expense') ? `-${value}` : value;
+  const removeClassAfterMS = 4000;
+  addClassForMS(pigAmount, `${operationType}-animation`, removeClassAfterMS);
 }

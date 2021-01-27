@@ -1,6 +1,10 @@
 // eslint-disable-next-line no-unused-vars
 import style from './style/style.css';
 
+import EnExpenseCategories from './js/data/dataExpenseCategories';
+import EnIncomeCategories from './js/data/dataIncomeCategories';
+import Settings from './js/settings/Settings';
+
 import addOperation from './js/addOperation/addOperation';
 import {
   getIntervalText,
@@ -10,6 +14,7 @@ import {
 } from './js/interval/interval';
 
 import Operations from './js/operations/Operations';
+import { updateBalance } from './js/addOperation/processingOperation';
 
 import { getAuthorizationWindow } from './js/authorization/authorization';
 
@@ -23,9 +28,16 @@ const btnOperations = document.querySelector('#btn-operations');
 
 btnAddOperation.addEventListener('click', addOperation);
 
+window.onload = addOperation;
+
+// settings init
+// eslint-disable-next-line no-unused-vars
+const settings = new Settings();
+
 document.addEventListener('DOMContentLoaded', () => {
   // create add operation tab;
   addOperation();
+  updateBalance();
 
   const currentDatestamp = new Date().getTime();
 

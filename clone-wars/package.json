@@ -8,7 +8,7 @@
     "build": "webpack --mode production",
     "lint": "eslint ./src",
     "lint:fix": "eslint ./src --fix",
-    "style:fix": "stylelint ./src/style --fix",
+    "style:fix": "stylelint ./src/style/*.css --fix",
     "watch": "webpack --mode development --watch",
     "dev-server": "webpack serve --mode development"
   },
