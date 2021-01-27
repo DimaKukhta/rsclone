@@ -30,7 +30,7 @@ export function enableInput(operationType) {
     save.removeAttribute('disabled');
     date.removeAttribute('disabled');
   } else {
-    disableInput();
+    disableInput(operationType);
   }
 }
 

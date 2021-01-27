@@ -12,10 +12,10 @@ const intervalOperations = document.querySelector('#interval-select');
 const monthNames = {
   en: ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'Jun.',
     'Jul.', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'],
-  ru: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
-    'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-  by: ['Студзень', 'Люты', 'Сакавик', 'Красавик', 'Май', 'Чэрвень',
-    'Липень', 'Жнивень', 'Верасень', 'Кастрычник', 'Листапад', 'Снежань'],
+  ru: ['Янв.', 'Фев.', 'Март', 'Апр.', 'Май', 'Июн.',
+    'Июл.', 'Авг.', 'Сен.', 'Окт.', 'Ноя.', 'Дек.'],
+  by: ['Сту.', 'Лют.', 'Сак.', 'Крас.', 'Май', 'Чэрв.',
+    'Лип.', 'Жнив.', 'Вер.', 'Каст.', 'Лист.', 'Снеж.'],
 };
 
 export default class Operations {
@@ -72,11 +72,12 @@ export default class Operations {
 
       const categoryOperations = document.createElement('li');
       categoryOperations.classList.add('category');
+ 
       const dataByCategory = operationsObject[category];
-
       const totalByCategory = dataByCategory.reduce((accum, { value }) => accum + value, 0);
 
-      categoryOperations.textContent = `${category}: ${sign}${totalByCategory} ${currency}`;
+      categoryOperations.innerHTML = `<span>${category}: ${sign}</span><span class = 'category-total' data-value = '${totalByCategory}'>
+        ${totalByCategory}</span> <span>${currency}</span>`;
 
       const sortedByCategories = dataByCategory.sort((a, b) => new Date(b.date) - new Date(a.date));
 
@@ -93,14 +94,14 @@ export default class Operations {
         const year = dateOperation.getFullYear();
 
         const operationLi = document.createElement('li');
+        operationLi.classList.add('record-data');
 
         // here will be function than returns lang from seetings
         const lang = 'en';
 
         const dateText = `${addZeroes(day)} ${monthNames[lang][monthIndex]} ${year}`;
-        operationLi.textContent = `
-          ${sign}${sortedByCategories[index].value} ${currency};
-          ${dateText}`;
+        operationLi.innerHTML = `<span>${sign}${sortedByCategories[index].value} <span class = 'currency'>${currency}</span></span>
+          <span>${dateText}</span>`;
 
         const deleteBtn = document.createElement('button');
         deleteBtn.classList.add('delete-record');
@@ -125,7 +126,8 @@ export default class Operations {
     const totalForInterval = getSummaryOperationsForInterval(operationType, intervalOperations.value, currentDatestamp);
 
     const summary = document.createElement('div');
-    summary.innerHTML = `<span>Summary ${operationType} for interval: ${sign}</span><span class='interval-total'>${totalForInterval}</span> <span>${currency}</span>`;
+    summary.innerHTML = `<span>Summary ${operationType} for interval: ${sign}</span><span class='interval-total' data-value = '${totalForInterval}'>
+      ${totalForInterval}</span> <span>${currency}</span>`;
 
     this.operations.append(summary);
     this.operations.append(horisontalLine.cloneNode());
@@ -160,6 +162,11 @@ export default class Operations {
 
       localStorage.setItem(operationType, JSON.stringify(operationsCopy));
 
+      const deleteValue = target.dataset.value;
+      updateSummaryForInterval(target, deleteValue);
+      updateTotalForCategory(target, deleteValue);
+      updateBalance();
+
       const record = target.parentElement;
       const categoryRecords = target.closest('.records').children;
       const isOneRecord = Array.from(categoryRecords).length === 1;
@@ -170,10 +177,6 @@ export default class Operations {
       } else {
         record.remove();
       }
-
-      const deleteValue = target.dataset.value;
-      updateSummaryForInterval(operationType, deleteValue);
-      updateBalance();
     }
   }
 
@@ -201,10 +204,20 @@ function expandAndCollapseList({ target }) {
   }
 }
 
-function updateSummaryForInterval(operationType, deleteValue) {
-  const operations = document.querySelector(`.operations-${operationType}`);
-  const total = operations.querySelector('.interval-total');
-  const currentValue = +total.textContent;
+function updateSummaryForInterval(deleteBtn, deleteValue) {
+  const operation = deleteBtn.closest('.operations');
+  const total = operation.querySelector('.interval-total');
+  const currentValue = total.dataset.value;
   const updateValue = currentValue - deleteValue;
+  total.dataset.value = updateValue;
+  total.textContent = updateValue;
+}
+
+function updateTotalForCategory(deleteBtn, deleteValue) {
+  const category = deleteBtn.closest('.category');
+  const total = category.querySelector('.category-total');
+  const currentValue = total.dataset.value;
+  const updateValue = currentValue - deleteValue;
+  total.dataset.value = updateValue;
   total.textContent = updateValue;
 }

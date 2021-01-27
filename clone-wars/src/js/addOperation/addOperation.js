@@ -89,7 +89,11 @@ function drawAddExpense() {
 
   btn.addEventListener('click', () => {
     if (isInputValid('expense')) {
-      audio.play();
+      // replace null to 'true' when music settings will be implemented
+      const isMusic = localStorage.getItem('music') === null;
+      if (isMusic) {
+        audio.play();
+      }
       pigAnimation('expense', (+input.value).toFixed(2));
       saveOperationToLocalStorage('expense');
       setDefaultOperation('expense');
