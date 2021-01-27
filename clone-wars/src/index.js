@@ -16,7 +16,7 @@ import {
 import Operations from './js/operations/Operations';
 import { updateBalance } from './js/addOperation/processingOperation';
 
-import { getAuthorizationWindow } from './js/authorization/authorization';
+import Authorization from './js/authorization/Authorization';
 
 const intervalSelect = document.querySelector('#interval-select');
 const intervalReport = document.querySelector('#interval');
@@ -90,5 +90,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isOperationsTab) {
       operations.updateOperations();
     }
+    const authorization = new Authorization();
   });
 });
