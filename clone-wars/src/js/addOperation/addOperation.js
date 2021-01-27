@@ -89,7 +89,10 @@ function drawAddExpense() {
 
   btn.addEventListener('click', () => {
     if (isInputValid('expense')) {
-      audio.play();
+      // Sound switch
+      const audioLocalStorage = localStorage.getItem('sound');
+      if (audioLocalStorage === 'true' || audioLocalStorage === null) audio.play();
+
       pigAnimation('expense', (+input.value).toFixed(2));
       saveOperationToLocalStorage('expense');
       setDefaultOperation('expense');
@@ -178,7 +181,10 @@ function drawAddIncome() {
 
   btn.addEventListener('click', () => {
     if (isInputValid('income')) {
-      audio.play();
+      // Sound switch
+      const audioLocalStorage = localStorage.getItem('sound');
+      if (audioLocalStorage === 'true' || audioLocalStorage === null) audio.play();
+
       pigAnimation('income', (+input.value).toFixed(2));
       saveOperationToLocalStorage('income');
       setDefaultOperation('income');

@@ -1,5 +1,4 @@
 .settings {
-
     position: fixed;
     right: -20rem;
     bottom: 10rem;
@@ -16,11 +15,9 @@
     height: 22rem;
 
     font-weight: 700;
-    /* text-align: center; */
     font-size: 1.5rem;
-    /* background-color: rgba(29, 133, 93, 0.288); */
+
     background: linear-gradient(to left top, rgba(29, 133, 93, 0.288), rgba(29, 133, 93, 0.884));
-    
     border-radius: 5px 19px 5px 5px;
 
     transition: .3s ease-in-out;
@@ -55,7 +52,6 @@
 
 .close_settings {
     position: absolute;
-
     top: 0;
     right: 0;
 
@@ -79,13 +75,11 @@
 .close_settings:hover {
     background-color: rgb(6, 141, 123);
     cursor: pointer;
- 
 }
 
 .settings_radio {
     width: 1.5rem;
     height: 1.5rem;
-
     cursor: pointer;
 }
 
@@ -95,7 +89,6 @@
 
 .settings_radio:checked {
     background-color: rgba(49, 221, 184, 0.849);
-
     border-color: rgb(0, 0, 0);
 }
 
@@ -114,9 +107,7 @@
     flex-direction: row;
     justify-content: space-between;
     margin-top: 1.5rem;
-
     margin-bottom: 1.9rem;
-
 }
 
 .settings_inner {
@@ -142,27 +133,21 @@
 /*================ Toogle ==========*/
 .onoffswitch {
     position: relative;
-
     width: 105px;
     height: 34px;
-
     -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
 }
 .onoffswitch-checkbox {
     position: absolute;
-
     opacity: 0;
-
     pointer-events: none;
 }
 .onoffswitch-label {
     display: block; overflow: hidden;
-
     border: 2px solid #02363f81; border-radius: 8px; cursor: pointer;
 }
 .onoffswitch-inner {
     display: block; width: 200%; margin-left: -100%;
-
     transition: margin 0.3s ease-in 0s;
 }
 .onoffswitch-inner:before, .onoffswitch-inner:after {
@@ -174,33 +159,23 @@
 }
 .onoffswitch-inner::after {
     padding-left: 40px;
-
     color: #cbffef;
-
     background-color: var(--color-dark);
-
     content: "Dark";
 }
 .onoffswitch-inner::before {
-    
     padding-right: 40px;
-
     color: #FFFFFF;
     text-align: right;
-
     background-color: rgba(21, 95, 67, 0.562);
-
     content: "Bright";
 }
 .onoffswitch-switch {
     position: absolute; top: 0;
     right: 73px; bottom: 0;
-
     display: block; width: 22px; margin: 4px;
-
     background: #BDFFE8;
     border: 2px solid #999999; border-radius: 8px;
-
     transition: all 0.3s ease-in 0s; 
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
@@ -216,3 +191,40 @@ label:hover {
     cursor: pointer;
 }
 /* lable */
+
+.box_sound {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    user-select: none;
+}
+
+.box_sound__label {
+    font-size: 26px;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.box_sound__input {
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: var(--color-light);
+    border-color: rgb(0, 0, 0);
+    cursor: pointer;
+}
+
+.box_sound__input:hover {
+    background-color: rgba(166, 253, 234, 0.849);
+} 
+
+.box_sound__input:focus {
+    background-color: var(--color-light);
+    border-color: rgb(0, 0, 0);
+    box-shadow: none;
+} 
+
+.box_sound__input:checked {
+    background-color: rgba(49, 221, 184, 0.849);
+    border-color: rgb(0, 0, 0);
+}
