@@ -1,3 +1,4 @@
+/* HEADER */
 .header {
   height: 7rem;
 }
@@ -6,13 +7,35 @@
   margin-left: 1rem;
 }
 
-main {
-  height: calc(100% - 14rem);
+.form-select {
+  min-width: 100px;
 }
 
+.balance {
+  margin-right: 5px;
+}
+
+/* MAIN */
+main {
+  height: calc(100% - 17rem);
+}
+
+/* FOOTER */
 footer {
-  height: 7rem;
+  height: 10rem;
   margin-top: auto;
+}
+
+.footer-text {
+  height: 3rem;
+}
+
+.footer-link {
+  color: var(--color-green);
+}
+
+.footer-image {
+  height: 1rem;
 }
 
 ul {  
@@ -66,14 +89,6 @@ button:focus {
 .btn-add-operation:hover {
   background-color: rgba(211, 212, 237, 1);
   border: none;
-}
-
-.form-select {
-  min-width: 100px;
-}
-
-.balance {
-  margin-right: 5px;
 }
 
 .red {
