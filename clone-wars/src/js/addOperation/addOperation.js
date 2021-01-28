@@ -45,7 +45,7 @@ function drawAddExpense() {
   firstOption.textContent = '-- choose one --';
 
   select.append(firstOption);
-  // another options from separate file
+
   expenseCategories.forEach(({ name }) => {
     const option = document.createElement('option');
     option.value = name;
@@ -72,7 +72,6 @@ function drawAddExpense() {
   const inputDate = document.createElement('input');
   inputDate.type = 'date';
   inputDate.id = 'expense-date';
-  inputDate.max = '2021-01-22';
   inputDate.disabled = true;
   inputDate.classList.add('form-control', 'mb-5');
 

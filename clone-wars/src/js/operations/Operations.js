@@ -5,7 +5,7 @@
 /* eslint-disable class-methods-use-this */
 import { getIntervalData, getSummaryOperationsForInterval, groupOperationsByCategory } from '../data/getData';
 import { updateBalance } from '../addOperation/processingOperation';
-import addZeroes from '../utils/addZeroes';
+import { addZeroes, groupDecimals } from '../utils/utils';
 
 const intervalOperations = document.querySelector('#interval-select');
 
@@ -80,7 +80,7 @@ export default class Operations {
 
       categoryOperations.innerHTML = `<img class = 'category-icon' src = '../assets/icons/${category}.svg'><span class = 'fw-bold text-success'>${category}: </span> 
       <span class = 'category-total fw-bold ${textColor}' data-value = '${totalByCategory}'>
-      ${sign}${totalByCategory}</span> <span class = 'fw-bold ${textColor}'>${currency}</span>`;
+      ${sign}${groupDecimals(totalByCategory)}</span> <span class = 'fw-bold ${textColor}'>${currency}</span>`;
 
       const sortedByCategories = dataByCategory.sort((a, b) => new Date(b.date) - new Date(a.date));
 
@@ -101,15 +101,16 @@ export default class Operations {
 
         // here will be function than returns lang from seetings
         const lang = 'en';
-
+        const operationValue = sortedByCategories[index].value;
+        // groupDecimals(
         const dateText = `${addZeroes(day)} ${monthNames[lang][monthIndex]} ${year}`;
-        operationLi.innerHTML = `<span class = '${textColor}'>${sign}${sortedByCategories[index].value} <span class = 'currency ${textColor}'>${currency}</span></span>
+        operationLi.innerHTML = `<span class = '${textColor}'>${sign}${groupDecimals(operationValue)} <span class = 'currency ${textColor}'>${currency}</span></span>
           <span>${dateText}</span>`;
 
         const deleteBtn = document.createElement('button');
         deleteBtn.classList.add('delete-record');
         deleteBtn.dataset.id = sortedByCategories[index].id;
-        deleteBtn.dataset.value = sortedByCategories[index].value;
+        deleteBtn.dataset.value = operationValue;
         deleteBtn.textContent = '✖';
 
         recordContainer.append(deleteBtn);
@@ -132,7 +133,7 @@ export default class Operations {
 
     summary.classList.add(textColor, 'fs-4');
     summary.innerHTML = `<span>Summary ${operationType} for interval: </span><span class='interval-total fw-bold' data-value = '${totalForInterval}'>
-    ${sign}${totalForInterval}</span> <span class = 'fw-bold'>${currency}</span>`;
+    ${sign}${groupDecimals(totalForInterval)}</span> <span class = 'fw-bold'>${currency}</span>`;
 
     this.operations.append(summary);
     this.operations.append(horisontalLine.cloneNode());
@@ -215,7 +216,7 @@ function updateSummaryForInterval(deleteBtn, deleteValue, operationType) {
   const currentValue = total.dataset.value;
   const updateValue = currentValue - deleteValue;
   total.dataset.value = updateValue;
-  total.textContent = (operationType === 'expense') ? `-${updateValue}` : `+${updateValue}`;
+  total.textContent = (operationType === 'expense') ? `-${groupDecimals(updateValue)}` : `+${groupDecimals(updateValue)}`;
 }
 
 function updateTotalForCategory(deleteBtn, deleteValue, operationType) {
@@ -224,5 +225,5 @@ function updateTotalForCategory(deleteBtn, deleteValue, operationType) {
   const currentValue = total.dataset.value;
   const updateValue = currentValue - deleteValue;
   total.dataset.value = updateValue;
-  total.textContent = (operationType === 'expense') ? `-${updateValue}` : `+${updateValue}`;
+  total.textContent = (operationType === 'expense') ? `-${groupDecimals(updateValue)}` : `+${groupDecimals(updateValue)}`;
 }

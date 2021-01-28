@@ -1,5 +1,5 @@
 import { getOperations, getSummaryOperationsForInterval } from '../data/getData';
-import addZeroes from '../utils/addZeroes';
+import { addZeroes, groupDecimals } from '../utils/utils';
 
 function generateId() {
   const str = '1234567890abcdefg';
@@ -109,7 +109,7 @@ export function updateBalance() {
     setColorClassForElem(balanceElem, 'red');
   }
 
-  balanceElem.textContent = balanceValue.toFixed(2);
+  balanceElem.textContent = groupDecimals(+balanceValue.toFixed(2));
 }
 
 function addClassForMS(elem, className, ms) {
