@@ -60,6 +60,8 @@ export default class Operations {
 
     const operationsCatetegories = Object.keys(operationsObject).sort();
 
+    const textColor = (operationType === 'expense') ? 'text-danger' : 'text-warning';
+
     operationsCatetegories.forEach((category) => {
       const categoryContainer = document.createElement('div');
       categoryContainer.classList.add('category-container');
@@ -72,12 +74,12 @@ export default class Operations {
 
       const categoryOperations = document.createElement('li');
       categoryOperations.classList.add('category');
- 
+
       const dataByCategory = operationsObject[category];
       const totalByCategory = dataByCategory.reduce((accum, { value }) => accum + value, 0);
 
-      categoryOperations.innerHTML = `<span>${category}: ${sign}</span><span class = 'category-total' data-value = '${totalByCategory}'>
-        ${totalByCategory}</span> <span>${currency}</span>`;
+      categoryOperations.innerHTML = `<span class = 'fw-bold text-success'>${category}: </span> <span class = 'category-total fw-bold ${textColor}' data-value = '${totalByCategory}'>
+      ${sign}${totalByCategory}</span> <span class = 'fw-bold ${textColor}'>${currency}</span>`;
 
       const sortedByCategories = dataByCategory.sort((a, b) => new Date(b.date) - new Date(a.date));
 
@@ -100,7 +102,7 @@ export default class Operations {
         const lang = 'en';
 
         const dateText = `${addZeroes(day)} ${monthNames[lang][monthIndex]} ${year}`;
-        operationLi.innerHTML = `<span>${sign}${sortedByCategories[index].value} <span class = 'currency'>${currency}</span></span>
+        operationLi.innerHTML = `<span class = '${textColor}'>${sign}${sortedByCategories[index].value} <span class = 'currency ${textColor}'>${currency}</span></span>
           <span>${dateText}</span>`;
 
         const deleteBtn = document.createElement('button');
@@ -126,8 +128,10 @@ export default class Operations {
     const totalForInterval = getSummaryOperationsForInterval(operationType, intervalOperations.value, currentDatestamp);
 
     const summary = document.createElement('div');
-    summary.innerHTML = `<span>Summary ${operationType} for interval: ${sign}</span><span class='interval-total' data-value = '${totalForInterval}'>
-      ${totalForInterval}</span> <span>${currency}</span>`;
+
+    summary.classList.add(textColor, 'fs-4');
+    summary.innerHTML = `<span>Summary ${operationType} for interval: </span><span class='interval-total fw-bold' data-value = '${totalForInterval}'>
+    ${sign}${totalForInterval}</span> <span class = 'fw-bold'>${currency}</span>`;
 
     this.operations.append(summary);
     this.operations.append(horisontalLine.cloneNode());
@@ -138,7 +142,7 @@ export default class Operations {
 
   createReport() {
     this.container = document.createElement('div');
-    this.container.classList.add('operations-container');
+    this.container.classList.add('operations-container', '.mt-5');
     this.container.append(this.createOperations('expense'));
     this.container.append(this.createOperations('income'));
     return this.container;
@@ -163,8 +167,8 @@ export default class Operations {
       localStorage.setItem(operationType, JSON.stringify(operationsCopy));
 
       const deleteValue = target.dataset.value;
-      updateSummaryForInterval(target, deleteValue);
-      updateTotalForCategory(target, deleteValue);
+      updateSummaryForInterval(target, deleteValue, operationType);
+      updateTotalForCategory(target, deleteValue, operationType);
       updateBalance();
 
       const record = target.parentElement;
@@ -204,20 +208,20 @@ function expandAndCollapseList({ target }) {
   }
 }
 
-function updateSummaryForInterval(deleteBtn, deleteValue) {
+function updateSummaryForInterval(deleteBtn, deleteValue, operationType) {
   const operation = deleteBtn.closest('.operations');
   const total = operation.querySelector('.interval-total');
   const currentValue = total.dataset.value;
   const updateValue = currentValue - deleteValue;
   total.dataset.value = updateValue;
-  total.textContent = updateValue;
+  total.textContent = (operationType === 'expense') ? `-${updateValue}` : `+${updateValue}`;
 }
 
-function updateTotalForCategory(deleteBtn, deleteValue) {
+function updateTotalForCategory(deleteBtn, deleteValue, operationType) {
   const category = deleteBtn.closest('.category');
   const total = category.querySelector('.category-total');
   const currentValue = total.dataset.value;
   const updateValue = currentValue - deleteValue;
   total.dataset.value = updateValue;
-  total.textContent = updateValue;
+  total.textContent = (operationType === 'expense') ? `-${updateValue}` : `+${updateValue}`;
 }
