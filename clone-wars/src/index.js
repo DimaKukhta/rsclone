@@ -1,8 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import style from './style/style.css';
-import { renderHTML, renderLayout, renderEventLayout } from './js/baseLayout/renderBaseLayout';
+import { renderHTML, renderLayout } from './js/baseLayout/renderBaseLayout';
 
 renderHTML();
-  setTimeout(() => {
-  renderLayout();
-}, 100);
+setTimeout(renderLayout, 0);

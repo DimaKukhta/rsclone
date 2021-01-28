@@ -32,11 +32,11 @@ export default class Authorization {
 
   hidden(element) {
     element.classList.add('hidden');
-  }  
+  }
 
   async signIn(login, password, log, container) {
     console.log(login, password);
-    let response = await fetch(`https://rs-clone-be1.herokuapp.com/authorization/${login}/${password}`);
+    const response = await fetch(`https://rs-clone-be1.herokuapp.com/authorization/${login}/${password}`);
     const json = await response.json();
     if (json.statusCode) {
       log.innerHTML = '<p class="warning">Нет такого пользователя</p>';
@@ -48,19 +48,19 @@ export default class Authorization {
 
   async signUp(login, password, log, container) {
     const user = {
-     login: login,
-     password: password
-    }
-    let response = await fetch('https://rs-clone-be1.herokuapp.com/', {
+      login,
+      password,
+    };
+    const response = await fetch('https://rs-clone-be1.herokuapp.com/', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json;charset=utf-8'
+        'Content-Type': 'application/json;charset=utf-8',
       },
-      body: JSON.stringify(user)
+      body: JSON.stringify(user),
     });
 
-    let result = await response.json();
-    if(result.statusCode) {
+    const result = await response.json();
+    if (result.statusCode) {
       log.innerHTML = '<p class="warning">Логин уже занят</p>';
     } else {
       console.log(result);

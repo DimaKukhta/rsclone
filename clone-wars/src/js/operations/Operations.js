@@ -20,6 +20,7 @@ const monthNames = {
 
 export default class Operations {
   createOperations(operationType) {
+    const intervalOperations = document.querySelector('#interval-select');
     this.operations = document.createElement('ul');
     this.operations.classList.add('operations', `operations-${operationType}`);
     this.operations.id = `operations-${operationType}`;
@@ -40,8 +41,9 @@ export default class Operations {
       emptyFolder.style.width = '100px';
 
       const noDataText = document.createElement('div');
-      noDataText.textContent = `no ${operationType} for this interval...`;
-
+      const noDataTextInner = document.createElement('p');
+      noDataTextInner.textContent = `no ${operationType} for this interval...`;
+      noDataText.append(noDataTextInner);
       this.operations.append(noDataText, emptyFolder);
 
       return this.operations;
@@ -63,7 +65,7 @@ export default class Operations {
       const categoryContainer = document.createElement('div');
       categoryContainer.classList.add('category-container');
 
-      categoryContainer.addEventListener('click', expandAndCollapseList)
+      categoryContainer.addEventListener('click', expandAndCollapseList);
 
       const expander = document.createElement('button');
       expander.classList.add('record-expander');

@@ -1,20 +1,21 @@
+// eslint-disable-next-line no-unused-vars
 import EnExpenseCategories from '../data/dataExpenseCategories';
 import EnIncomeCategories from '../data/dataIncomeCategories';
 import Settings from '../settings/Settings';
 
 import addOperation from '../addOperation/addOperation';
 import {
-    getIntervalText,
-    setIntervalDate,
-    getPreviousDatestampForInterval,
-    getNextDatestampForInterval,
+  getIntervalText,
+  setIntervalDate,
+  getPreviousDatestampForInterval,
+  getNextDatestampForInterval,
 } from '../interval/interval';
 
 import Operations from '../operations/Operations';
 import { updateBalance } from '../addOperation/processingOperation';
 
-export  function renderHTML() {
-   const html = `<header class="navbar navbar-light bg-white header border-bottom">
+export function renderHTML() {
+  const html = `<header class="navbar navbar-light bg-white header border-bottom">
     <div class="container">
         <div class="col-2">
         <p>Balance:</p>
@@ -78,81 +79,91 @@ export  function renderHTML() {
         </nav>
     </div>
     </footer>`;
-    document.body.insertAdjacentHTML('beforeend', html);
+  document.body.insertAdjacentHTML('beforeend', html);
 }
-    export function renderLayout() {
+export function renderLayout() {
+  const intervalSelect = document.querySelector('#interval-select');
+  const intervalReport = document.querySelector('#interval');
+  const navigateInterval = document.querySelector('.navigate-interval');
 
-    const intervalSelect = document.querySelector('#interval-select');
-    const intervalReport = document.querySelector('#interval');
-    const navigateInterval = document.querySelector('.navigate-interval');
+  // нужно перевесит обработчик событий на контейнер с кнопками
+  const btnAddOperation = document.querySelector('#btn-add-operation');
+  const btnOperations = document.querySelector('#btn-operations');
 
-    // нужно перевесит обработчик событий на контейнер с кнопками
-    const btnAddOperation = document.querySelector('#btn-add-operation');
-    const btnOperations = document.querySelector('#btn-operations');
+  btnAddOperation.addEventListener('click', addOperation);
 
-    btnAddOperation.addEventListener('click', addOperation);
+  // window.onload = addOperation;
 
-    window.onload = addOperation;
-
-    // settings init
+  const settingsRewrite = () => {
+    const oldSettings = document.querySelector('templete');
+    oldSettings.parentNode.removeChild(oldSettings);
+    const operationsSettings = document.querySelectorAll('.operations');
+    const recordExpander = document.querySelectorAll('.record-expander');
     // eslint-disable-next-line no-unused-vars
-    const settings = new Settings();
- 
-    //document.addEventListener('DOMContentLoaded', () => {
-    // create add operation tab;
-    addOperation();
-    updateBalance();
+    const settings = new Settings(operationsSettings, recordExpander);
+  };
 
+  addOperation();
+  updateBalance();
+
+  const currentDatestamp = new Date().getTime();
+
+  intervalReport.textContent = getIntervalText(currentDatestamp);
+  setIntervalDate(currentDatestamp);
+
+  const operations = new Operations();
+
+  btnOperations.addEventListener('click', () => {
+    const main = document.querySelector('#main-content');
+    main.innerHTML = '';
+    operations.renderIn(main);
+
+    // settings rewrite
+    settingsRewrite();
+  });
+
+  intervalSelect.addEventListener('change', () => {
+    // eslint-disable-next-line no-shadow
     const currentDatestamp = new Date().getTime();
 
     intervalReport.textContent = getIntervalText(currentDatestamp);
     setIntervalDate(currentDatestamp);
 
-    const operations = new Operations();
+    const isOperationsTab = document.querySelector('.operations-container');
+    if (isOperationsTab) {
+      operations.updateOperations();
+    }
+    // settings rewrite
+    settingsRewrite();
+  });
 
-    btnOperations.addEventListener('click', () => {
-        const main = document.querySelector('#main-content');
-        main.innerHTML = '';
-        operations.renderIn(main);
-    });
+  navigateInterval.addEventListener('click', ({ target }) => {
+    const intervalDatestamp = +intervalReport.dataset.date;
+    const interval = intervalSelect.value;
 
-    intervalSelect.addEventListener('change', () => {
-        // eslint-disable-next-line no-shadow
-        const currentDatestamp = new Date().getTime();
+    let updatedStamp;
 
-        intervalReport.textContent = getIntervalText(currentDatestamp);
-        setIntervalDate(currentDatestamp);
+    switch (target.id) {
+      case 'prev':
+        updatedStamp = getPreviousDatestampForInterval(interval, intervalDatestamp);
+        break;
+      case 'next':
+        updatedStamp = getNextDatestampForInterval(interval, intervalDatestamp);
+        break;
+      default:
+        break;
+    }
+    setIntervalDate(updatedStamp);
 
-        const isOperationsTab = document.querySelector('.operations-container');
-        if (isOperationsTab) {
-        operations.updateOperations();
-        }
-    });
+    intervalReport.textContent = getIntervalText(updatedStamp);
 
-    navigateInterval.addEventListener('click', ({ target }) => {
-        const intervalDatestamp = +intervalReport.dataset.date;
-        const interval = intervalSelect.value;
+    const isOperationsTab = document.querySelector('.operations-container');
 
-        let updatedStamp;
-
-        switch (target.id) {
-        case 'prev':
-            updatedStamp = getPreviousDatestampForInterval(interval, intervalDatestamp);
-            break;
-        case 'next':
-            updatedStamp = getNextDatestampForInterval(interval, intervalDatestamp);
-            break;
-        default:
-            break;
-        }
-        setIntervalDate(updatedStamp);
-
-        intervalReport.textContent = getIntervalText(updatedStamp);
-
-        const isOperationsTab = document.querySelector('.operations-container');
-
-        if (isOperationsTab) {
-        operations.updateOperations();
-        }
-    });
+    if (isOperationsTab) {
+      operations.updateOperations();
+    }
+    // settings init
+    settingsRewrite();
+  });
+  const settings = new Settings();
 }
