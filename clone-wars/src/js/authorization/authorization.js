@@ -1,3 +1,5 @@
+import { renderHTML, renderLayout } from '../baseLayout/renderBaseLayout';
+
 export default class Authorization {
   constructor() {
     this.render();
@@ -25,8 +27,7 @@ export default class Authorization {
       </div>
     </form>
     </div>`;
-    const container = document.querySelector('#main-content');
-    console.log(container);
+    const container = document.querySelector('body');
     container.insertAdjacentHTML('beforeend', htmlCode);
   }
 
@@ -35,7 +36,6 @@ export default class Authorization {
   }
 
   async signIn(login, password, log, container) {
-    console.log(login, password);
     const response = await fetch(`https://rs-clone-be1.herokuapp.com/authorization/${login}/${password}`);
     const json = await response.json();
     if (json.statusCode) {
@@ -43,6 +43,8 @@ export default class Authorization {
     } else {
       console.log(json);
       this.hidden(container);
+      renderHTML();
+      renderLayout();
     }
   }
 
@@ -65,6 +67,8 @@ export default class Authorization {
     } else {
       console.log(result);
       this.hidden(container);
+      renderHTML();
+      renderLayout();
     }
   }
 
