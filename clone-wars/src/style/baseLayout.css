@@ -106,7 +106,7 @@ button:focus {
   }
 }
 
-@media (max-width: 772px) {
+@media (max-width: 775px) {
   .footer-btn-text {
     visibility: hidden;
   }
