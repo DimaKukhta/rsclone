@@ -78,7 +78,8 @@ export default class Operations {
       const dataByCategory = operationsObject[category];
       const totalByCategory = dataByCategory.reduce((accum, { value }) => accum + value, 0);
 
-      categoryOperations.innerHTML = `<span class = 'fw-bold text-success'>${category}: </span> <span class = 'category-total fw-bold ${textColor}' data-value = '${totalByCategory}'>
+      categoryOperations.innerHTML = `<img class = 'category-icon' src = '../assets/icons/${category}.svg'><span class = 'fw-bold text-success'>${category}: </span> 
+      <span class = 'category-total fw-bold ${textColor}' data-value = '${totalByCategory}'>
       ${sign}${totalByCategory}</span> <span class = 'fw-bold ${textColor}'>${currency}</span>`;
 
       const sortedByCategories = dataByCategory.sort((a, b) => new Date(b.date) - new Date(a.date));
