@@ -1,5 +1,5 @@
 import { getOperations, getSummaryOperationsForInterval } from '../data/getData';
-import addZeroes from '../utils/addZeroes';
+import { addZeroes, groupDecimals } from '../utils/utils';
 import updateData from '../utils/updateData';
 
 function generateId() {

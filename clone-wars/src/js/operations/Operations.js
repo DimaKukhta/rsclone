@@ -5,7 +5,7 @@
 /* eslint-disable class-methods-use-this */
 import { getIntervalData, getSummaryOperationsForInterval, groupOperationsByCategory } from '../data/getData';
 import { updateBalance } from '../addOperation/processingOperation';
-import addZeroes from '../utils/addZeroes';
+import { addZeroes, groupDecimals } from '../utils/utils';
 import updateData from '../utils/updateData';
 
 const monthNames = {
