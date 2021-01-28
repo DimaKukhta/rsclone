@@ -7,7 +7,6 @@ import { getIntervalData, getSummaryOperationsForInterval, groupOperationsByCate
 import { updateBalance } from '../addOperation/processingOperation';
 import addZeroes from '../utils/addZeroes';
 
-const intervalOperations = document.querySelector('#interval-select');
 
 const monthNames = {
   en: ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'Jun.',
@@ -151,6 +150,7 @@ export default class Operations {
   }
 
   deleteRecord(target, operationType) {
+    const intervalOperations = document.querySelector('#interval-select');
     if (target.classList.contains('delete-record')) {
       const interval = document.querySelector('#interval');
 
