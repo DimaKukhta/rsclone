@@ -110,4 +110,8 @@ button:focus {
   .footer-btn-text {
     visibility: hidden;
   }
+
+  main {
+    height: auto;
+  }
 }
