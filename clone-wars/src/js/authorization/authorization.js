@@ -35,24 +35,41 @@ export default class Authorization {
     element.classList.add('hidden');
   }
 
-  async signIn(login, password, log, container) {
+  getData(user) {
+    if (user.history.length) {
+      const expense = user.history[0] || [];
+      const income = user.history[1] || [];
+
+      localStorage.setItem('expense', JSON.stringify(expense));
+      localStorage.setItem('income', JSON.stringify(income));
+    } else {
+      localStorage.setItem('expense', '[]');
+      localStorage.setItem('income', '[]');
+    }
+  }
+
+  async signIn(login, password, log, container, button) {
+    button.disabled = true;
     const response = await fetch(`https://rs-clone-be1.herokuapp.com/authorization/${login}/${password}`);
     const json = await response.json();
+    button.disabled = false;
     if (json.statusCode) {
       log.innerHTML = '<p class="warning">Нет такого пользователя</p>';
     } else {
-      console.log(json);
+      localStorage.setItem('login', json.login);
+      this.getData(json);
       this.hidden(container);
       renderHTML();
       renderLayout();
     }
   }
 
-  async signUp(login, password, log, container) {
+  async signUp(login, password, log, container, button) {
     const user = {
       login,
       password,
     };
+    button.disabled = true;
     const response = await fetch('https://rs-clone-be1.herokuapp.com/', {
       method: 'POST',
       headers: {
@@ -62,10 +79,12 @@ export default class Authorization {
     });
 
     const result = await response.json();
+    localStorage.setItem('login', result.login);
+    button.disabled = false;
     if (result.statusCode) {
       log.innerHTML = '<p class="warning">Логин уже занят</p>';
     } else {
-      console.log(result);
+      this.getData(result);
       this.hidden(container);
       renderHTML();
       renderLayout();
@@ -85,11 +104,11 @@ export default class Authorization {
 
     signInButton.addEventListener('click', (e) => {
       e.preventDefault();
-      this.signIn(loginInput.value, passwordInput.value, logPlace, containerForm);
+      this.signIn(loginInput.value, passwordInput.value, logPlace, containerForm, signInButton);
     });
     signUpButton.addEventListener('click', (e) => {
       e.preventDefault();
-      this.signUp(loginInput.value, passwordInput.value, logPlace, containerForm);
+      this.signUp(loginInput.value, passwordInput.value, logPlace, containerForm, signUpButton);
     });
   }
 }

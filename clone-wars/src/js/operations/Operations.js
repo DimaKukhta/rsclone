@@ -7,7 +7,6 @@ import { getIntervalData, getSummaryOperationsForInterval, groupOperationsByCate
 import { updateBalance } from '../addOperation/processingOperation';
 import addZeroes from '../utils/addZeroes';
 
-
 const monthNames = {
   en: ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'Jun.',
     'Jul.', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'],
