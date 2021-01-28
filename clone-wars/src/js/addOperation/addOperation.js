@@ -12,9 +12,10 @@ import {
 import expenseCategories from '../data/dataExpenseCategories';
 import incomeCategories from '../data/dataIncomeCategories';
 
-const mainContent = document.querySelector('#main-content');
+//const mainContent = document.querySelector('#main-content');
 
 function drawAddExpense() {
+  const mainContent = document.querySelector('#main-content');
   const fragment = new DocumentFragment();
   const container = document.createElement('div');
   container.id = 'add-expense';
@@ -104,6 +105,7 @@ function drawAddExpense() {
 }
 
 function drawAddIncome() {
+  const mainContent = document.querySelector('#main-content');
   const fragment = new DocumentFragment();
   const container = document.createElement('div');
   container.id = 'add-income';
@@ -193,6 +195,7 @@ function drawAddIncome() {
 }
 
 function drawImage() {
+  const mainContent = document.querySelector('#main-content');
   const fragment = new DocumentFragment();
   const container = document.createElement('div');
   container.classList.add('add-operation-image');
@@ -208,6 +211,7 @@ function drawImage() {
 }
 
 export default function addOperation() {
+  const mainContent = document.querySelector('#main-content');
   mainContent.innerHTML = '';
 
   drawAddExpense();

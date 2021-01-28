@@ -97,9 +97,7 @@ export  function renderHTML() {
     // settings init
     // eslint-disable-next-line no-unused-vars
     const settings = new Settings();
-}
-    export function renderEventLayout() { 
-        
+ 
     //document.addEventListener('DOMContentLoaded', () => {
     // create add operation tab;
     addOperation();
