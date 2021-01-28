@@ -179,7 +179,6 @@ export default class Settings {
         if (this.operations) this.operations.forEach((el) => el.classList.remove('text_dark'));
         if (this.recordExpander) this.recordExpander.forEach((el) => el.classList.remove('text_dark'));
 
-
         this.buttons.forEach((btn) => {
           btn.classList.remove('dark_btn');
         });
@@ -219,7 +218,6 @@ export default class Settings {
     this.languageName = document.getElementsByName('language');
     this.closeButton = document.querySelector('.close_settings');
     this.soundCheck = document.querySelector('.box_sound__input');
-
 
     this.soundCheck.onchange = this.soundSwitch;
 

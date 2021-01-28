@@ -5,9 +5,8 @@
 /* eslint-disable class-methods-use-this */
 import { getIntervalData, getSummaryOperationsForInterval, groupOperationsByCategory } from '../data/getData';
 import { updateBalance } from '../addOperation/processingOperation';
-import { addZeroes, groupDecimals } from '../utils/utils';
-
-const intervalOperations = document.querySelector('#interval-select');
+import addZeroes from '../utils/addZeroes';
+import updateData from '../utils/updateData';
 
 const monthNames = {
   en: ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'Jun.',
@@ -20,6 +19,7 @@ const monthNames = {
 
 export default class Operations {
   createOperations(operationType) {
+    const intervalOperations = document.querySelector('#interval-select');
     this.operations = document.createElement('ul');
     this.operations.classList.add('operations', `operations-${operationType}`);
     this.operations.id = `operations-${operationType}`;
@@ -66,6 +66,7 @@ export default class Operations {
       const categoryContainer = document.createElement('div');
       categoryContainer.classList.add('category-container');
 
+      // eslint-disable-next-line no-use-before-define
       categoryContainer.addEventListener('click', expandAndCollapseList);
 
       const expander = document.createElement('button');
@@ -156,6 +157,7 @@ export default class Operations {
   }
 
   deleteRecord(target, operationType) {
+    const intervalOperations = document.querySelector('#interval-select');
     if (target.classList.contains('delete-record')) {
       const interval = document.querySelector('#interval');
 
@@ -183,6 +185,7 @@ export default class Operations {
       } else {
         record.remove();
       }
+      updateData(localStorage.getItem('login'));
     }
   }
 
