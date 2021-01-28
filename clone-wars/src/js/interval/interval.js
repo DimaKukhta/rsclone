@@ -1,6 +1,6 @@
 /* eslint-disable consistent-return */
 /* eslint-disable import/prefer-default-export */
-import addZeroes from '../utils/addZeroes';
+import {addZeroes} from '../utils/utils';
 
 export function setIntervalDate(stamp) {
   const currentInterval = document.querySelector('#interval');

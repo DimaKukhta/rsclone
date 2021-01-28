@@ -21,8 +21,14 @@
 
 .record-container {
   display: flex;
-  padding-left: 15px;
   margin-bottom: 5px;
+  padding-left: 15px;
+}
+
+.record-data {
+  display: flex;
+  justify-content: space-between;
+  min-width: 250px;
 }
 
 .category-container {
@@ -30,9 +36,15 @@
   align-items: flex-start;
 }
 
+.category-icon {
+  width: 30px;
+  margin-right: 5px;
+}
+
 .delete-record,
 .record-expander {
   margin-right: 10px;
+
   background: none;
 }
 

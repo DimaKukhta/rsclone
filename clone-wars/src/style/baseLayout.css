@@ -15,10 +15,11 @@ footer {
   margin-top: auto;
 }
 
-ul {  
-  list-style: none;
-  padding: 0;
-  margin: 0;  
+ul {
+  margin: 0;
+  padding: 0;  
+
+  list-style: none;  
 }
 
 button {
@@ -26,8 +27,8 @@ button {
 }
 
 button:active {
-  outline: none;
   border: none;
+  outline: none;
 }
 
 button:focus {

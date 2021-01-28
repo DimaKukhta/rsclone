@@ -80,6 +80,7 @@
 .settings_radio {
     width: 1.5rem;
     height: 1.5rem;
+
     cursor: pointer;
 }
 
@@ -133,21 +134,27 @@
 /*================ Toogle ==========*/
 .onoffswitch {
     position: relative;
+
     width: 105px;
     height: 34px;
+
     -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
 }
 .onoffswitch-checkbox {
     position: absolute;
+
     opacity: 0;
+
     pointer-events: none;
 }
 .onoffswitch-label {
     display: block; overflow: hidden;
+
     border: 2px solid #02363f81; border-radius: 8px; cursor: pointer;
 }
 .onoffswitch-inner {
     display: block; width: 200%; margin-left: -100%;
+
     transition: margin 0.3s ease-in 0s;
 }
 .onoffswitch-inner:before, .onoffswitch-inner:after {
@@ -159,23 +166,32 @@
 }
 .onoffswitch-inner::after {
     padding-left: 40px;
+
     color: #cbffef;
+
     background-color: var(--color-dark);
+
     content: "Dark";
 }
 .onoffswitch-inner::before {
     padding-right: 40px;
+
     color: #FFFFFF;
     text-align: right;
+
     background-color: rgba(21, 95, 67, 0.562);
+
     content: "Bright";
 }
 .onoffswitch-switch {
     position: absolute; top: 0;
     right: 73px; bottom: 0;
+
     display: block; width: 22px; margin: 4px;
+
     background: #BDFFE8;
     border: 2px solid #999999; border-radius: 8px;
+
     transition: all 0.3s ease-in 0s; 
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
@@ -193,22 +209,26 @@ label:hover {
 /* lable */
 
 .box_sound {
-    width: 100%;
     display: flex;
-    justify-content: flex-start;
     align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+
     user-select: none;
 }
 
 .box_sound__label {
-    font-size: 26px;
     margin-right: 15px;
+
+    font-size: 26px;
+
     cursor: pointer;
 }
 
 .box_sound__input {
     width: 1.5rem;
     height: 1.5rem;
+
     background-color: var(--color-light);
     border-color: rgb(0, 0, 0);
     cursor: pointer;
