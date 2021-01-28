@@ -38,10 +38,11 @@ footer {
   height: 1rem;
 }
 
-ul {  
-  list-style: none;
+ul {
+  margin: 0; 
   padding: 0;
-  margin: 0;  
+
+  list-style: none; 
 }
 
 button {
@@ -49,8 +50,8 @@ button {
 }
 
 button:active {
-  outline: none;
   border: none;
+  outline: none;
 }
 
 button:focus {
@@ -97,4 +98,16 @@ button:focus {
 
 .green {
   color: var(--color-green)!important;
+}
+
+@media (max-width: 993px) {
+  .footer-central-button {
+    visibility: hidden;
+  }
+}
+
+@media (max-width: 772px) {
+  .footer-btn-text {
+    visibility: hidden;
+  }
 }
