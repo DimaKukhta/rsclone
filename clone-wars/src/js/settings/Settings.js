@@ -3,6 +3,7 @@ export default class Settings {
     this.theme = 'Theme';
     this.currency = 'Currency';
     this.language = 'Language';
+    this.sound = 'Sound';
     this.set = document.querySelector('.settings');
     this.countButtonSettings = false;
     this.themeLocal = localStorage.getItem('theme');
@@ -56,6 +57,14 @@ export default class Settings {
                 </label>
               </div>
             </span>
+
+            <div class="box_sound">
+              <label class="form-check-label box_sound__label" for="flexCheckChecked">
+                ${this.sound}
+              </label>
+              <input class="form-check-input box_sound__input" type="checkbox" value="" id="flexCheckChecked" checked>
+
+            </div>
             
             <div class="settings_wrapper">
               <form class="column container settings_inner currency_form">
@@ -101,6 +110,10 @@ export default class Settings {
 
     this.main = document.querySelector('.bg-light');
     this.main.appendChild(this.settingsWindow);
+  }
+
+  soundSwitch() {
+    localStorage.setItem('sound', this.checked);
   }
 
   changeCurrency() {
@@ -205,6 +218,10 @@ export default class Settings {
     this.currencyName = document.getElementsByName('currency');
     this.languageName = document.getElementsByName('language');
     this.closeButton = document.querySelector('.close_settings');
+    this.soundCheck = document.querySelector('.box_sound__input');
+
+
+    this.soundCheck.onchange = this.soundSwitch;
 
     for (let i = 0; i < this.languageName.length; i += 1) {
       this.languageName[i].onchange = this.changeLang;
