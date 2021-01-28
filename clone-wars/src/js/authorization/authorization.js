@@ -6,6 +6,7 @@ export default class Authorization {
     this.handlers();
   }
 
+  // eslint-disable-next-line class-methods-use-this
   render() {
     const htmlCode = `<div class="container-form">
     <form class="authorization-form">
@@ -31,10 +32,12 @@ export default class Authorization {
     container.insertAdjacentHTML('beforeend', htmlCode);
   }
 
+  // eslint-disable-next-line class-methods-use-this
   hidden(element) {
     element.classList.add('hidden');
   }
 
+  // eslint-disable-next-line class-methods-use-this
   getData(user) {
     if (user.history.length) {
       const expense = user.history[0] || [];
@@ -48,46 +51,70 @@ export default class Authorization {
     }
   }
 
-  async signIn(login, password, log, container, button) {
-    button.disabled = true;
-    const response = await fetch(`https://rs-clone-be1.herokuapp.com/authorization/${login}/${password}`);
-    const json = await response.json();
-    button.disabled = false;
-    if (json.statusCode) {
-      log.innerHTML = '<p class="warning">Нет такого пользователя</p>';
+  async signIn(login, password, log, container, button, loginInput, passwordInput) {
+    if (login && password) {
+      // eslint-disable-next-line no-param-reassign
+      button.disabled = true;
+      const response = await fetch(`https://rs-clone-be1.herokuapp.com/authorization/${login}/${password}`);
+      const json = await response.json();
+      // eslint-disable-next-line no-param-reassign
+      button.disabled = false;
+      if (json.statusCode) {
+        // eslint-disable-next-line no-param-reassign
+        log.innerHTML = '<p class="warning">Неверный логин/пароль</p>';
+        loginInput.classList.add('is-invalid');
+        passwordInput.classList.add('is-invalid');
+      } else {
+        localStorage.setItem('login', json.login);
+        this.getData(json);
+        this.hidden(container);
+        renderHTML();
+        renderLayout();
+      }
     } else {
-      localStorage.setItem('login', json.login);
-      this.getData(json);
-      this.hidden(container);
-      renderHTML();
-      renderLayout();
+      loginInput.classList.add('is-invalid');
+      passwordInput.classList.add('is-invalid');
+      // eslint-disable-next-line no-param-reassign
+      log.innerHTML = '<p class="warning">Некорректные данные</p>';
     }
   }
 
-  async signUp(login, password, log, container, button) {
-    const user = {
-      login,
-      password,
-    };
-    button.disabled = true;
-    const response = await fetch('https://rs-clone-be1.herokuapp.com/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-      },
-      body: JSON.stringify(user),
-    });
+  async signUp(login, password, log, container, button, loginInput, passwordInput) {
+    if (login && password) {
+      const user = {
+        login,
+        password,
+      };
+      // eslint-disable-next-line no-param-reassign
+      button.disabled = true;
+      const response = await fetch('https://rs-clone-be1.herokuapp.com/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+        },
+        body: JSON.stringify(user),
+      });
 
-    const result = await response.json();
-    localStorage.setItem('login', result.login);
-    button.disabled = false;
-    if (result.statusCode) {
-      log.innerHTML = '<p class="warning">Логин уже занят</p>';
+      const result = await response.json();
+      localStorage.setItem('login', result.login);
+      // eslint-disable-next-line no-param-reassign
+      button.disabled = false;
+      if (result.statusCode) {
+        // eslint-disable-next-line no-param-reassign
+        log.innerHTML = '<p class="warning">Такой логин уже занят</p>';
+        loginInput.classList.add('is-invalid');
+        passwordInput.classList.add('is-invalid');
+      } else {
+        this.getData(result);
+        this.hidden(container);
+        renderHTML();
+        renderLayout();
+      }
     } else {
-      this.getData(result);
-      this.hidden(container);
-      renderHTML();
-      renderLayout();
+      loginInput.classList.add('is-invalid');
+      passwordInput.classList.add('is-invalid');
+      // eslint-disable-next-line no-param-reassign
+      log.innerHTML = '<p class="warning">Некорректные данные</p>';
     }
   }
 
@@ -104,11 +131,25 @@ export default class Authorization {
 
     signInButton.addEventListener('click', (e) => {
       e.preventDefault();
-      this.signIn(loginInput.value, passwordInput.value, logPlace, containerForm, signInButton);
+      this.signIn(loginInput.value, passwordInput.value,
+        logPlace, containerForm, signInButton, loginInput, passwordInput);
     });
     signUpButton.addEventListener('click', (e) => {
       e.preventDefault();
-      this.signUp(loginInput.value, passwordInput.value, logPlace, containerForm, signUpButton);
+      this.signUp(loginInput.value, passwordInput.value,
+        logPlace, containerForm, signUpButton, loginInput, passwordInput);
+    });
+
+    loginInput.addEventListener('input', () => {
+      if (loginInput.classList.contains('is-invalid')) {
+        loginInput.classList.remove('is-invalid');
+      }
+    });
+
+    passwordInput.addEventListener('input', () => {
+      if (passwordInput.classList.contains('is-invalid')) {
+        passwordInput.classList.remove('is-invalid');
+      }
     });
   }
 }

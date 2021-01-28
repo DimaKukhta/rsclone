@@ -6,6 +6,7 @@
 import { getIntervalData, getSummaryOperationsForInterval, groupOperationsByCategory } from '../data/getData';
 import { updateBalance } from '../addOperation/processingOperation';
 import addZeroes from '../utils/addZeroes';
+import updateData from '../utils/updateData';
 
 const monthNames = {
   en: ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'Jun.',
@@ -63,6 +64,7 @@ export default class Operations {
       const categoryContainer = document.createElement('div');
       categoryContainer.classList.add('category-container');
 
+      // eslint-disable-next-line no-use-before-define
       categoryContainer.addEventListener('click', expandAndCollapseList);
 
       const expander = document.createElement('button');
@@ -164,6 +166,7 @@ export default class Operations {
 
       this.updateOperations(operationType);
       updateBalance();
+      updateData(localStorage.getItem('login'));
     }
   }
 

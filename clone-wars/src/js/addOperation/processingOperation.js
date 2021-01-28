@@ -1,6 +1,6 @@
 import { getOperations, getSummaryOperationsForInterval } from '../data/getData';
 import addZeroes from '../utils/addZeroes';
-import updateData from '../utils/updateData'
+import updateData from '../utils/updateData';
 
 function generateId() {
   const str = '1234567890abcdefg';
@@ -118,6 +118,7 @@ function addClassForMS(elem, className, ms) {
   elem.classList.add(className);
   setTimeout(() => {
     elem.classList.remove(className);
+    // eslint-disable-next-line no-param-reassign
     elem.textContent = '';
   }, ms);
 }

@@ -1,6 +1,5 @@
 // eslint-disable-next-line no-unused-vars
 import EnExpenseCategories from '../data/dataExpenseCategories';
-import EnIncomeCategories from '../data/dataIncomeCategories';
 import Settings from '../settings/Settings';
 
 import addOperation from '../addOperation/addOperation';
@@ -165,5 +164,6 @@ export function renderLayout() {
     // settings init
     settingsRewrite();
   });
+  // eslint-disable-next-line no-unused-vars
   const settings = new Settings();
 }
