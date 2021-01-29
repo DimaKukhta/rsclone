@@ -1,5 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import EnExpenseCategories from '../data/dataExpenseCategories';
+import lang from '../data/baselayoutLang';
+
 import Settings from '../settings/Settings';
 
 import addOperation from '../addOperation/addOperation';
@@ -17,7 +19,7 @@ export function renderHTML() {
   const html = `<header class="navbar navbar-light bg-white header border-bottom">
     <div class="container">
         <div class="col-2">
-        <p>Balance:</p>
+        <p>${lang.balance}:</p>
         <p class="fw-bold">
             <span id="current-amount" class="current-amount balance"></span
             ><span id="current-currency">BYN</span>
@@ -30,10 +32,10 @@ export function renderHTML() {
         </div>
         <div class="d-flex col-2">
         <select class="form-select" name="interval" id="interval-select">
-            <option value="day">Day</option>
-            <option value="month" selected>Month</option>
-            <option value="year">Year</option>
-            <option value="all">All</option>
+            <option value="day">${lang.day}</option>
+            <option value="month" selected>${lang.month}</option>
+            <option value="year">${lang.year}</option>
+            <option value="all">${lang.all}</option>
         </select>
         <img class="header-image" src="./assets/icons/007.svg" alt="" />
         </div>
@@ -53,27 +55,27 @@ export function renderHTML() {
         >
         <button type="button" id = "btn-operations" class="btn btn-success nav-button col-2">
             <img class="footer-btn-image" src="./assets/icons/001.svg" alt="Operation" />
-            <span class="d-block">Operations</span>
+            <span class="d-block">${lang.operations}</span>
         </button>
 
         <button type="button" class="btn btn-success nav-button col-2">
             <img class="footer-btn-image" src="./assets/icons/002.svg" alt="Report" />
-            <span class="d-block">Reports</span>
+            <span class="d-block">${lang.reports}</span>
         </button>
 
         <button type="button" id="btn-add-operation" class="col-2 btn-add-operation">
             <img class="footer-btn-image" src="./assets/icons/005.svg" alt="add">
-            <span class="text-nowrap d-block text-success fw-bold">Add operation</span>
+            <span class="text-nowrap d-block text-success fw-bold">${lang.add}</span>
         </button>
 
         <button type="button" class="btn btn-success col-2">
             <img class="footer-btn-image" src="./assets/icons/003.svg" alt="Category" />
-            <span class="d-block">Categories</span>
+            <span class="d-block">${lang.categories}</span>
         </button>
 
         <button type="button" class="btn btn-success col-2" id="settings">
             <img class="footer-btn-image" src="./assets/icons/004.svg" alt="Settings"/>
-            <span class="d-block">Settings</span>
+            <span class="d-block">${lang.settings}</span>
         </button>
         </nav>
     </div>

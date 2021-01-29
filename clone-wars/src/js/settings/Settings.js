@@ -6,6 +6,7 @@ export default class Settings {
     this.sound = 'Sound';
     this.set = document.querySelector('.settings');
     this.countButtonSettings = false;
+    // theme togler mem
     this.themeLocal = localStorage.getItem('theme');
     if (this.themeLocal === undefined) {
       this.checkedToggler = 'checked';
@@ -15,6 +16,13 @@ export default class Settings {
     } else {
       this.checkedToggler = 'checked';
     }
+    this.langLocal = localStorage.getItem('language');
+    if (this.langLocal === null || this.langLocal === undefined) {
+      // this.langEnFirstTime = document.getElementById('language_en');
+      localStorage.setItem('language', 'language_en');
+      this.langEnFirstTime = 'checked';
+    }
+
 
     this.themeToggler = document.getElementsByName('onoffswitch');
 
@@ -22,6 +30,7 @@ export default class Settings {
     this.textSpan = document.querySelectorAll('span');
 
     this.buttons = document.querySelectorAll('.btn');
+    this.addButtonText = document.getElementById('btn-add-operation').lastElementChild;
     this.btnOperation = document.querySelector('btn-add-operation');
     this.header = document.querySelector('header');
     this.main = document.querySelector('main');
@@ -32,13 +41,14 @@ export default class Settings {
     this.render();
     this.handlers();
     // this.themeChange();
-
+    
     this.set = document.querySelector('.settings');
     this.outer = document.querySelector('.outer');
 
     this.operations = operationsSettings;
     this.recordExpander = recordExpander;
     this.themeChange();
+    // this.changeLang();
   }
 
   render() {
@@ -91,15 +101,15 @@ export default class Settings {
                 </div>
 
                 <div>
-                  <input type="radio" class="settings_radio form-check-input" name="language" id="language_en" checked>
+                  <input type="radio" class="settings_radio form-check-input" name="language" id="language_en" ${this.langEnFirstTime} ${this.checkedLang}>
                   <label for="language_en"><span>EN</span></label>
                 </div>
                 <div>
-                  <input type="radio" class="settings_radio form-check-input" name="language" id="language_ru">
+                  <input type="radio" class="settings_radio form-check-input" name="language" id="language_ru" ${this.checkedLang}>
                   <label for="language_ru"><span>RU</span></label>
                 </div>
                 <div>
-                  <input type="radio" class="settings_radio form-check-input" name="language" id="language_by">
+                  <input type="radio" class="settings_radio form-check-input" name="language" id="language_by" ${this.checkedLang}>
                   <label for="language_by"><span>BY</span></label>
                 </div>
               </div>
@@ -118,28 +128,63 @@ export default class Settings {
 
   changeCurrency() {
     console.log(this.id);
+    this.consoleP = document.querySelectorAll('p');
+    this.consoleS = document.querySelectorAll('span');
+    this.consoleLabel = document.querySelectorAll('label');
+    this.LabelCategory = document.querySelectorAll('labelcategory');
+
+    this.consoleOption = document.querySelector('#interval-select');
+
+    console.log('====================p======================');
+    this.consoleP.forEach((p) => console.log(p.innerText));
+
+    console.log('===================p=======================');
+    console.log('===================interval=======================');
+    for (let i = 0; i < this.consoleOption.options.length; i += 1) {
+      console.log(this.consoleOption.options[i].innerText);
+      // this.consoleOption.options[i].innerText = 'qwewqeqweqewqew';
+    }
+    console.log('===================interval=======================');
+
+    console.log('===================category=======================');
+    this.LabelCategory.forEach((category) => console.log(category.innerText));
+    console.log('===================category=======================');
+
+    console.log('===================label=======================');
+    this.consoleLabel.forEach((label) => console.log(label.innerText));
+    console.log('===================label=======================');
+
+    // console.log(this.consoleLabel, 'label');
+    console.log('===================s=======================');
+
+    this.consoleS.forEach((span) => console.log(span.innerText));
+    console.log('====================s======================');
+
+
     localStorage.setItem('currency', this.id);
   }
 
   changeLang() {
-    this.textP = document.querySelectorAll('p');
-    this.textSpan = document.querySelectorAll('span');
     console.log(this.id);
+    // localStorage.setItem('language', this.id);
+    // this.checkedLang = 'checked';
+    // this.langLocal = localStorage.getItem('language');
+    // if (!this.langLocal) {
+    //   // this.langEnFirstTime = document.getElementById('language_en');
+    //   localStorage.setItem('language', 'language_en');
+    //   this.langEnFirstTime = 'checked';
+    // }
+    this.langLocal
     localStorage.setItem('language', this.id);
+
+    // console.log(this.id);
   }
 
   themeChange() {
-    console.log(this.buttons);
-    console.log(this.textP.length);
-
     this.themeChangeLocalS = function () {
       this.themeLocal = localStorage.getItem('theme');
       // dark on
       if (this.themeLocal === 'false') {
-        // ===================================================================================
-        this.rr = Array.from(document.documentElement.textContent);
-        console.log(this.rr);
-        // ==================================================================================
         this.textSpan[1].classList.add('text_dark');
         this.header.classList.add('bgc_dark');
         this.main.classList.add('bgc_dark');
@@ -149,7 +194,8 @@ export default class Settings {
         // settings
         this.set.classList.add('bgc_dark_settings');
         // add operation
-        this.textSpan[4].classList.add('btnOperation_dark');
+        this.addButtonText.classList.add('btnOperation_dark');
+        // console.log(this.textSpan)
         // operations
         if (this.operations) this.operations.forEach((el) => el.classList.add('text_dark'));
         if (this.recordExpander) this.recordExpander.forEach((el) => el.classList.add('text_dark'));
@@ -171,7 +217,7 @@ export default class Settings {
 
         this.set.classList.remove('bgc_dark_settings');
 
-        this.textSpan[4].classList.remove('btnOperation_dark');
+        this.addButtonText.classList.remove('btnOperation_dark');
         this.textP.forEach((elem) => {
           elem.classList.remove('text_dark');
         });
