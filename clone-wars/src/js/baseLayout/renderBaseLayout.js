@@ -98,7 +98,6 @@ export function renderLayout() {
   const intervalReport = document.querySelector('#interval');
   const navigateInterval = document.querySelector('.navigate-interval');
 
-  // нужно перевесит обработчик событий на контейнер с кнопками
   const btnAddOperation = document.querySelector('#btn-add-operation');
   const btnOperations = document.querySelector('#btn-operations');
 
