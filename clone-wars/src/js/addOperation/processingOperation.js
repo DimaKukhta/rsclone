@@ -61,7 +61,7 @@ export function saveOperationToLocalStorage(operationType) {
   });
 
   localStorage.setItem(operationType, JSON.stringify(operationArray));
-  updateData(localStorage.getItem('login'));
+  // updateData(localStorage.getItem('login'));
 }
 
 export function setDefaultOperation(operationType) {

@@ -166,7 +166,7 @@ export default class Operations {
 
       this.updateOperations(operationType);
       updateBalance();
-      updateData(localStorage.getItem('login'));
+      //updateData(localStorage.getItem('login'));
     }
   }
 
