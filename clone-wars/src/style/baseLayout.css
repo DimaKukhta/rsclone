@@ -80,6 +80,18 @@ button:focus {
   border: none;
 }
 
+.footer-text {
+  height: 3rem;
+}
+
+.footer-link {
+  color: var(--color-green);
+}
+
+.footer-image {
+  height: 1rem;
+}
+
 .red {
   color: var(--color-red)!important;
 }

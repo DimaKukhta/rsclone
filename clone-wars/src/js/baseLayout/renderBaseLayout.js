@@ -76,6 +76,19 @@ export function renderHTML() {
             <span class="d-block">Settings</span>
         </button>
         </nav>
+        <div class="flex-row d-flex justify-content-center align-items-end flex-wrap footer-text">
+          <span>Created by:</span>
+          <a class="footer-link" href="https://github.com/DimaKukhta">DimaKukhta, </a>
+          <a class="footer-link" href="https://github.com/natgeo89">natgeo89, </a>
+          <a class="footer-link" href="https://github.com/artemosadchuck">artemosadchuck, </a>
+          <a class="footer-link" href="https://github.com/confesssa">confesssa</a>
+          <span>for</span>
+          <a class="footer-link" href="https://rs.school/js/"><img class="footer-image" src="./assets/rss.svg"
+              alt="Rolling Scope School" />
+            Rolling Scope School</a>
+          <span>2021</span>
+        </div>
+      </div>
     </div>
     </footer>`;
   document.body.insertAdjacentHTML('beforeend', html);
