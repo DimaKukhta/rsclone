@@ -7,25 +7,26 @@ export function getOperations(operationType) {
 
 export function getIntervalData(operationType, interval = 'all', currentDatestamp) {
   const operationsArray = getOperations(operationType);
+
   let intervalArray;
 
   switch (interval) {
-    case 'day':
+    case 'Day':
       intervalArray = operationsArray.filter(({ date }) => new Date(date).getDate() === new Date(currentDatestamp).getDate()
         && new Date(date).getMonth() === new Date(currentDatestamp).getMonth()
         && new Date(date).getFullYear() === new Date(currentDatestamp).getFullYear());
       return intervalArray;
 
-    case 'month':
+    case 'Month':
       intervalArray = operationsArray.filter(({ date }) => new Date(date).getMonth() === new Date(currentDatestamp).getMonth()
       && new Date(date).getFullYear() === new Date(currentDatestamp).getFullYear());
       return intervalArray;
 
-    case 'year':
+    case 'Year':
       intervalArray = operationsArray.filter(({ date }) => new Date(date).getFullYear() === new Date(currentDatestamp).getFullYear());
       return intervalArray;
 
-    case 'all':
+    case 'All':
       return operationsArray;
     default:
       return operationsArray;

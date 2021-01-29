@@ -157,15 +157,11 @@ export default class Operations {
   }
 
   deleteRecord(target, operationType) {
-    const intervalOperations = document.querySelector('#interval-select');
     if (target.classList.contains('delete-record')) {
-      const interval = document.querySelector('#interval');
-
-      const currentDatestamp = +interval.dataset.date;
-
-      const operationsCopy = [...getIntervalData(operationType, intervalOperations.value, currentDatestamp)];
+      const operationsCopy = [...getIntervalData(operationType)];
       const deleteId = target.dataset.id;
       const deleteRecordIndex = operationsCopy.findIndex(({ id }) => id === deleteId);
+
       operationsCopy.splice(deleteRecordIndex, 1);
 
       localStorage.setItem(operationType, JSON.stringify(operationsCopy));

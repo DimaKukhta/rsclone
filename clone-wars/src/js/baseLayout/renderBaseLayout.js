@@ -93,8 +93,6 @@ export function renderLayout() {
 
   btnAddOperation.addEventListener('click', addOperation);
 
-  // window.onload = addOperation;
-
   const settingsRewrite = () => {
     const oldSettings = document.querySelector('templete');
     oldSettings.parentNode.removeChild(oldSettings);
@@ -109,10 +107,10 @@ export function renderLayout() {
 
   const currentDatestamp = new Date().getTime();
 
+  const operations = new Operations();
+
   intervalReport.textContent = getIntervalText(currentDatestamp);
   setIntervalDate(currentDatestamp);
-
-  const operations = new Operations();
 
   btnOperations.addEventListener('click', () => {
     const main = document.querySelector('#main-content');
@@ -169,6 +167,7 @@ export function renderLayout() {
         default:
           break;
       }
+
       setIntervalDate(updatedStamp);
 
       intervalReport.textContent = getIntervalText(updatedStamp);
