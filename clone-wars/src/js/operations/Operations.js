@@ -5,21 +5,21 @@
 /* eslint-disable class-methods-use-this */
 import { getIntervalData, getSummaryOperationsForInterval, groupOperationsByCategory } from '../data/getData';
 import { updateBalance } from '../addOperation/processingOperation';
-import addZeroes from '../utils/addZeroes';
-
-const intervalOperations = document.querySelector('#interval-select');
+import { addZeroes, groupDecimals } from '../utils/utils';
+import updateData from '../utils/updateData';
 
 const monthNames = {
   en: ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'Jun.',
     'Jul.', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'],
-  ru: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
-    'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-  by: ['Студзень', 'Люты', 'Сакавик', 'Красавик', 'Май', 'Чэрвень',
-    'Липень', 'Жнивень', 'Верасень', 'Кастрычник', 'Листапад', 'Снежань'],
+  ru: ['Янв.', 'Фев.', 'Март', 'Апр.', 'Май', 'Июн.',
+    'Июл.', 'Авг.', 'Сен.', 'Окт.', 'Ноя.', 'Дек.'],
+  by: ['Сту.', 'Лют.', 'Сак.', 'Крас.', 'Май', 'Чэрв.',
+    'Лип.', 'Жнив.', 'Вер.', 'Каст.', 'Лист.', 'Снеж.'],
 };
 
 export default class Operations {
   createOperations(operationType) {
+    const intervalOperations = document.querySelector('#interval-select');
     this.operations = document.createElement('ul');
     this.operations.classList.add('operations', `operations-${operationType}`);
     this.operations.id = `operations-${operationType}`;
@@ -60,26 +60,28 @@ export default class Operations {
 
     const operationsCatetegories = Object.keys(operationsObject).sort();
 
+    const textColor = (operationType === 'expense') ? 'text-danger' : 'text-warning';
+
     operationsCatetegories.forEach((category) => {
       const categoryContainer = document.createElement('div');
       categoryContainer.classList.add('category-container');
 
-      categoryContainer.addEventListener('click', expandAndCollapseList)
+      // eslint-disable-next-line no-use-before-define
+      categoryContainer.addEventListener('click', expandAndCollapseList);
 
       const expander = document.createElement('button');
       expander.classList.add('record-expander');
       expander.textContent = '▼';
 
-      // expander.addEventListener('click', expandAndCollapseList)
-      // ▲▼
-
       const categoryOperations = document.createElement('li');
       categoryOperations.classList.add('category');
-      const dataByCategory = operationsObject[category];
 
+      const dataByCategory = operationsObject[category];
       const totalByCategory = dataByCategory.reduce((accum, { value }) => accum + value, 0);
 
-      categoryOperations.textContent = `${category}: ${sign}${totalByCategory} ${currency}`;
+      categoryOperations.innerHTML = `<img class = 'category-icon' src = '../assets/icons/${category}.svg'><span class = 'fw-bold text-success'>${category}: </span> 
+      <span class = 'category-total fw-bold ${textColor}' data-value = '${totalByCategory}'>
+      ${sign}${groupDecimals(totalByCategory)}</span> <span class = 'fw-bold ${textColor}'>${currency}</span>`;
 
       const sortedByCategories = dataByCategory.sort((a, b) => new Date(b.date) - new Date(a.date));
 
@@ -96,18 +98,20 @@ export default class Operations {
         const year = dateOperation.getFullYear();
 
         const operationLi = document.createElement('li');
+        operationLi.classList.add('record-data');
 
         // here will be function than returns lang from seetings
         const lang = 'en';
-
+        const operationValue = sortedByCategories[index].value;
+        // groupDecimals(
         const dateText = `${addZeroes(day)} ${monthNames[lang][monthIndex]} ${year}`;
-        operationLi.textContent = `
-          ${sign}${sortedByCategories[index].value} ${currency};
-          ${dateText}`;
+        operationLi.innerHTML = `<span class = '${textColor}'>${sign}${groupDecimals(operationValue)} <span class = 'currency ${textColor}'>${currency}</span></span>
+          <span>${dateText}</span>`;
 
         const deleteBtn = document.createElement('button');
         deleteBtn.classList.add('delete-record');
         deleteBtn.dataset.id = sortedByCategories[index].id;
+        deleteBtn.dataset.value = operationValue;
         deleteBtn.textContent = '✖';
 
         recordContainer.append(deleteBtn);
@@ -127,7 +131,10 @@ export default class Operations {
     const totalForInterval = getSummaryOperationsForInterval(operationType, intervalOperations.value, currentDatestamp);
 
     const summary = document.createElement('div');
-    summary.textContent = `Summary ${operationType} for interval: ${sign}${totalForInterval} ${currency}`;
+
+    summary.classList.add(textColor, 'fs-4');
+    summary.innerHTML = `<span>Summary ${operationType} for interval: </span><span class='interval-total fw-bold' data-value = '${totalForInterval}'>
+    ${sign}${groupDecimals(totalForInterval)}</span> <span class = 'fw-bold'>${currency}</span>`;
 
     this.operations.append(summary);
     this.operations.append(horisontalLine.cloneNode());
@@ -138,7 +145,7 @@ export default class Operations {
 
   createReport() {
     this.container = document.createElement('div');
-    this.container.classList.add('operations-container');
+    this.container.classList.add('operations-container', '.mt-5');
     this.container.append(this.createOperations('expense'));
     this.container.append(this.createOperations('income'));
     return this.container;
@@ -150,6 +157,7 @@ export default class Operations {
   }
 
   deleteRecord(target, operationType) {
+    const intervalOperations = document.querySelector('#interval-select');
     if (target.classList.contains('delete-record')) {
       const interval = document.querySelector('#interval');
 
@@ -162,8 +170,22 @@ export default class Operations {
 
       localStorage.setItem(operationType, JSON.stringify(operationsCopy));
 
-      this.updateOperations(operationType);
+      const deleteValue = target.dataset.value;
+      updateSummaryForInterval(target, deleteValue, operationType);
+      updateTotalForCategory(target, deleteValue, operationType);
       updateBalance();
+
+      const record = target.parentElement;
+      const categoryRecords = target.closest('.records').children;
+      const isOneRecord = Array.from(categoryRecords).length === 1;
+
+      if (isOneRecord) {
+        const categoryContainer = target.closest('.category-container');
+        categoryContainer.remove();
+      } else {
+        record.remove();
+      }
+      updateData(localStorage.getItem('login'));
     }
   }
 
@@ -189,4 +211,22 @@ function expandAndCollapseList({ target }) {
       target.textContent = '▲';
     }
   }
+}
+
+function updateSummaryForInterval(deleteBtn, deleteValue, operationType) {
+  const operation = deleteBtn.closest('.operations');
+  const total = operation.querySelector('.interval-total');
+  const currentValue = total.dataset.value;
+  const updateValue = currentValue - deleteValue;
+  total.dataset.value = updateValue;
+  total.textContent = (operationType === 'expense') ? `-${groupDecimals(updateValue)}` : `+${groupDecimals(updateValue)}`;
+}
+
+function updateTotalForCategory(deleteBtn, deleteValue, operationType) {
+  const category = deleteBtn.closest('.category');
+  const total = category.querySelector('.category-total');
+  const currentValue = total.dataset.value;
+  const updateValue = currentValue - deleteValue;
+  total.dataset.value = updateValue;
+  total.textContent = (operationType === 'expense') ? `-${groupDecimals(updateValue)}` : `+${groupDecimals(updateValue)}`;
 }

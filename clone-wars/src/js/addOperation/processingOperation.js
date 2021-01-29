@@ -1,5 +1,6 @@
 import { getOperations, getSummaryOperationsForInterval } from '../data/getData';
-import addZeroes from '../utils/addZeroes';
+import { addZeroes, groupDecimals } from '../utils/utils';
+import updateData from '../utils/updateData';
 
 function generateId() {
   const str = '1234567890abcdefg';
@@ -30,7 +31,7 @@ export function enableInput(operationType) {
     save.removeAttribute('disabled');
     date.removeAttribute('disabled');
   } else {
-    disableInput();
+    disableInput(operationType);
   }
 }
 
@@ -60,6 +61,7 @@ export function saveOperationToLocalStorage(operationType) {
   });
 
   localStorage.setItem(operationType, JSON.stringify(operationArray));
+  updateData(localStorage.getItem('login'));
 }
 
 export function setDefaultOperation(operationType) {
@@ -109,13 +111,14 @@ export function updateBalance() {
     setColorClassForElem(balanceElem, 'red');
   }
 
-  balanceElem.textContent = balanceValue.toFixed(2);
+  balanceElem.textContent = groupDecimals(+balanceValue.toFixed(2));
 }
 
 function addClassForMS(elem, className, ms) {
   elem.classList.add(className);
   setTimeout(() => {
     elem.classList.remove(className);
+    // eslint-disable-next-line no-param-reassign
     elem.textContent = '';
   }, ms);
 }

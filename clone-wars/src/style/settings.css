@@ -1,5 +1,4 @@
 .settings {
-
     position: fixed;
     right: -20rem;
     bottom: 10rem;
@@ -16,11 +15,9 @@
     height: 22rem;
 
     font-weight: 700;
-    /* text-align: center; */
     font-size: 1.5rem;
-    /* background-color: rgba(29, 133, 93, 0.288); */
+
     background: linear-gradient(to left top, rgba(29, 133, 93, 0.288), rgba(29, 133, 93, 0.884));
-    
     border-radius: 5px 19px 5px 5px;
 
     transition: .3s ease-in-out;
@@ -55,7 +52,6 @@
 
 .close_settings {
     position: absolute;
-
     top: 0;
     right: 0;
 
@@ -79,7 +75,6 @@
 .close_settings:hover {
     background-color: rgb(6, 141, 123);
     cursor: pointer;
- 
 }
 
 .settings_radio {
@@ -95,7 +90,6 @@
 
 .settings_radio:checked {
     background-color: rgba(49, 221, 184, 0.849);
-
     border-color: rgb(0, 0, 0);
 }
 
@@ -114,9 +108,7 @@
     flex-direction: row;
     justify-content: space-between;
     margin-top: 1.5rem;
-
     margin-bottom: 1.9rem;
-
 }
 
 .settings_inner {
@@ -182,7 +174,6 @@
     content: "Dark";
 }
 .onoffswitch-inner::before {
-    
     padding-right: 40px;
 
     color: #FFFFFF;
@@ -216,3 +207,44 @@ label:hover {
     cursor: pointer;
 }
 /* lable */
+
+.box_sound {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+
+    user-select: none;
+}
+
+.box_sound__label {
+    margin-right: 15px;
+
+    font-size: 26px;
+
+    cursor: pointer;
+}
+
+.box_sound__input {
+    width: 1.5rem;
+    height: 1.5rem;
+
+    background-color: var(--color-light);
+    border-color: rgb(0, 0, 0);
+    cursor: pointer;
+}
+
+.box_sound__input:hover {
+    background-color: rgba(166, 253, 234, 0.849);
+} 
+
+.box_sound__input:focus {
+    background-color: var(--color-light);
+    border-color: rgb(0, 0, 0);
+    box-shadow: none;
+} 
+
+.box_sound__input:checked {
+    background-color: rgba(49, 221, 184, 0.849);
+    border-color: rgb(0, 0, 0);
+}

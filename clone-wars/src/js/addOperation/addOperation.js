@@ -1,4 +1,4 @@
-import { 
+import {
   saveOperationToLocalStorage,
   setDefaultOperation,
   isInputValid,
@@ -12,9 +12,10 @@ import {
 import expenseCategories from '../data/dataExpenseCategories';
 import incomeCategories from '../data/dataIncomeCategories';
 
-const mainContent = document.querySelector('#main-content');
+// const mainContent = document.querySelector('#main-content');
 
 function drawAddExpense() {
+  const mainContent = document.querySelector('#main-content');
   const fragment = new DocumentFragment();
   const container = document.createElement('div');
   container.id = 'add-expense';
@@ -45,7 +46,7 @@ function drawAddExpense() {
   firstOption.textContent = '-- choose one --';
 
   select.append(firstOption);
-  // another options from separate file
+
   expenseCategories.forEach(({ name }) => {
     const option = document.createElement('option');
     option.value = name;
@@ -72,7 +73,6 @@ function drawAddExpense() {
   const inputDate = document.createElement('input');
   inputDate.type = 'date';
   inputDate.id = 'expense-date';
-  inputDate.max = '2021-01-22';
   inputDate.disabled = true;
   inputDate.classList.add('form-control', 'mb-5');
 
@@ -89,7 +89,10 @@ function drawAddExpense() {
 
   btn.addEventListener('click', () => {
     if (isInputValid('expense')) {
-      audio.play();
+      // Sound switch
+      const audioLocalStorage = localStorage.getItem('sound');
+      if (audioLocalStorage === 'true' || audioLocalStorage === null) audio.play();
+
       pigAnimation('expense', (+input.value).toFixed(2));
       saveOperationToLocalStorage('expense');
       setDefaultOperation('expense');
@@ -104,6 +107,7 @@ function drawAddExpense() {
 }
 
 function drawAddIncome() {
+  const mainContent = document.querySelector('#main-content');
   const fragment = new DocumentFragment();
   const container = document.createElement('div');
   container.id = 'add-income';
@@ -178,7 +182,10 @@ function drawAddIncome() {
 
   btn.addEventListener('click', () => {
     if (isInputValid('income')) {
-      audio.play();
+      // Sound switch
+      const audioLocalStorage = localStorage.getItem('sound');
+      if (audioLocalStorage === 'true' || audioLocalStorage === null) audio.play();
+
       pigAnimation('income', (+input.value).toFixed(2));
       saveOperationToLocalStorage('income');
       setDefaultOperation('income');
@@ -193,6 +200,7 @@ function drawAddIncome() {
 }
 
 function drawImage() {
+  const mainContent = document.querySelector('#main-content');
   const fragment = new DocumentFragment();
   const container = document.createElement('div');
   container.classList.add('add-operation-image');
@@ -208,6 +216,7 @@ function drawImage() {
 }
 
 export default function addOperation() {
+  const mainContent = document.querySelector('#main-content');
   mainContent.innerHTML = '';
 
   drawAddExpense();

@@ -26,23 +26,11 @@ footer {
   margin-top: auto;
 }
 
-.footer-text {
-  height: 3rem;
-}
-
-.footer-link {
-  color: var(--color-green);
-}
-
-.footer-image {
-  height: 1rem;
-}
-
 ul {
-  margin: 0; 
-  padding: 0;
+  margin: 0;
+  padding: 0;  
 
-  list-style: none; 
+  list-style: none;  
 }
 
 button {
