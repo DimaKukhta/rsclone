@@ -67,8 +67,8 @@ export function renderHTML() {
         </button>
 
         <button type="button" class="btn btn-success col-2">
-            <img class="footer-btn-image" src="./assets/icons/003.svg" alt="Category" />
-            <span class="d-block">Categories</span>
+            <img class="footer-btn-image" src="./assets/icons/003.svg" alt="Hotkeys" />
+            <span class="d-block">Hotkeys</span>
         </button>
 
         <button type="button" class="btn btn-success col-2" id="settings">
