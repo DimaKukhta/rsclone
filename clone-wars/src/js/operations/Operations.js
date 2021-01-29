@@ -185,7 +185,7 @@ export default class Operations {
       } else {
         record.remove();
       }
-      updateData(localStorage.getItem('login'));
+      // updateData(localStorage.getItem('login'));
     }
   }
 
