@@ -115,3 +115,10 @@ button:focus {
     height: auto;
   }
 }
+
+@media (max-width: 775px) {
+  .header-image {
+    display: none;
+  }
+}
+
