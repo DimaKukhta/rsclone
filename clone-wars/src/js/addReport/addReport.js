@@ -1,9 +1,14 @@
+import Charts from '../chart/Charts';
+
 export default function addReport() {
   const mainContent = document.querySelector('#main-content');
   mainContent.innerHTML = '';
+  const container = document.querySelector('.container');
 
-  const text = document.createElement('p');
-  text.textContent = 'Тут бы сделать две диаграммы) Папка и файл addReport';
-  text.style.color = 'red';
-  mainContent.append(text);
+ const chart = new Charts();
+
+ container.addEventListener('click', () => {
+   chart.updateCharts();
+   console.log('click');
+  });
 }
