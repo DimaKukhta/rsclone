@@ -1,5 +1,5 @@
 import Chart from 'chart.js';
-import { getOperationsForChart, getIntervalData } from '../data/getData';
+import { getOperationsForChart } from '../data/getData';
 
 function getInterval() {
   const intervalSelect = document.querySelector('#interval-select');
@@ -74,7 +74,7 @@ export default class Charts {
         maintainAspectRatio: false,
         title: {
           display: true,
-          text: 'Exprense',
+          text: 'Expense',
           fontSize: 16,
         },
       },
