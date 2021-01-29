@@ -2,7 +2,9 @@
 import EnExpenseCategories from '../data/dataExpenseCategories';
 import Settings from '../settings/Settings';
 
+import addReport from '../addReport/addReport';
 import addOperation from '../addOperation/addOperation';
+import drawHotKeys from '../drawHotKeys/drawHotKeys';
 import {
   getIntervalText,
   setIntervalDate,
@@ -56,7 +58,7 @@ export function renderHTML() {
             <span class="d-block footer-btn-text">Operations</span>
         </button>
 
-        <button type="button" class="btn btn-success nav-button col-2" accesskey="5" title="hotkey '5'">
+        <button type="button" id="btn-report" class="btn btn-success nav-button col-2" accesskey="5" title="hotkey '5'">
             <img class="footer-btn-image" src="./assets/icons/002.svg" alt="Report" />
             <span class="d-block footer-btn-text">Reports</span>
         </button>
@@ -66,12 +68,12 @@ export function renderHTML() {
             <span class="text-nowrap d-block text-success fw-bold footer-central-button">Add operation</span>
         </button>
 
-        <button type="button" class="btn btn-success col-2" accesskey="7" title="hotkey '7'">
+        <button type="button" id="btn-hotkeys" class="btn btn-success col-2" accesskey="7" title="hotkey '7'">
             <img class="footer-btn-image" src="./assets/icons/003.svg" alt="Hotkeys" />
             <span class="d-block footer-btn-text">Hotkeys</span>
         </button>
 
-        <button type="button" class="btn btn-success col-2" id="settings" accesskey="8" title="hotkey '8'">
+        <button type="button" id="settings" class="btn btn-success col-2" accesskey="8" title="hotkey '8'">
             <img class="footer-btn-image" src="./assets/icons/004.svg" alt="Settings"/>
             <span class="d-block footer-btn-text">Settings</span>
         </button>
@@ -98,10 +100,15 @@ export function renderLayout() {
   const intervalReport = document.querySelector('#interval');
   const navigateInterval = document.querySelector('.navigate-interval');
 
-  const btnAddOperation = document.querySelector('#btn-add-operation');
   const btnOperations = document.querySelector('#btn-operations');
+  const btnReport = document.querySelector('#btn-report');
+  const btnAddOperation = document.querySelector('#btn-add-operation');
+  const btnHotKeys = document.querySelector('#btn-hotkeys');
 
+  btnReport.addEventListener('click', addReport);
   btnAddOperation.addEventListener('click', addOperation);
+  btnHotKeys.addEventListener('click', drawHotKeys);
+
 
   // window.onload = addOperation;
 
