@@ -1,5 +1,5 @@
 import { getOperations, getSummaryOperationsForInterval } from '../data/getData';
-import addZeroes from '../utils/addZeroes';
+import { addZeroes, groupDecimals } from '../utils/utils';
 import updateData from '../utils/updateData';
 
 function generateId() {
@@ -31,7 +31,7 @@ export function enableInput(operationType) {
     save.removeAttribute('disabled');
     date.removeAttribute('disabled');
   } else {
-    disableInput();
+    disableInput(operationType);
   }
 }
 
@@ -111,7 +111,7 @@ export function updateBalance() {
     setColorClassForElem(balanceElem, 'red');
   }
 
-  balanceElem.textContent = balanceValue.toFixed(2);
+  balanceElem.textContent = groupDecimals(+balanceValue.toFixed(2));
 }
 
 function addClassForMS(elem, className, ms) {

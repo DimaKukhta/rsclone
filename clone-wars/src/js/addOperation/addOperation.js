@@ -19,7 +19,7 @@ function drawAddExpense() {
   const fragment = new DocumentFragment();
   const container = document.createElement('div');
   container.id = 'add-expense';
-  container.classList.add('d-flex', 'flex-column', 'text-center', 'mt-5', 'pe-5', 'add-expense');
+  container.classList.add('d-flex', 'flex-column', 'text-center', 'mt-5', 'add-expense');
 
   const title = document.createElement('p');
   title.classList.add('text-danger', 'text-uppercase', 'fs-4', 'mb-4');
@@ -46,7 +46,7 @@ function drawAddExpense() {
   firstOption.textContent = '-- choose one --';
 
   select.append(firstOption);
-  // another options from separate file
+
   expenseCategories.forEach(({ name }) => {
     const option = document.createElement('option');
     option.value = name;
@@ -73,7 +73,6 @@ function drawAddExpense() {
   const inputDate = document.createElement('input');
   inputDate.type = 'date';
   inputDate.id = 'expense-date';
-  inputDate.max = '2021-01-22';
   inputDate.disabled = true;
   inputDate.classList.add('form-control', 'mb-5');
 
@@ -112,7 +111,7 @@ function drawAddIncome() {
   const fragment = new DocumentFragment();
   const container = document.createElement('div');
   container.id = 'add-income';
-  container.classList.add('d-flex', 'flex-column', 'text-center', 'mt-5', 'ps-5', 'add-income');
+  container.classList.add('d-flex', 'flex-column', 'text-center', 'mt-5', 'add-income');
 
   const title = document.createElement('p');
   title.classList.add('text-warning', 'text-uppercase', 'fs-4', 'mb-4');

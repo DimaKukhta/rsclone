@@ -1,10 +1,10 @@
-/* .add-expense {
-  margin-left: 500px;
+.add-expense {
+  padding-right: 3rem;
 }
 
 .add-income {
-  margin-right: 500px;
-} */
+  padding-left: 3rem;
+} 
 
 
 .pig {
@@ -53,5 +53,15 @@
   to {
     transform: scale(50);
     opacity: 0;
+  }
+}
+
+@media (max-width: 530px) {
+  .add-expense {
+    padding: 0;
+  }
+
+  .add-income {
+    padding: 0;
   }
 }

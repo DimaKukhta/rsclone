@@ -1,3 +1,4 @@
+/* HEADER */
 .header {
   height: 7rem;
 }
@@ -6,19 +7,30 @@
   margin-left: 1rem;
 }
 
-main {
-  height: calc(100% - 14rem);
+.form-select {
+  min-width: 100px;
 }
 
+.balance {
+  margin-right: 5px;
+}
+
+/* MAIN */
+main {
+  height: calc(100% - 17rem);
+}
+
+/* FOOTER */
 footer {
-  height: 7rem;
+  height: 10rem;
   margin-top: auto;
 }
 
-ul {  
-  list-style: none;
-  padding: 0;
-  margin: 0;  
+ul {
+  margin: 0;
+  padding: 0;  
+
+  list-style: none;  
 }
 
 button {
@@ -26,8 +38,8 @@ button {
 }
 
 button:active {
-  outline: none;
   border: none;
+  outline: none;
 }
 
 button:focus {
@@ -68,12 +80,16 @@ button:focus {
   border: none;
 }
 
-.form-select {
-  min-width: 100px;
+.footer-text {
+  height: 3rem;
 }
 
-.balance {
-  margin-right: 5px;
+.footer-link {
+  color: var(--color-green);
+}
+
+.footer-image {
+  height: 1rem;
 }
 
 .red {
@@ -83,3 +99,26 @@ button:focus {
 .green {
   color: var(--color-green)!important;
 }
+
+@media (max-width: 993px) {
+  .footer-central-button {
+    visibility: hidden;
+  }
+}
+
+@media (max-width: 775px) {
+  .footer-btn-text {
+    visibility: hidden;
+  }
+
+  main {
+    height: auto;
+  }
+}
+
+@media (max-width: 775px) {
+  .header-image {
+    display: none;
+  }
+}
+
