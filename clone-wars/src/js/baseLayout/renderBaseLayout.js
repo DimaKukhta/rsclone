@@ -24,12 +24,12 @@ export function renderHTML() {
         </p>
         </div>
         <div class="navigate-interval d-flex align-items-center">
-        <button class = "iteration-button btn btn-outline-success" id = "prev"> &lt; </button>
+        <button class = "iteration-button btn btn-outline-success" id = "prev" accesskey="1" title="hotkey '1'"> &lt; </button>
         <div id="interval" class="me-1 ms-1">current interval</div>
-        <button class = "iteration-button btn btn-outline-success" id = "next"> &gt; </button>
+        <button class = "iteration-button btn btn-outline-success" id = "next" accesskey="2" title="hotkey '2'"> &gt; </button>
         </div>
         <div class="d-flex col-2">
-        <select class="form-select" name="interval" id="interval-select">
+        <select class="form-select" name="interval" id="interval-select" accesskey="3" title="hotkey '3'">
             <option value="day">Day</option>
             <option value="month" selected>Month</option>
             <option value="year">Year</option>
@@ -51,27 +51,27 @@ export function renderHTML() {
         <nav
         class="row d-flex flex-row justify-content-sm-between align-items-center mt-3 text-center"
         >
-        <button type="button" id = "btn-operations" class="btn btn-success nav-button col-2">
+        <button type="button" id = "btn-operations" class="btn btn-success nav-button col-2" accesskey="4" title="hotkey '4'">
             <img class="footer-btn-image" src="./assets/icons/001.svg" alt="Operation" />
             <span class="d-block footer-btn-text">Operations</span>
         </button>
 
-        <button type="button" class="btn btn-success nav-button col-2">
+        <button type="button" class="btn btn-success nav-button col-2" accesskey="5" title="hotkey '5'">
             <img class="footer-btn-image" src="./assets/icons/002.svg" alt="Report" />
             <span class="d-block footer-btn-text">Reports</span>
         </button>
 
-        <button type="button" id="btn-add-operation" class="col-2 btn-add-operation">
+        <button type="button" id="btn-add-operation" class="col-2 btn-add-operation" accesskey="6" title="hotkey '6'">
             <img class="footer-btn-image" src="./assets/icons/005.svg" alt="add">
             <span class="text-nowrap d-block text-success fw-bold footer-central-button">Add operation</span>
         </button>
 
-        <button type="button" class="btn btn-success col-2">
+        <button type="button" class="btn btn-success col-2" accesskey="7" title="hotkey '7'">
             <img class="footer-btn-image" src="./assets/icons/003.svg" alt="Hotkeys" />
             <span class="d-block footer-btn-text">Hotkeys</span>
         </button>
 
-        <button type="button" class="btn btn-success col-2" id="settings">
+        <button type="button" class="btn btn-success col-2" id="settings" accesskey="8" title="hotkey '8'">
             <img class="footer-btn-image" src="./assets/icons/004.svg" alt="Settings"/>
             <span class="d-block footer-btn-text">Settings</span>
         </button>
