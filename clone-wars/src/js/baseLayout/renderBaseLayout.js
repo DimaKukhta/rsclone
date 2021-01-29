@@ -4,7 +4,9 @@ import lang from '../data/baselayoutLang';
 
 import Settings from '../settings/Settings';
 
+import addReport from '../addReport/addReport';
 import addOperation from '../addOperation/addOperation';
+import drawHotKeys from '../drawHotKeys/drawHotKeys';
 import {
   getIntervalText,
   setIntervalDate,
@@ -26,9 +28,9 @@ export function renderHTML() {
         </p>
         </div>
         <div class="navigate-interval d-flex align-items-center">
-        <button class = "iteration-button btn btn-outline-success" id = "prev"> &lt; </button>
+        <button class = "iteration-button btn btn-outline-success" id = "prev" accesskey="1" title="hotkey '1'"> &lt; </button>
         <div id="interval" class="me-1 ms-1">current interval</div>
-        <button class = "iteration-button btn btn-outline-success" id = "next"> &gt; </button>
+        <button class = "iteration-button btn btn-outline-success" id = "next" accesskey="2" title="hotkey '2'"> &gt; </button>
         </div>
         <div class="d-flex col-2">
         <select class="form-select" name="interval" id="interval-select">
@@ -53,17 +55,17 @@ export function renderHTML() {
         <nav
         class="row d-flex flex-row justify-content-sm-between align-items-center mt-3 text-center"
         >
-        <button type="button" id = "btn-operations" class="btn btn-success nav-button col-2">
+        <button type="button" id = "btn-operations" class="btn btn-success nav-button col-2" accesskey="4" title="hotkey '4'">
             <img class="footer-btn-image" src="./assets/icons/001.svg" alt="Operation" />
             <span class="d-block">${lang.operations}</span>
         </button>
 
-        <button type="button" class="btn btn-success nav-button col-2">
+        <button type="button" id="btn-report" class="btn btn-success nav-button col-2" accesskey="5" title="hotkey '5'">
             <img class="footer-btn-image" src="./assets/icons/002.svg" alt="Report" />
             <span class="d-block">${lang.reports}</span>
         </button>
 
-        <button type="button" id="btn-add-operation" class="col-2 btn-add-operation">
+        <button type="button" id="btn-add-operation" class="col-2 btn-add-operation" accesskey="6" title="hotkey '6'">
             <img class="footer-btn-image" src="./assets/icons/005.svg" alt="add">
             <span class="text-nowrap d-block text-success fw-bold">${lang.add}</span>
         </button>
@@ -73,11 +75,24 @@ export function renderHTML() {
             <span class="d-block">${lang.categories}</span>
         </button>
 
-        <button type="button" class="btn btn-success col-2" id="settings">
+        <button type="button" id="settings" class="btn btn-success col-2" accesskey="8" title="hotkey '8'">
             <img class="footer-btn-image" src="./assets/icons/004.svg" alt="Settings"/>
             <span class="d-block">${lang.settings}</span>
         </button>
         </nav>
+        <div class="flex-row d-flex justify-content-center align-items-end flex-wrap footer-text">
+          <span>Created by:</span>
+          <a class="footer-link" href="https://github.com/DimaKukhta">DimaKukhta, </a>
+          <a class="footer-link" href="https://github.com/natgeo89">natgeo89, </a>
+          <a class="footer-link" href="https://github.com/artemosadchuck">artemosadchuck, </a>
+          <a class="footer-link" href="https://github.com/confesssa">confesssa</a>
+          <span>for</span>
+          <a class="footer-link" href="https://rs.school/js/"><img class="footer-image" src="./assets/rss.svg"
+              alt="Rolling Scope School" />
+            Rolling Scope School</a>
+          <span>2021</span>
+        </div>
+      </div>
     </div>
     </footer>`;
   document.body.insertAdjacentHTML('beforeend', html);
@@ -87,11 +102,14 @@ export function renderLayout() {
   const intervalReport = document.querySelector('#interval');
   const navigateInterval = document.querySelector('.navigate-interval');
 
-  // нужно перевесит обработчик событий на контейнер с кнопками
-  const btnAddOperation = document.querySelector('#btn-add-operation');
   const btnOperations = document.querySelector('#btn-operations');
+  const btnReport = document.querySelector('#btn-report');
+  const btnAddOperation = document.querySelector('#btn-add-operation');
+  const btnHotKeys = document.querySelector('#btn-hotkeys');
 
+  btnReport.addEventListener('click', addReport);
   btnAddOperation.addEventListener('click', addOperation);
+  btnHotKeys.addEventListener('click', drawHotKeys);
 
   // window.onload = addOperation;
 
