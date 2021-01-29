@@ -53,27 +53,27 @@ export function renderHTML() {
         >
         <button type="button" id = "btn-operations" class="btn btn-success nav-button col-2">
             <img class="footer-btn-image" src="./assets/icons/001.svg" alt="Operation" />
-            <span class="d-block">Operations</span>
+            <span class="d-block footer-btn-text">Operations</span>
         </button>
 
         <button type="button" class="btn btn-success nav-button col-2">
             <img class="footer-btn-image" src="./assets/icons/002.svg" alt="Report" />
-            <span class="d-block">Reports</span>
+            <span class="d-block footer-btn-text">Reports</span>
         </button>
 
         <button type="button" id="btn-add-operation" class="col-2 btn-add-operation">
             <img class="footer-btn-image" src="./assets/icons/005.svg" alt="add">
-            <span class="text-nowrap d-block text-success fw-bold">Add operation</span>
+            <span class="text-nowrap d-block text-success fw-bold footer-central-button">Add operation</span>
         </button>
 
         <button type="button" class="btn btn-success col-2">
             <img class="footer-btn-image" src="./assets/icons/003.svg" alt="Hotkeys" />
-            <span class="d-block">Hotkeys</span>
+            <span class="d-block footer-btn-text">Hotkeys</span>
         </button>
 
         <button type="button" class="btn btn-success col-2" id="settings">
             <img class="footer-btn-image" src="./assets/icons/004.svg" alt="Settings"/>
-            <span class="d-block">Settings</span>
+            <span class="d-block footer-btn-text">Settings</span>
         </button>
         </nav>
         <div class="flex-row d-flex justify-content-center align-items-end flex-wrap footer-text">
