@@ -145,7 +145,7 @@ export default class Operations {
 
   createReport() {
     this.container = document.createElement('div');
-    this.container.classList.add('operations-container', '.mt-5');
+    this.container.classList.add('operations-container', 'mt-5');
     this.container.append(this.createOperations('expense'));
     this.container.append(this.createOperations('income'));
     return this.container;
