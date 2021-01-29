@@ -5,10 +5,10 @@ export default function addReport() {
   mainContent.innerHTML = '';
   const container = document.querySelector('.container');
 
- const chart = new Charts();
+  const chart = new Charts();
 
- container.addEventListener('click', () => {
-   chart.updateCharts();
-   console.log('click');
+  container.addEventListener('click', () => {
+    chart.updateCharts();
+    console.log('click');
   });
 }
