@@ -79,9 +79,11 @@ export default class Operations {
       const dataByCategory = operationsObject[category];
       const totalByCategory = dataByCategory.reduce((accum, { value }) => accum + value, 0);
 
+      const roundTotalByCategory = +totalByCategory.toFixed(2);
+
       categoryOperations.innerHTML = `<img class = 'category-icon' src = '../assets/icons/${category}.svg'><span class = 'fw-bold text-success'>${category}: </span> 
-      <span class = 'category-total fw-bold ${textColor}' data-value = '${totalByCategory}'>
-      ${sign}${groupDecimals(totalByCategory)}</span> <span class = 'fw-bold ${textColor}'>${currency}</span>`;
+      <span class = 'category-total fw-bold ${textColor}' data-value = '${roundTotalByCategory}'>
+      ${sign}${groupDecimals(roundTotalByCategory)}</span> <span class = 'fw-bold ${textColor}'>${currency}</span>`;
 
       const sortedByCategories = dataByCategory.sort((a, b) => new Date(b.date) - new Date(a.date));
 
@@ -129,12 +131,13 @@ export default class Operations {
     });
 
     const totalForInterval = getSummaryOperationsForInterval(operationType, intervalOperations.value, currentDatestamp);
+    const roundTotalForInterval = +totalForInterval.toFixed(2);
 
     const summary = document.createElement('div');
 
     summary.classList.add(textColor, 'fs-4');
-    summary.innerHTML = `<span>Summary ${operationType} for interval: </span><span class='interval-total fw-bold' data-value = '${totalForInterval}'>
-    ${sign}${groupDecimals(totalForInterval)}</span> <span class = 'fw-bold'>${currency}</span>`;
+    summary.innerHTML = `<span>Summary ${operationType} for interval: </span><span class='interval-total fw-bold' data-value = '${roundTotalForInterval}'>
+    ${sign}${groupDecimals(roundTotalForInterval)}</span> <span class = 'fw-bold'>${currency}</span>`;
 
     this.operations.append(summary);
     this.operations.append(horisontalLine.cloneNode());
@@ -213,7 +216,7 @@ function updateSummaryForInterval(deleteBtn, deleteValue, operationType) {
   const operation = deleteBtn.closest('.operations');
   const total = operation.querySelector('.interval-total');
   const currentValue = total.dataset.value;
-  const updateValue = currentValue - deleteValue;
+  const updateValue = +(currentValue - deleteValue).toFixed(2);
   total.dataset.value = updateValue;
   total.textContent = (operationType === 'expense') ? `-${groupDecimals(updateValue)}` : `+${groupDecimals(updateValue)}`;
 }
@@ -222,7 +225,8 @@ function updateTotalForCategory(deleteBtn, deleteValue, operationType) {
   const category = deleteBtn.closest('.category');
   const total = category.querySelector('.category-total');
   const currentValue = total.dataset.value;
-  const updateValue = currentValue - deleteValue;
+  const updateValue = +(currentValue - deleteValue).toFixed(2);
+
   total.dataset.value = updateValue;
   total.textContent = (operationType === 'expense') ? `-${groupDecimals(updateValue)}` : `+${groupDecimals(updateValue)}`;
 }
