@@ -1,5 +1,4 @@
 const en = {
-  balance: 'Balance',
   day: 'Day',
   month: 'Month',
   year: 'Year',
@@ -13,10 +12,10 @@ const en = {
   sound: 'Sound',
   currency: 'Currency:',
   language: 'Language:',
+  balance: 'Balance',
 };
 
 const ru = {
-  balance: 'Баланс',
   day: 'День',
   month: 'Месяц',
   year: 'Год',
@@ -30,10 +29,10 @@ const ru = {
   sound: 'Звук',
   currency: 'Валюта:',
   language: 'Язык:',
+  balance: 'Баланс',
 };
 
 const by = {
-  balance: 'Баланс',
   day: 'Дзень',
   month: 'Месяц',
   year: 'Год',
@@ -47,6 +46,7 @@ const by = {
   sound: 'Гук',
   currency: 'Валюта:',
   language: 'Мова:',
+  balance: 'Баланс',
 };
 
 const lang = () => {
