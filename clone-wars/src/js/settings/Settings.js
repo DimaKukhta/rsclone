@@ -2,6 +2,7 @@
 // import { renderHTML, renderLayout } from '../baseLayout/renderBaseLayout';
 import { switchLang } from '../data/baselayoutLang';
 import lang from '../data/baselayoutLang';
+import { renderHTML, renderLayout } from '../baseLayout/renderBaseLayout';
 
 export default class Settings {
   constructor(operationsSettings, recordExpander) {
@@ -156,7 +157,6 @@ export default class Settings {
     // balance
     this.balance = document.getElementById('balance');
     this.balance.innerText = switchLang().balance;
-
     // interval
     this.consoleOption = document.querySelector('#interval-select');
     this.arrSwitchLang = Object.values(switchLang());

@@ -1,4 +1,4 @@
-const en = {
+const enL = {
   day: 'Day',
   month: 'Month',
   year: 'Year',
@@ -15,7 +15,7 @@ const en = {
   balance: 'Balance',
 };
 
-const ru = {
+const ruL = {
   day: 'День',
   month: 'Месяц',
   year: 'Год',
@@ -32,7 +32,7 @@ const ru = {
   balance: 'Баланс',
 };
 
-const by = {
+const byL = {
   day: 'Дзень',
   month: 'Месяц',
   year: 'Год',
@@ -49,7 +49,7 @@ const by = {
   balance: 'Баланс',
 };
 
-const lang = () => {
+const lang = (en, ru, by) => {
   const localSLang = localStorage.getItem('language');
   let langL;
   switch (localSLang) {
@@ -72,6 +72,7 @@ const lang = () => {
   return langL;
 };
 
-const switchLang = lang;
-export { switchLang };
-export default lang();
+const switchLang = lang.bind(...[null, enL, ruL, byL]);
+const switchLangNoBind = lang;
+export { switchLang, switchLangNoBind };
+export default lang(enL, ruL, byL);

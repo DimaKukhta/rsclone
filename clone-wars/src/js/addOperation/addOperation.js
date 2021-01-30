@@ -9,9 +9,9 @@ import {
   pigAnimation,
 } from './processingOperation';
 
+import addOperationLang from '../data/addOperationLang';
 import expenseCategories from '../data/dataExpenseCategories';
 import incomeCategories from '../data/dataIncomeCategories';
-
 // const mainContent = document.querySelector('#main-content');
 
 function drawAddExpense() {
@@ -23,12 +23,12 @@ function drawAddExpense() {
 
   const title = document.createElement('p');
   title.classList.add('text-danger', 'text-uppercase', 'fs-4', 'mb-4');
-  title.textContent = 'Add Expense';
+  title.textContent = `${addOperationLang.addExpence}`;
 
   const labelCategory = document.createElement('labelCategory');
   labelCategory.classList.add('mb-1', 'text-danger', 'fw-bold');
   labelCategory.for = 'category-select-expense';
-  labelCategory.textContent = 'Category';
+  labelCategory.textContent = `${addOperationLang.category}`;
 
   const select = document.createElement('select');
 
@@ -43,21 +43,27 @@ function drawAddExpense() {
 
   const firstOption = document.createElement('option');
   firstOption.value = 'none';
-  firstOption.textContent = '-- choose one --';
+  firstOption.textContent = `${addOperationLang.chooseOne}`;
 
   select.append(firstOption);
 
-  expenseCategories.forEach(({ name }) => {
+  const localSLang = localStorage.getItem('language');
+  expenseCategories.forEach(({ name, text }) => {
     const option = document.createElement('option');
     option.value = name;
     option.textContent = name;
+    if (!localSLang) option.textContent = text.en;
+    if (localSLang === 'language_en') option.textContent = text.en;
+    if (localSLang === 'language_ru') option.textContent = text.ru;
+    if (localSLang === 'language_by') option.textContent = text.by;
+    option.id = `${name}_id`;
     select.append(option);
   });
 
   const labelAmount = document.createElement('label');
   labelAmount.classList.add('mb-1', 'text-danger', 'fw-bold');
   labelAmount.for = 'add-expense';
-  labelAmount.textContent = 'Amount';
+  labelAmount.textContent = `${addOperationLang.amount}`;
 
   const input = document.createElement('input');
 
@@ -67,7 +73,7 @@ function drawAddExpense() {
 
   input.classList.add('form-control', 'input-expense', 'mb-5');
   input.id = 'add-expense';
-  input.placeholder = '-- enter the amount --';
+  input.placeholder = `${addOperationLang.enterTheAmount}`;
   input.disabled = true;
 
   const inputDate = document.createElement('input');
@@ -81,7 +87,7 @@ function drawAddExpense() {
   btn.classList.add('btn', 'btn-danger', 'mx-auto', 'w-100');
   btn.id = 'save-expense';
   btn.disabled = true;
-  btn.textContent = 'Save expense';
+  btn.textContent = `${addOperationLang.saveExpence}`;
 
   const audio = document.createElement('audio');
   audio.id = 'audio';
@@ -115,12 +121,12 @@ function drawAddIncome() {
 
   const title = document.createElement('p');
   title.classList.add('text-warning', 'text-uppercase', 'fs-4', 'mb-4');
-  title.textContent = 'Add Income';
+  title.textContent = `${addOperationLang.addIncome}`;
 
   const labelCategory = document.createElement('labelCategory');
   labelCategory.classList.add('mb-1', 'text-warning', 'fw-bold');
   labelCategory.for = 'category-select-income';
-  labelCategory.textContent = 'Category';
+  labelCategory.textContent = `${addOperationLang.category}`;
 
   const select = document.createElement('select');
 
@@ -135,21 +141,27 @@ function drawAddIncome() {
 
   const firstOption = document.createElement('option');
   firstOption.value = 'none';
-  firstOption.textContent = '-- choose one --';
+  firstOption.textContent = `${addOperationLang.chooseOne}`;
 
   select.append(firstOption);
   // another options from separate file
-  incomeCategories.forEach(({ name }) => {
+
+  const localSLang = localStorage.getItem('language');
+  incomeCategories.forEach(({ name, text }) => {
     const option = document.createElement('option');
     option.value = name;
-    option.textContent = name;
+    if (!localSLang) option.textContent = text.en;
+    if (localSLang === 'language_en') option.textContent = text.en;
+    if (localSLang === 'language_ru') option.textContent = text.ru;
+    if (localSLang === 'language_by') option.textContent = text.by;
+    option.id = `${name}_id`;
     select.append(option);
   });
 
   const labelAmount = document.createElement('label');
   labelAmount.classList.add('mb-1', 'text-warning', 'fw-bold');
   labelAmount.for = 'add-income';
-  labelAmount.textContent = 'Amount';
+  labelAmount.textContent = `${addOperationLang.amount}`;
 
   const input = document.createElement('input');
 
@@ -159,7 +171,7 @@ function drawAddIncome() {
 
   input.classList.add('form-control', 'input-income', 'mb-5');
   input.id = 'add-income';
-  input.placeholder = '-- enter the amount --';
+  input.placeholder = `${addOperationLang.enterTheAmount}`;
   input.disabled = true;
 
   const inputDate = document.createElement('input');
@@ -174,7 +186,7 @@ function drawAddIncome() {
   btn.classList.add('btn', 'btn-warning', 'mx-auto', 'w-100');
   btn.id = 'save-income';
   btn.disabled = true;
-  btn.textContent = 'Save income';
+  btn.textContent = `${addOperationLang.saveIncome}`;
 
   const audio = document.createElement('audio');
   audio.id = 'audio';
