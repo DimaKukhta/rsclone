@@ -16,7 +16,6 @@ import {
 
 import Operations from '../operations/Operations';
 import { updateBalance } from '../addOperation/processingOperation';
-import { getSummaryOperationsForInterval } from '../data/getData';
 
 export function renderHTML() {
   const html = `<header class="navbar navbar-light bg-white header border-bottom">
@@ -35,10 +34,10 @@ export function renderHTML() {
         </div>
         <div class="d-flex col-2">
         <select class="form-select" name="interval" id="interval-select" accesskey="3" title="hotkey '3'">
-            <option value="day">${lang.day}</option>
-            <option value="month" selected>${lang.month}</option>
-            <option value="year">${lang.year}</option>
-            <option value="all">${lang.all}</option>
+            <option value="Day">${lang.day}</option>
+            <option value="Month" selected>${lang.month}</option>
+            <option value="Year">${lang.year}</option>
+            <option value="All">${lang.all}</option>
         </select>
         <img class="header-image" src="./assets/icons/007.svg" alt="" />
         </div>
@@ -137,10 +136,10 @@ export function renderLayout() {
 
   const currentDatestamp = new Date().getTime();
 
+  const operations = new Operations();
+
   intervalReport.textContent = getIntervalText(currentDatestamp);
   setIntervalDate(currentDatestamp);
-
-  const operations = new Operations();
 
   btnOperations.addEventListener('click', () => {
     const main = document.querySelector('#main-content');
@@ -167,32 +166,36 @@ export function renderLayout() {
   });
 
   navigateInterval.addEventListener('click', ({ target }) => {
-    const intervalDatestamp = +intervalReport.dataset.date;
-    const interval = intervalSelect.value;
+    const isIterationBtn = target.classList.contains('iteration-button');
+    if (isIterationBtn) {
+      const intervalDatestamp = +intervalReport.dataset.date;
+      const interval = intervalSelect.value;
 
-    let updatedStamp;
+      let updatedStamp;
 
-    switch (target.id) {
-      case 'prev':
-        updatedStamp = getPreviousDatestampForInterval(interval, intervalDatestamp);
-        break;
-      case 'next':
-        updatedStamp = getNextDatestampForInterval(interval, intervalDatestamp);
-        break;
-      default:
-        break;
+      switch (target.id) {
+        case 'prev':
+          updatedStamp = getPreviousDatestampForInterval(interval, intervalDatestamp);
+          break;
+        case 'next':
+          updatedStamp = getNextDatestampForInterval(interval, intervalDatestamp);
+          break;
+        default:
+          break;
+      }
+
+      setIntervalDate(updatedStamp);
+
+      intervalReport.textContent = getIntervalText(updatedStamp);
+
+      const isOperationsTab = document.querySelector('.operations-container');
+
+      if (isOperationsTab) {
+        operations.updateOperations();
+      }
+      // settings init
+      settingsRewrite();
     }
-    setIntervalDate(updatedStamp);
-
-    intervalReport.textContent = getIntervalText(updatedStamp);
-
-    const isOperationsTab = document.querySelector('.operations-container');
-
-    if (isOperationsTab) {
-      operations.updateOperations();
-    }
-    // settings init
-    settingsRewrite();
   });
   // eslint-disable-next-line no-unused-vars
   const settings = new Settings();

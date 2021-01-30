@@ -23,14 +23,14 @@ export function getIntervalText(stamp) {
   const intervalValue = intervalSelect.value;
 
   switch (intervalValue) {
-    case 'day':
+    case 'Day':
       return `${addZeroes(day)}.${addZeroes(month + 1)}.${year}`;
-    case 'month':
+    case 'Month':
       return `${addZeroes(month + 1)}.${year}`;
-    case 'year':
+    case 'Year':
       return `${year}`;
-    case 'all':
-      return 'all expenses';
+    case 'All':
+      return 'All expenses';
     default:
       break;
   }
@@ -42,20 +42,20 @@ export function getNextDatestampForInterval(interval, stamp) {
   let prevDatestamp;
 
   switch (interval) {
-    case 'day':
+    case 'Day':
       currDate.setDate(currDate.getDate() + 1);
       prevDatestamp = currDate.getTime();
       return prevDatestamp;
-    case 'month':
+    case 'Month':
       currDate.setMonth(currDate.getMonth() + 1);
       prevDatestamp = currDate.getTime();
       return prevDatestamp;
-    case 'year':
+    case 'Year':
       currDate.setFullYear(currDate.getFullYear() + 1);
       prevDatestamp = currDate.getTime();
       return prevDatestamp;
-    case 'all':
-      return 'all expenses';
+    case 'All':
+      return stamp;
     default:
       break;
   }
@@ -67,21 +67,21 @@ export function getPreviousDatestampForInterval(interval, stamp) {
   let prevDatestamp;
 
   switch (interval) {
-    case 'day':
+    case 'Day':
       currDate.setDate(currDate.getDate() - 1);
       prevDatestamp = currDate.getTime();
       return prevDatestamp;
-    case 'month':
+    case 'Month':
       currDate.setMonth(currDate.getMonth() - 1);
       prevDatestamp = currDate.getTime();
       return prevDatestamp;
-    case 'year':
+    case 'Year':
       // console.log(currDate, currDate.getFullYear()-1)
       currDate.setFullYear(currDate.getFullYear() - 1);
       prevDatestamp = currDate.getTime();
       return prevDatestamp;
-    case 'all':
-      return 'all expenses';
+    case 'All':
+      return stamp;
     default:
       break;
   }

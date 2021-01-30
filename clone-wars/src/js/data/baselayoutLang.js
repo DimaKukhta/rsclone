@@ -2,7 +2,7 @@ const enL = {
   day: 'Day',
   month: 'Month',
   year: 'Year',
-  all: 'all',
+  all: 'All',
   operations: 'Operations',
   reports: 'Reports',
   add: 'Add operation',
