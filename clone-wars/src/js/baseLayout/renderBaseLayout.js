@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import EnExpenseCategories from '../data/dataExpenseCategories';
 import lang from '../data/baselayoutLang';
-
+import getCurrency from '../data/getCurrency';
 import Settings from '../settings/Settings';
 
 import addReport from '../addReport/addReport';
@@ -16,15 +16,16 @@ import {
 
 import Operations from '../operations/Operations';
 import { updateBalance } from '../addOperation/processingOperation';
+import { getSummaryOperationsForInterval } from '../data/getData';
 
 export function renderHTML() {
   const html = `<header class="navbar navbar-light bg-white header border-bottom">
     <div class="container">
         <div class="col-2">
-        <p>${lang.balance}:</p>
+        <p id="balance">${lang.balance}</p>
         <p class="fw-bold">
             <span id="current-amount" class="current-amount balance"></span
-            ><span id="current-currency">BYN</span>
+            ><span id="current-currency">${getCurrency}</span>
         </p>
         </div>
         <div class="navigate-interval d-flex align-items-center">
@@ -33,7 +34,7 @@ export function renderHTML() {
         <button class = "iteration-button btn btn-outline-success" id = "next" accesskey="2" title="hotkey '2'"> &gt; </button>
         </div>
         <div class="d-flex col-2">
-        <select class="form-select" name="interval" id="interval-select">
+        <select class="form-select" name="interval" id="interval-select" accesskey="3" title="hotkey '3'">
             <option value="day">${lang.day}</option>
             <option value="month" selected>${lang.month}</option>
             <option value="year">${lang.year}</option>
@@ -57,27 +58,27 @@ export function renderHTML() {
         >
         <button type="button" id = "btn-operations" class="btn btn-success nav-button col-2" accesskey="4" title="hotkey '4'">
             <img class="footer-btn-image" src="./assets/icons/001.svg" alt="Operation" />
-            <span class="d-block">${lang.operations}</span>
+            <span id="operations" class="d-block">${lang.operations}</span>
         </button>
 
         <button type="button" id="btn-report" class="btn btn-success nav-button col-2" accesskey="5" title="hotkey '5'">
             <img class="footer-btn-image" src="./assets/icons/002.svg" alt="Report" />
-            <span class="d-block">${lang.reports}</span>
+            <span id="reports" class="d-block">${lang.reports}</span>
         </button>
 
         <button type="button" id="btn-add-operation" class="col-2 btn-add-operation" accesskey="6" title="hotkey '6'">
             <img class="footer-btn-image" src="./assets/icons/005.svg" alt="add">
-            <span class="text-nowrap d-block text-success fw-bold">${lang.add}</span>
+            <span id="add" class="text-nowrap d-block text-success fw-bold">${lang.add}</span>
         </button>
 
-        <button type="button" class="btn btn-success col-2">
+        <button type="button" id="btn-hotkeys" class="btn btn-success col-2"  accesskey="7" title="hotkey '7'">
             <img class="footer-btn-image" src="./assets/icons/003.svg" alt="Category" />
-            <span class="d-block">${lang.categories}</span>
+            <span id="hotkeys" class="d-block">${lang.hotkeys}</span>
         </button>
 
         <button type="button" id="settings" class="btn btn-success col-2" accesskey="8" title="hotkey '8'">
             <img class="footer-btn-image" src="./assets/icons/004.svg" alt="Settings"/>
-            <span class="d-block">${lang.settings}</span>
+            <span id="settings_span" class="d-block">${lang.settings}</span>
         </button>
         </nav>
         <div class="flex-row d-flex justify-content-center align-items-end flex-wrap footer-text">
@@ -97,6 +98,15 @@ export function renderHTML() {
     </footer>`;
   document.body.insertAdjacentHTML('beforeend', html);
 }
+export function settingsRewrite() {
+  const oldSettings = document.querySelector('templete');
+  oldSettings.parentNode.removeChild(oldSettings);
+  const operationsSettings = document.querySelectorAll('.operations');
+  const recordExpander = document.querySelectorAll('.record-expander');
+  // eslint-disable-next-line no-unused-vars
+  const settings = new Settings(operationsSettings, recordExpander);
+}
+
 export function renderLayout() {
   const intervalSelect = document.querySelector('#interval-select');
   const intervalReport = document.querySelector('#interval');
@@ -113,14 +123,14 @@ export function renderLayout() {
 
   // window.onload = addOperation;
 
-  const settingsRewrite = () => {
-    const oldSettings = document.querySelector('templete');
-    oldSettings.parentNode.removeChild(oldSettings);
-    const operationsSettings = document.querySelectorAll('.operations');
-    const recordExpander = document.querySelectorAll('.record-expander');
-    // eslint-disable-next-line no-unused-vars
-    const settings = new Settings(operationsSettings, recordExpander);
-  };
+  // export function settingsRewrite () {
+  //   const oldSettings = document.querySelector('templete');
+  //   oldSettings.parentNode.removeChild(oldSettings);
+  //   const operationsSettings = document.querySelectorAll('.operations');
+  //   const recordExpander = document.querySelectorAll('.record-expander');
+  //   // eslint-disable-next-line no-unused-vars
+  //   const settings = new Settings(operationsSettings, recordExpander);
+  // };
 
   addOperation();
   updateBalance();

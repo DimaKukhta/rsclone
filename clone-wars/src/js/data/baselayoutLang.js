@@ -7,9 +7,12 @@ const en = {
   operations: 'Operations',
   reports: 'Reports',
   add: 'Add operation',
-  categories: 'categories',
+  hotkeys: 'Hotkeys',
   settings: 'Settings',
-
+  theme: 'Theme',
+  sound: 'Sound',
+  currency: 'Currency:',
+  language: 'Language:',
 };
 
 const ru = {
@@ -20,9 +23,13 @@ const ru = {
   all: 'Общее',
   operations: 'Операции',
   reports: 'Отчет',
-  add: 'Добавить операцию',
-  categories: 'Категории',
+  add: 'Добавить',
+  hotkeys: 'Клавиши',
   settings: 'Настройки',
+  theme: 'Тема',
+  sound: 'Звук',
+  currency: 'Валюта:',
+  language: 'Язык:',
 };
 
 const by = {
@@ -33,33 +40,38 @@ const by = {
   all: 'Агульнае',
   operations: 'Аперацыі',
   reports: 'Справаздача',
-  add: 'Дадаць аперацыю',
-  categories: 'Катэгорыі',
+  add: 'Дадаць',
+  hotkeys: 'Клавішы',
   settings: 'Налады',
+  theme: 'Тэма',
+  sound: 'Гук',
+  currency: 'Валюта:',
+  language: 'Мова:',
 };
 
-const baselang = () => {
+const lang = () => {
   const localSLang = localStorage.getItem('language');
-  console.log(localSLang);
-  let lang;
+  let langL;
   switch (localSLang) {
     case null || 'undefined' || 'null' || undefined:
-      lang = en;
+      langL = en;
       break;
     case 'language_ru':
-      lang = ru;
+      langL = ru;
       break;
     case 'language_by':
-      lang = by;
+      langL = by;
       break;
     case 'language_en':
-      lang = en;
+      langL = en;
       break;
     default:
-      lang = en;
+      langL = en;
       break;
   }
-  return lang;
+  return langL;
 };
 
-export default baselang();
+const switchLang = lang;
+export { switchLang };
+export default lang();
