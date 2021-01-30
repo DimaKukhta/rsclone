@@ -288,7 +288,6 @@ export default class Settings {
     };
 
     this.themeToggler = document.getElementsByName('onoffswitch');
-
     this.closeButton.addEventListener('click', () => this.closeSettings());
   }
 }
