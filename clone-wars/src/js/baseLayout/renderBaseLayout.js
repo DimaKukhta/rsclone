@@ -34,10 +34,10 @@ export function renderHTML() {
         </div>
         <div class="d-flex col-2">
         <select class="form-select" name="interval" id="interval-select" accesskey="3" title="hotkey '3'">
-            <option value="day">${lang.day}</option>
-            <option value="month" selected>${lang.month}</option>
-            <option value="year">${lang.year}</option>
-            <option value="all">${lang.all}</option>
+            <option value="Day">${lang.day}</option>
+            <option value="Month" selected>${lang.month}</option>
+            <option value="Year">${lang.year}</option>
+            <option value="All">${lang.all}</option>
         </select>
         <img class="header-image" src="./assets/icons/007.svg" alt="" />
         </div>
