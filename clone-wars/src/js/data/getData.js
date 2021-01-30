@@ -76,3 +76,10 @@ export function getSummaryOperationsForInterval(operationType, interval, stamp) 
 
   return summaryOperation;
 }
+
+export function getMaxDate() {
+  const expenseArray = getIntervalData('expense');
+  const incomeArray = getIntervalData('income');
+  const datesArray = [...expenseArray, ...incomeArray].map(({ date }) => new Date(date).getTime());
+  return Math.max(...datesArray);
+}

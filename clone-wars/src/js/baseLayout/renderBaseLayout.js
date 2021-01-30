@@ -11,6 +11,7 @@ import {
 } from '../interval/interval';
 
 import { disableBtn, enableBtn } from '../utils/utils';
+import { getMaxDate } from '../data/getData';
 
 import Operations from '../operations/Operations';
 import { updateBalance } from '../addOperation/processingOperation';
@@ -123,6 +124,7 @@ export function renderLayout() {
 
   intervalSelect.addEventListener('change', () => {
     const selectInterval = document.querySelector('#interval-select');
+    const interval = document.querySelector('#interval');
     const nextBtn = document.querySelector('#next');
     const prevBtn = document.querySelector('#prev');
 
@@ -141,6 +143,15 @@ export function renderLayout() {
     intervalReport.textContent = getIntervalText(currentDatestamp);
     setIntervalDate(currentDatestamp);
 
+    const maxDate = getMaxDate();
+    console.log(maxDate, getNextDatestampForInterval(selectInterval.value, +interval.dataset.date))
+
+    if (getNextDatestampForInterval(selectInterval.value, +interval.dataset.date) >= maxDate) {
+      disableBtn(nextBtn);
+    } else {
+      enableBtn(nextBtn);
+    }
+
     const isOperationsTab = document.querySelector('.operations-container');
     if (isOperationsTab) {
       operations.updateOperations();
@@ -152,6 +163,9 @@ export function renderLayout() {
   navigateInterval.addEventListener('click', ({ target }) => {
     const isIterationBtn = target.classList.contains('iteration-button');
     if (isIterationBtn) {
+
+
+
       const intervalDatestamp = +intervalReport.dataset.date;
       const interval = intervalSelect.value;
 
@@ -169,6 +183,24 @@ export function renderLayout() {
       }
 
       setIntervalDate(updatedStamp);
+
+      const selectInterval = document.querySelector('#interval-select');
+      const intervalEl = document.querySelector('#interval');
+      const nextBtn = document.querySelector('#next');
+      const prevBtn = document.querySelector('#prev');
+      
+      const maxDate = getMaxDate();
+      const currentDataset = +intervalEl.dataset.date;
+      console.log(getNextDatestampForInterval(selectInterval.value, currentDataset), maxDate);
+
+      if (getNextDatestampForInterval(selectInterval.value, currentDataset) >= maxDate) {
+        disableBtn(nextBtn);
+      } else {
+        enableBtn(nextBtn);
+      }
+
+
+
 
       intervalReport.textContent = getIntervalText(updatedStamp);
 
