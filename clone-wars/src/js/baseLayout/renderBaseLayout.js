@@ -109,7 +109,6 @@ export function renderLayout() {
   btnAddOperation.addEventListener('click', addOperation);
   btnHotKeys.addEventListener('click', drawHotKeys);
 
-
   // window.onload = addOperation;
 
   const settingsRewrite = () => {
