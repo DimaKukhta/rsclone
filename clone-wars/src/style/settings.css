@@ -36,6 +36,13 @@
     transition: .2s ease-in-out;
     
 }
+.container_theme{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 2.2rem;
+}
 
 .settings_outer {
     position: fixed;
@@ -99,7 +106,7 @@
     flex-direction: row;
     align-items: baseline;
     justify-content: space-between;
-    width: 100%;
+    width: 19rem;
     height: 100%;
 }
 
@@ -117,6 +124,7 @@
     align-items: baseline;
     justify-content: space-between;
     width: 50%;
+    min-width: 50%;
     height: 75%;
 }
 
@@ -128,9 +136,6 @@
   transform: translateX(-22rem);
 }
 
-.set_off_slide {
-
-}
 /*================ Toogle ==========*/
 .onoffswitch {
     position: relative;

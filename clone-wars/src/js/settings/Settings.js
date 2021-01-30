@@ -1,11 +1,18 @@
+/* eslint-disable import/no-duplicates */
+// import { renderHTML, renderLayout } from '../baseLayout/renderBaseLayout';
+import { switchLang } from '../data/baselayoutLang';
+import lang from '../data/baselayoutLang';
+import { renderHTML, renderLayout } from '../baseLayout/renderBaseLayout';
+
 export default class Settings {
   constructor(operationsSettings, recordExpander) {
-    this.theme = 'Theme';
-    this.currency = 'Currency';
-    this.language = 'Language';
-    this.sound = 'Sound';
+    this.theme = lang.theme;
+    this.currency = lang.currency;
+    this.language = lang.language;
+    this.sound = lang.sound;
     this.set = document.querySelector('.settings');
     this.countButtonSettings = false;
+    // theme togler mem
     this.themeLocal = localStorage.getItem('theme');
     if (this.themeLocal === undefined) {
       this.checkedToggler = 'checked';
@@ -22,6 +29,7 @@ export default class Settings {
     this.textSpan = document.querySelectorAll('span');
 
     this.buttons = document.querySelectorAll('.btn');
+    this.addButtonText = document.getElementById('btn-add-operation').lastElementChild;
     this.btnOperation = document.querySelector('btn-add-operation');
     this.header = document.querySelector('header');
     this.main = document.querySelector('main');
@@ -29,9 +37,9 @@ export default class Settings {
     this.currentAmount = document.getElementById('current-amount');
     this.interval = document.getElementById('interval');
 
+    this.readerLocalStorage();
     this.render();
     this.handlers();
-    // this.themeChange();
 
     this.set = document.querySelector('.settings');
     this.outer = document.querySelector('.outer');
@@ -41,14 +49,35 @@ export default class Settings {
     this.themeChange();
   }
 
+  readerLocalStorage() {
+    this.langLocal = localStorage.getItem('language');
+    if (this.langLocal === null || this.langLocal === undefined) {
+      localStorage.setItem('language', 'language_en');
+      this.langEnFirstTime = 'checked';
+    }
+    if (this.langLocal === 'language_en') this.langEnFirstTime = 'checked';
+    if (this.langLocal === 'language_ru') this.langRu = 'checked';
+    if (this.langLocal === 'language_by') this.langBy = 'checked';
+
+    this.currencyLocal = localStorage.getItem('currency');
+    if (this.currencyLocal === null || this.currencyLocal === undefined) {
+      localStorage.setItem('currency', 'currency_byn');
+      this.currencyFirstTime = 'checked';
+    }
+    if (this.currencyLocal === 'currency_byn') this.currencyFirstTimeBUN = 'checked';
+    if (this.currencyLocal === 'currency_us') this.currencyUS = 'checked';
+    if (this.currencyLocal === 'currency_eu') this.currencyEU = 'checked';
+  }
+
   render() {
     this.settingsWindow = document.createElement('templete');
     this.settingsWindow.innerHTML = `
     <div class="outer"></div>
     <div class="container settings" width="400px">
           <div class="close_settings">x</div>
-          <div>
-            <span class="theme_app">${this.theme} 
+            <div>
+            <div class="container_theme">
+              <span class="theme_app" id="settings_theme">${this.theme} </span>
               <div class="onoffswitch">
                 <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" tabindex="0" ${this.checkedToggler}>
                 <label class="onoffswitch-label" for="myonoffswitch">
@@ -56,10 +85,10 @@ export default class Settings {
                     <span class="onoffswitch-switch"></span>
                 </label>
               </div>
-            </span>
+            </div>  
 
             <div class="box_sound">
-              <label class="form-check-label box_sound__label" for="flexCheckChecked">
+              <label class="form-check-label box_sound__label" for="flexCheckChecked" id="settings_sound">
                 ${this.sound}
               </label>
               <input class="form-check-input box_sound__input" type="checkbox" value="" id="flexCheckChecked" checked>
@@ -69,37 +98,37 @@ export default class Settings {
             <div class="settings_wrapper">
               <form class="column container settings_inner currency_form">
                 <div class="head_list">
-                  <span>${this.currency}:</span>
+                  <span id="settings_currency">${this.currency}</span>
                 </div>
 
                 <div>
-                  <input type="radio" class="settings_radio form-check-input" name="currency" id="currency_byn" checked>
+                  <input type="radio" class="settings_radio form-check-input" name="currency" value="BYN" id="currency_byn" ${this.currencyFirstTime} ${this.currencyFirstTimeBUN}>
                   <label for="currency_byn"><span>BYN</span></label>
                 </div>
                 <div>
-                  <input type="radio" class="settings_radio form-check-input" name="currency" id="currency_us">
+                  <input type="radio" class="settings_radio form-check-input" name="currency" value="US" id="currency_us" ${this.currencyUS}>
                   <label for="currency_us"><span>US</span></label>
                 </div>
                 <div>
-                  <input type="radio" class="settings_radio form-check-input" name="currency" id="currency_eu">
+                  <input type="radio" class="settings_radio form-check-input" name="currency" value="EU" id="currency_eu" ${this.currencyEU}>
                   <label for="currency_eu"><span>EU</span></label>
                 </div>
               </form>
               <div class="column container settings_inner">
                 <div class="head_list">
-                  <span>${this.language}:</span>
+                  <span id="settings_language">${this.language}</span>
                 </div>
 
                 <div>
-                  <input type="radio" class="settings_radio form-check-input" name="language" id="language_en" checked>
+                  <input type="radio" class="settings_radio form-check-input" name="language" id="language_en" ${this.langEnFirstTime} ${this.checkedLang}>
                   <label for="language_en"><span>EN</span></label>
                 </div>
                 <div>
-                  <input type="radio" class="settings_radio form-check-input" name="language" id="language_ru">
+                  <input type="radio" class="settings_radio form-check-input" name="language" id="language_ru" ${this.langRu} ${this.checkedLang}>
                   <label for="language_ru"><span>RU</span></label>
                 </div>
                 <div>
-                  <input type="radio" class="settings_radio form-check-input" name="language" id="language_by">
+                  <input type="radio" class="settings_radio form-check-input" name="language" id="language_by" ${this.langBy} ${this.checkedLang}>
                   <label for="language_by"><span>BY</span></label>
                 </div>
               </div>
@@ -117,29 +146,52 @@ export default class Settings {
   }
 
   changeCurrency() {
-    console.log(this.id);
     localStorage.setItem('currency', this.id);
+    this.currentCurrency = document.getElementById('current-currency');
+    this.currentCurrency.innerText = (() => this.value)();
   }
 
   changeLang() {
-    this.textP = document.querySelectorAll('p');
-    this.textSpan = document.querySelectorAll('span');
-    console.log(this.id);
     localStorage.setItem('language', this.id);
+    this.addButtonText = document.getElementById('btn-add-operation').lastElementChild;
+    // balance
+    this.balance = document.getElementById('balance');
+    this.balance.innerText = switchLang().balance;
+    // interval
+    this.consoleOption = document.querySelector('#interval-select');
+    this.arrSwitchLang = Object.values(switchLang());
+    for (let i = 0; i < this.consoleOption.options.length; i += 1) {
+      this.consoleOption.options[i].innerText = this.arrSwitchLang[i];
+    }
+    // footer
+    this.operations = document.getElementById('operations');
+    this.reports = document.getElementById('reports');
+    this.add = document.getElementById('add');
+    this.hotkeys = document.getElementById('hotkeys');
+    this.settingsSpan = document.getElementById('settings_span');
+
+    this.operations.innerText = switchLang().operations;
+    this.reports.innerText = switchLang().reports;
+    this.add.innerText = switchLang().add;
+    this.hotkeys.innerText = switchLang().hotkeys;
+    this.settingsSpan.innerText = switchLang().settings;
+
+    this.themeLife = document.getElementById('settings_theme');
+    this.currencyLife = document.getElementById('settings_currency');
+    this.languageLife = document.getElementById('settings_language');
+    this.soundLife = document.getElementById('settings_sound');
+
+    this.themeLife.innerText = switchLang().theme;
+    this.currencyLife.innerText = switchLang().currency;
+    this.languageLife.innerText = switchLang().language;
+    this.soundLife.innerText = switchLang().sound;
   }
 
   themeChange() {
-    console.log(this.buttons);
-    console.log(this.textP.length);
-
-    this.themeChangeLocalS = function () {
+    this.themeChangeLocalS = () => {
       this.themeLocal = localStorage.getItem('theme');
       // dark on
       if (this.themeLocal === 'false') {
-        // ===================================================================================
-        this.rr = Array.from(document.documentElement.textContent);
-        console.log(this.rr);
-        // ==================================================================================
         this.textSpan[1].classList.add('text_dark');
         this.header.classList.add('bgc_dark');
         this.main.classList.add('bgc_dark');
@@ -149,11 +201,10 @@ export default class Settings {
         // settings
         this.set.classList.add('bgc_dark_settings');
         // add operation
-        this.textSpan[4].classList.add('btnOperation_dark');
+        this.addButtonText.classList.add('btnOperation_dark');
         // operations
         if (this.operations) this.operations.forEach((el) => el.classList.add('text_dark'));
         if (this.recordExpander) this.recordExpander.forEach((el) => el.classList.add('text_dark'));
-        // console.log(this.themeLocal);
         this.textP.forEach((el) => el.classList.add('text_dark'));
         this.buttons.forEach((btn) => {
           btn.classList.add('dark_btn');
@@ -162,7 +213,6 @@ export default class Settings {
       // dark off
       if (this.themeLocal === 'true') {
         this.textSpan[1].classList.remove('text_dark');
-        // console.log(this.themeLocal);
         this.header.classList.remove('bgc_dark');
         this.main.classList.remove('bgc_dark');
         this.footer.classList.remove('bgc_dark');
@@ -171,7 +221,7 @@ export default class Settings {
 
         this.set.classList.remove('bgc_dark_settings');
 
-        this.textSpan[4].classList.remove('btnOperation_dark');
+        this.addButtonText.classList.remove('btnOperation_dark');
         this.textP.forEach((elem) => {
           elem.classList.remove('text_dark');
         });
@@ -187,7 +237,6 @@ export default class Settings {
 
     for (let i = 0; i < this.themeToggler.length; i += 1) {
       this.themeToggler[i].onchange = () => {
-        // console.log(this.themeToggler[i].checked);
         localStorage.setItem('theme', this.themeToggler[i].checked);
         setTimeout(this.themeChangeLocalS(), 0);
         this.themeChange();
@@ -239,7 +288,6 @@ export default class Settings {
     };
 
     this.themeToggler = document.getElementsByName('onoffswitch');
-
     this.closeButton.addEventListener('click', () => this.closeSettings());
   }
 }
