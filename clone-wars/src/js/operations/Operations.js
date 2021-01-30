@@ -14,7 +14,7 @@ const monthNames = {
   ru: ['Янв.', 'Фев.', 'Март', 'Апр.', 'Май', 'Июн.',
     'Июл.', 'Авг.', 'Сен.', 'Окт.', 'Ноя.', 'Дек.'],
   by: ['Сту.', 'Лют.', 'Сак.', 'Крас.', 'Май', 'Чэрв.',
-    'Лип.', 'Жнив.', 'Вер.', 'Каст.', 'Лист.', 'Снеж.'],
+    'Лiп.', 'Жнiв.', 'Вер.', 'Каст.', 'Лiст.', 'Снеж.'],
 };
 
 export default class Operations {
@@ -148,7 +148,7 @@ export default class Operations {
 
   createReport() {
     this.container = document.createElement('div');
-    this.container.classList.add('operations-container', '.mt-5');
+    this.container.classList.add('operations-container', 'mt-5');
     this.container.append(this.createOperations('expense'));
     this.container.append(this.createOperations('income'));
     return this.container;
@@ -184,7 +184,7 @@ export default class Operations {
       } else {
         record.remove();
       }
-      updateData(localStorage.getItem('login'));
+      // updateData(localStorage.getItem('login'));
     }
   }
 
