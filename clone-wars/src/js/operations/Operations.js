@@ -81,7 +81,7 @@ export default class Operations {
 
       const roundTotalByCategory = +totalByCategory.toFixed(2);
 
-      categoryOperations.innerHTML = `<img class = 'category-icon' src = '../assets/icons/${category}.svg'><span class = 'fw-bold text-success'>${category}: </span> 
+      categoryOperations.innerHTML = `<img class = 'category-icon' src = './assets/icons/${category}.svg'><span class = 'fw-bold text-success'>${category}: </span> 
       <span class = 'category-total fw-bold ${textColor}' data-value = '${roundTotalByCategory}'>
       ${sign}${groupDecimals(roundTotalByCategory)}</span> <span class = 'fw-bold ${textColor}'>${currency}</span>`;
 
