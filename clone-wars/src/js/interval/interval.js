@@ -4,12 +4,34 @@ import { addZeroes } from '../utils/utils';
 
 export function setIntervalDate(stamp) {
   const currentInterval = document.querySelector('#interval');
+  const intervalSelect = document.querySelector('#interval-select');
+  const intervalSelectValue = intervalSelect.value;
 
   const date = new Date(stamp);
   const day = date.getDate();
   const month = date.getMonth();
   const year = date.getFullYear();
-  currentInterval.dataset.date = `${new Date(year, month, day).getTime()}`;
+
+  let updateStamp;
+
+  switch (intervalSelectValue) {
+    case 'Day':
+      updateStamp = `${new Date(year, month, day).getTime()}`;
+      break;
+    case 'Month':
+      updateStamp = `${new Date(year, month, 1).getTime()}`;
+      break;
+    case 'Year':
+      updateStamp = `${new Date(year, 0, 1).getTime()}`;
+      break;
+    case 'All':
+      updateStamp = '0';
+      break;
+    default:
+      break;
+  }
+
+  currentInterval.dataset.date = updateStamp;
 }
 
 export function getIntervalText(stamp) {
@@ -76,7 +98,6 @@ export function getPreviousDatestampForInterval(interval, stamp) {
       prevDatestamp = currDate.getTime();
       return prevDatestamp;
     case 'Year':
-      // console.log(currDate, currDate.getFullYear()-1)
       currDate.setFullYear(currDate.getFullYear() - 1);
       prevDatestamp = currDate.getTime();
       return prevDatestamp;
