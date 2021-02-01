@@ -1,8 +1,33 @@
 /* eslint-disable consistent-return */
 /* eslint-disable max-len */
 /* eslint-disable no-case-declarations */
+
+import { incomeCategories, expenseCategories } from './translate';
+
 export function getOperations(operationType) {
   return JSON.parse(localStorage.getItem(operationType)) || [];
+}
+
+export function getCurrentCurrency() {
+  return localStorage.getItem('currency') || 'currency_us';
+}
+
+export function getCurrentLanguage() {
+  return localStorage.getItem('language') || 'language_us';
+}
+
+export function getCategoryLang(operationType, category, lang) {
+  let categoryIndex;
+  switch (operationType) {
+    case 'expense':
+      categoryIndex = expenseCategories.findIndex(({ name }) => category === name);
+      return expenseCategories[categoryIndex].text[lang];
+    case 'income':
+      categoryIndex = incomeCategories.findIndex(({ name }) => category === name);
+      return incomeCategories[categoryIndex].text[lang];
+    default:
+      break;
+  }
 }
 
 export function getIntervalData(operationType, interval = 'all', currentDatestamp) {
@@ -43,14 +68,6 @@ export function groupOperationsByCategory(arrayOfOperations) {
     return accum;
   }, {});
 }
-
-// Дима, interval это значения: day, month, year, all.
-// его получаем так:
-// const intervalSelect = document.querySelector('#interval-select');
-// const interval = intervalSelect.value; (1-й параметр ф-ии)
-// stamp - временная отметка, которая управляется кнопками "prev/next"
-// const currentInterval = document.querySelector('#interval');
-// const currentDatestamp = +currentInterval.dataset.date; (2-й параметр ф-ии)
 
 export function getOperationsForChart(operationType, interval, stamp) {
   const operationsArray = getIntervalData(operationType, interval, stamp);

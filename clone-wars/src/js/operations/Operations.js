@@ -3,22 +3,27 @@
 /* eslint-disable no-shadow */
 /* eslint-disable no-prototype-builtins */
 /* eslint-disable class-methods-use-this */
-import { getIntervalData, getSummaryOperationsForInterval, groupOperationsByCategory } from '../data/getData';
+import {
+  getIntervalData,
+  getSummaryOperationsForInterval,
+  groupOperationsByCategory,
+  getCurrentCurrency,
+  getCurrentLanguage,
+  getCategoryLang,
+} from '../data/getData';
+
+import { monthNames, currencyNames, operationLang } from '../data/translate';
+
 import { updateBalance } from '../addOperation/processingOperation';
 import { addZeroes, groupDecimals } from '../utils/utils';
-import updateData from '../utils/updateData';
 
-const monthNames = {
-  en: ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'Jun.',
-    'Jul.', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'],
-  ru: ['Янв.', 'Фев.', 'Март', 'Апр.', 'Май', 'Июн.',
-    'Июл.', 'Авг.', 'Сен.', 'Окт.', 'Ноя.', 'Дек.'],
-  by: ['Сту.', 'Лют.', 'Сак.', 'Крас.', 'Май', 'Чэрв.',
-    'Лiп.', 'Жнiв.', 'Вер.', 'Каст.', 'Лiст.', 'Снеж.'],
-};
+import updateData from '../utils/updateData';
 
 export default class Operations {
   createOperations(operationType) {
+    const lang = getCurrentLanguage();
+    const currency = getCurrentCurrency();
+
     const intervalOperations = document.querySelector('#interval-select');
     this.operations = document.createElement('ul');
     this.operations.classList.add('operations', `operations-${operationType}`);
@@ -53,16 +58,17 @@ export default class Operations {
       this.deleteRecord(target, operationType);
     });
     // function getCurrencyFromSettings
-    const currency = 'BYN';
 
     const fragment = new DocumentFragment();
     const horisontalLine = document.createElement('hr');
 
-    const operationsCatetegories = Object.keys(operationsObject).sort();
+    const operationsCategories = Object.keys(operationsObject).sort();
 
     const textColor = (operationType === 'expense') ? 'text-danger' : 'text-warning';
 
-    operationsCatetegories.forEach((category) => {
+    operationsCategories.forEach((category) => {
+      const categoryLang = getCategoryLang(operationType, category, lang);
+
       const categoryContainer = document.createElement('div');
       categoryContainer.classList.add('category-container');
 
@@ -81,9 +87,9 @@ export default class Operations {
 
       const roundTotalByCategory = +totalByCategory.toFixed(2);
 
-      categoryOperations.innerHTML = `<img class = 'category-icon' src = './assets/icons/${category}.svg'><span class = 'fw-bold text-success'>${category}: </span> 
+      categoryOperations.innerHTML = `<img class = 'category-icon' src = './assets/icons/${category}.svg'><span class = 'fw-bold text-success'>${categoryLang}: </span> 
       <span class = 'category-total fw-bold ${textColor}' data-value = '${roundTotalByCategory}'>
-      ${sign}${groupDecimals(roundTotalByCategory)}</span> <span class = 'fw-bold ${textColor}'>${currency}</span>`;
+      ${sign}${groupDecimals(roundTotalByCategory)}</span> <span class = 'fw-bold ${textColor}'>${currencyNames[currency]}</span>`;
 
       const sortedByCategories = dataByCategory.sort((a, b) => new Date(b.date) - new Date(a.date));
 
@@ -102,12 +108,11 @@ export default class Operations {
         const operationLi = document.createElement('li');
         operationLi.classList.add('record-data');
 
-        // here will be function than returns lang from seetings
-        const lang = 'en';
+
         const operationValue = sortedByCategories[index].value;
         // groupDecimals(
         const dateText = `${addZeroes(day)} ${monthNames[lang][monthIndex]} ${year}`;
-        operationLi.innerHTML = `<span class = '${textColor}'>${sign}${groupDecimals(operationValue)} <span class = 'currency ${textColor}'>${currency}</span></span>
+        operationLi.innerHTML = `<span class = '${textColor}'>${sign}${groupDecimals(operationValue)} <span class = 'currency ${textColor}'>${currencyNames[currency]}</span></span>
           <span>${dateText}</span>`;
 
         const deleteBtn = document.createElement('button');
@@ -130,18 +135,24 @@ export default class Operations {
       fragment.append(categoryContainer);
     });
 
+    const recordsContainer = document.createElement('div');
+    recordsContainer.classList.add('records-container');
+    recordsContainer.append(fragment);
+
     const totalForInterval = getSummaryOperationsForInterval(operationType, intervalOperations.value, currentDatestamp);
     const roundTotalForInterval = +totalForInterval.toFixed(2);
 
     const summary = document.createElement('div');
 
     summary.classList.add(textColor, 'fs-4');
-    summary.innerHTML = `<span>Summary ${operationType} for interval: </span><span class='interval-total fw-bold' data-value = '${roundTotalForInterval}'>
-    ${sign}${groupDecimals(roundTotalForInterval)}</span> <span class = 'fw-bold'>${currency}</span>`;
+
+    const operationText = operationLang[operationType][lang];
+    summary.innerHTML = `<span>${operationText}: </span><span class='interval-total fw-bold' data-value = '${roundTotalForInterval}'>
+    ${sign}${groupDecimals(roundTotalForInterval)}</span> <span class = 'fw-bold'>${currencyNames[currency]}</span>`;
 
     this.operations.append(summary);
     this.operations.append(horisontalLine.cloneNode());
-    this.operations.append(fragment);
+    this.operations.append(recordsContainer);
 
     return this.operations;
   }

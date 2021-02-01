@@ -10,8 +10,8 @@ import {
 } from './processingOperation';
 
 import addOperationLang from '../data/addOperationLang';
-import expenseCategories from '../data/dataExpenseCategories';
-import incomeCategories from '../data/dataIncomeCategories';
+import { incomeCategories, expenseCategories } from '../data/translate';
+
 // const mainContent = document.querySelector('#main-content');
 
 function drawAddExpense() {
@@ -52,10 +52,10 @@ function drawAddExpense() {
     const option = document.createElement('option');
     option.value = name;
     option.textContent = name;
-    if (!localSLang) option.textContent = text.en;
-    if (localSLang === 'language_en') option.textContent = text.en;
-    if (localSLang === 'language_ru') option.textContent = text.ru;
-    if (localSLang === 'language_by') option.textContent = text.by;
+    if (!localSLang) option.textContent = text.language_en;
+    if (localSLang === 'language_en') option.textContent = text.language_en;
+    if (localSLang === 'language_ru') option.textContent = text.language_ru;
+    if (localSLang === 'language_by') option.textContent = text.language_by;
     option.id = `${name}_id`;
     select.append(option);
   });
@@ -150,10 +150,10 @@ function drawAddIncome() {
   incomeCategories.forEach(({ name, text }) => {
     const option = document.createElement('option');
     option.value = name;
-    if (!localSLang) option.textContent = text.en;
-    if (localSLang === 'language_en') option.textContent = text.en;
-    if (localSLang === 'language_ru') option.textContent = text.ru;
-    if (localSLang === 'language_by') option.textContent = text.by;
+    if (!localSLang) option.textContent = text.language_en;
+    if (localSLang === 'language_en') option.textContent = text.language_en;
+    if (localSLang === 'language_ru') option.textContent = text.language_ru;
+    if (localSLang === 'language_by') option.textContent = text.language_by;
     option.id = `${name}_id`;
     select.append(option);
   });
