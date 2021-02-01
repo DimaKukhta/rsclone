@@ -2,8 +2,8 @@
   display: flex;
 }
 
-.operations {
-  max-height: 600px;
+.records-container {
+  max-height: 500px;
   overflow-y: auto;
 }
 

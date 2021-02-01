@@ -1,4 +1,4 @@
-import { switchLang, switchLangNoBind } from './baselayoutLang';
+
 
 export default [
   {
