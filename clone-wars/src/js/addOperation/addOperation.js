@@ -11,8 +11,7 @@ import {
 
 import addOperationLang from '../data/addOperationLang';
 import { incomeCategories, expenseCategories } from '../data/translate';
-// import expenseCategories from '../data/dataExpenseCategories';
-// import incomeCategories from '../data/dataIncomeCategories';
+
 // const mainContent = document.querySelector('#main-content');
 
 function drawAddExpense() {

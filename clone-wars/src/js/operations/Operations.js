@@ -87,7 +87,7 @@ export default class Operations {
 
       const roundTotalByCategory = +totalByCategory.toFixed(2);
 
-      categoryOperations.innerHTML = `<img class = 'category-icon' src = '../assets/icons/${category}.svg'><span class = 'fw-bold text-success'>${categoryLang}: </span> 
+      categoryOperations.innerHTML = `<img class = 'category-icon' src = './assets/icons/${category}.svg'><span class = 'fw-bold text-success'>${categoryLang}: </span> 
       <span class = 'category-total fw-bold ${textColor}' data-value = '${roundTotalByCategory}'>
       ${sign}${groupDecimals(roundTotalByCategory)}</span> <span class = 'fw-bold ${textColor}'>${currencyNames[currency]}</span>`;
 
@@ -108,7 +108,6 @@ export default class Operations {
         const operationLi = document.createElement('li');
         operationLi.classList.add('record-data');
 
-        // here will be function than returns lang from seetings
 
         const operationValue = sortedByCategories[index].value;
         // groupDecimals(
