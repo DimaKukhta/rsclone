@@ -9,12 +9,14 @@ import {
   pigAnimation,
 } from './processingOperation';
 
-import addOperationLang from '../data/addOperationLang';
+import lang, { addLangEN, addLangRU, addLangBY } from '../data/addOperationLang';
 import expenseCategories from '../data/dataExpenseCategories';
 import incomeCategories from '../data/dataIncomeCategories';
-// const mainContent = document.querySelector('#main-content');
 
 function drawAddExpense() {
+  const addOperationLang = lang(addLangEN, addLangRU, addLangBY);
+  console.log(addOperationLang);
+
   const mainContent = document.querySelector('#main-content');
   const fragment = new DocumentFragment();
   const container = document.createElement('div');
@@ -113,6 +115,8 @@ function drawAddExpense() {
 }
 
 function drawAddIncome() {
+  const addOperationLang = lang(addLangEN, addLangRU, addLangBY);
+
   const mainContent = document.querySelector('#main-content');
   const fragment = new DocumentFragment();
   const container = document.createElement('div');

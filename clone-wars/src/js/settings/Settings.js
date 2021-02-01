@@ -2,7 +2,9 @@
 // import { renderHTML, renderLayout } from '../baseLayout/renderBaseLayout';
 import { switchLang } from '../data/baselayoutLang';
 import lang from '../data/baselayoutLang';
-import { renderHTML, renderLayout } from '../baseLayout/renderBaseLayout';
+// import { renderHTML, renderLayout } from '../baseLayout/renderBaseLayout';
+import Operations from '../operations/Operations';
+import addOperation from '../addOperation/addOperation';
 
 export default class Settings {
   constructor(operationsSettings, recordExpander) {
@@ -149,6 +151,9 @@ export default class Settings {
     localStorage.setItem('currency', this.id);
     this.currentCurrency = document.getElementById('current-currency');
     this.currentCurrency.innerText = (() => this.value)();
+    this.operationsS = new Operations('789');
+    this.operationsS.updateOperations();
+    // addOperation();
   }
 
   changeLang() {
@@ -185,6 +190,7 @@ export default class Settings {
     this.currencyLife.innerText = switchLang().currency;
     this.languageLife.innerText = switchLang().language;
     this.soundLife.innerText = switchLang().sound;
+    addOperation();
   }
 
   themeChange() {
@@ -205,10 +211,11 @@ export default class Settings {
         // operations
         if (this.operations) this.operations.forEach((el) => el.classList.add('text_dark'));
         if (this.recordExpander) this.recordExpander.forEach((el) => el.classList.add('text_dark'));
-        this.textP.forEach((el) => el.classList.add('text_dark'));
+        this.textP[0].classList.add('text_dark');
         this.buttons.forEach((btn) => {
           btn.classList.add('dark_btn');
         });
+        this.textSpan[0].classList.remove('text_dark');
       }
       // dark off
       if (this.themeLocal === 'true') {
