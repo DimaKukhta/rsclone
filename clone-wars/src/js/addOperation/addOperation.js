@@ -10,9 +10,9 @@ import {
 } from './processingOperation';
 
 import lang, { addLangEN, addLangRU, addLangBY } from '../data/addOperationLang';
-import expenseCategories from '../data/dataExpenseCategories';
-import incomeCategories from '../data/dataIncomeCategories';
-import addOperationLang from '../data/addOperationLang';
+// import expenseCategories from '../data/dataExpenseCategories';
+// import incomeCategories from '../data/dataIncomeCategories';
+// import addOperationLang from '../data/addOperationLang';
 import { incomeCategories, expenseCategories } from '../data/translate';
 
 // const mainContent = document.querySelector('#main-content');
@@ -103,7 +103,7 @@ function drawAddExpense() {
     if (isInputValid('expense')) {
       // Sound switch
       const audioLocalStorage = localStorage.getItem('sound');
-      if (audioLocalStorage === 'true' || audioLocalStorage === null) audio.play();
+      if (audioLocalStorage === 'true' || audioLocalStorage === null || audioLocalStorage === 'undefined') audio.play();
 
       pigAnimation('expense', (+input.value).toFixed(2));
       saveOperationToLocalStorage('expense');

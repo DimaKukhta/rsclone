@@ -1,5 +1,4 @@
 /* eslint-disable import/no-duplicates */
-// import { renderHTML, renderLayout } from '../baseLayout/renderBaseLayout';
 import { switchLang } from '../data/baselayoutLang';
 import lang from '../data/baselayoutLang';
 // import { renderHTML, renderLayout } from '../baseLayout/renderBaseLayout';
@@ -152,8 +151,13 @@ export default class Settings {
     this.currentCurrency = document.getElementById('current-currency');
     this.currentCurrency.innerText = (() => this.value)();
     this.operationsS = new Operations('789');
-    this.operationsS.updateOperations();
-    // addOperation();
+    const isOperationsTab = document.querySelector('.operations-container');
+    if (isOperationsTab) {
+      const operationsL = new Operations();
+      operationsL.updateOperations();
+      this.isRecordExpander = document.querySelectorAll('.record-expander');
+      this.isRecordExpander.forEach((el) => el.classList.add('text_dark'));
+    }
   }
 
   changeLang() {
@@ -190,7 +194,18 @@ export default class Settings {
     this.currencyLife.innerText = switchLang().currency;
     this.languageLife.innerText = switchLang().language;
     this.soundLife.innerText = switchLang().sound;
-    addOperation();
+
+    const isOperationsTab = document.querySelector('.operations-container');
+    if (isOperationsTab) {
+      const operationsL = new Operations();
+      operationsL.updateOperations();
+      this.isRecordExpander = document.querySelectorAll('.record-expander');
+      this.isRecordExpander.forEach((el) => el.classList.add('text_dark'));
+    }
+    const isAddOperationTab = document.querySelector('.add-operation-image');
+    if (isAddOperationTab) {
+      addOperation();
+    }
   }
 
   themeChange() {
@@ -210,7 +225,10 @@ export default class Settings {
         this.addButtonText.classList.add('btnOperation_dark');
         // operations
         if (this.operations) this.operations.forEach((el) => el.classList.add('text_dark'));
-        if (this.recordExpander) this.recordExpander.forEach((el) => el.classList.add('text_dark'));
+        this.isRecordExpander = document.querySelectorAll('.record-expander');
+        if (this.isRecordExpander) {
+          this.isRecordExpander.forEach((el) => el.classList.add('text_dark'));
+        }
         this.textP[0].classList.add('text_dark');
         this.buttons.forEach((btn) => {
           btn.classList.add('dark_btn');
@@ -234,8 +252,10 @@ export default class Settings {
         });
         // operations
         if (this.operations) this.operations.forEach((el) => el.classList.remove('text_dark'));
-        if (this.recordExpander) this.recordExpander.forEach((el) => el.classList.remove('text_dark'));
-
+        this.isRecordExpander = document.querySelectorAll('.record-expander');
+        if (this.isRecordExpander) {
+          this.isRecordExpander.forEach((el) => el.classList.add('text_dark'));
+        }
         this.buttons.forEach((btn) => {
           btn.classList.remove('dark_btn');
         });
