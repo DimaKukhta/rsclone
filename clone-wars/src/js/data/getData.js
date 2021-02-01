@@ -40,7 +40,6 @@ export function groupOperationsByCategory(arrayOfOperations) {
       accum[key] = arr.filter(({ category }) => category === key);
       return accum;
     }
-    console.log(accum);
     return accum;
   }, {});
 }

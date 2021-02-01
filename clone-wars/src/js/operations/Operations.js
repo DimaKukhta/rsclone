@@ -3,6 +3,7 @@
 /* eslint-disable no-shadow */
 /* eslint-disable no-prototype-builtins */
 /* eslint-disable class-methods-use-this */
+import { switchLang, switchLangNoBind } from '../data/baselayoutLang';
 import { getIntervalData, getSummaryOperationsForInterval, groupOperationsByCategory } from '../data/getData';
 import { updateBalance } from '../addOperation/processingOperation';
 import { addZeroes, groupDecimals } from '../utils/utils';
@@ -112,7 +113,8 @@ export default class Operations {
         operationLi.classList.add('record-data');
 
         // here will be function than returns lang from seetings
-        const lang = 'en';
+        const lang = switchLangNoBind('en', 'ru', 'by');
+
         const operationValue = sortedByCategories[index].value;
         // groupDecimals(
         const dateText = `${addZeroes(day)} ${monthNames[lang][monthIndex]} ${year}`;

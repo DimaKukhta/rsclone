@@ -3,7 +3,7 @@ import { switchLang, switchLangNoBind } from './baselayoutLang';
 export default [
   {
     name: 'Deposit',
-    'text': {
+    text: {
       en: 'Deposit',
       ru: 'Депозит',
       by: 'Дэпазіт',
