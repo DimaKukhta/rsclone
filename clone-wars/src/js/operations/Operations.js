@@ -3,8 +3,7 @@
 /* eslint-disable no-shadow */
 /* eslint-disable no-prototype-builtins */
 /* eslint-disable class-methods-use-this */
-// import { switchLang, switchLangNoBind } from '../data/baselayoutLang';
-// import { getIntervalData, getSummaryOperationsForInterval, groupOperationsByCategory } from '../data/getData';
+
 import {
   getIntervalData,
   getSummaryOperationsForInterval,
@@ -60,18 +59,6 @@ export default class Operations {
       this.deleteRecord(target, operationType);
     });
     // function getCurrencyFromSettings
-
-    // const currency = (() => {
-    //   const localSCurrency = localStorage.getItem('currency');
-    //   let currencyL;
-    //   if (!localSCurrency) currencyL = 'BYN';
-    //   if (localSCurrency === 'currency_eu') currencyL = 'EU';
-    //   if (localSCurrency === 'currency_us') currencyL = 'US';
-    //   if (localSCurrency === 'currency_byn') currencyL = 'BYN';
-    //   return currencyL;
-    // })();
-    // const currency = 'BYN';
-
 
     const fragment = new DocumentFragment();
     const horisontalLine = document.createElement('hr');
