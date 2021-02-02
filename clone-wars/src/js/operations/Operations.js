@@ -3,6 +3,7 @@
 /* eslint-disable no-shadow */
 /* eslint-disable no-prototype-builtins */
 /* eslint-disable class-methods-use-this */
+
 import {
   getIntervalData,
   getSummaryOperationsForInterval,
@@ -12,7 +13,7 @@ import {
   getCategoryLang,
 } from '../data/getData';
 
-import { monthNames, currencyNames, operationLang } from '../data/translate';
+import { monthNames, currencyNames, operationLang, noDataText } from '../data/translate';
 
 import { updateBalance } from '../addOperation/processingOperation';
 import { addZeroes, groupDecimals } from '../utils/utils';
@@ -44,11 +45,11 @@ export default class Operations {
       emptyFolder.src = './assets/empty-folder.svg';
       emptyFolder.style.width = '100px';
 
-      const noDataText = document.createElement('div');
-      const noDataTextInner = document.createElement('p');
-      noDataTextInner.textContent = `no ${operationType} for this interval...`;
-      noDataText.append(noDataTextInner);
-      this.operations.append(noDataText, emptyFolder);
+      const noDataElem = document.createElement('div');
+      const noDataP = document.createElement('p');
+      noDataP.textContent = noDataText[lang];
+      noDataElem.append(noDataP);
+      this.operations.append(noDataElem, emptyFolder);
 
       return this.operations;
     }
@@ -57,7 +58,6 @@ export default class Operations {
     this.operations.addEventListener('click', ({ target }) => {
       this.deleteRecord(target, operationType);
     });
-    // function getCurrencyFromSettings
 
     const fragment = new DocumentFragment();
     const horisontalLine = document.createElement('hr');
@@ -107,6 +107,10 @@ export default class Operations {
 
         const operationLi = document.createElement('li');
         operationLi.classList.add('record-data');
+
+        // here will be function than returns lang from seetings
+        // const lang = switchLangNoBind('en', 'ru', 'by');
+
 
         const operationValue = sortedByCategories[index].value;
         // groupDecimals(
