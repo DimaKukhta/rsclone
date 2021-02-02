@@ -167,6 +167,11 @@ export default class Settings {
     this.balance = document.getElementById('balance');
     this.balance.innerText = switchLang().balance;
     // interval
+    this.isInterval = document.getElementById('interval');
+    if (this.isInterval.dataset.date === '0') {
+      console.log(this.isInterval.dataset.date);
+      this.isInterval.textContent = switchLang().allExpenses;
+    }
     this.consoleOption = document.querySelector('#interval-select');
     this.arrSwitchLang = Object.values(switchLang());
     for (let i = 0; i < this.consoleOption.options.length; i += 1) {

@@ -122,15 +122,6 @@ export function renderLayout() {
 
   // window.onload = addOperation;
 
-  // export function settingsRewrite () {
-  //   const oldSettings = document.querySelector('templete');
-  //   oldSettings.parentNode.removeChild(oldSettings);
-  //   const operationsSettings = document.querySelectorAll('.operations');
-  //   const recordExpander = document.querySelectorAll('.record-expander');
-  //   // eslint-disable-next-line no-unused-vars
-  //   const settings = new Settings(operationsSettings, recordExpander);
-  // };
-
   addOperation();
   updateBalance();
 
@@ -160,6 +151,7 @@ export function renderLayout() {
     const isOperationsTab = document.querySelector('.operations-container');
     if (isOperationsTab) {
       operations.updateOperations();
+      settingsRewrite();
     }
     // settings rewrite
     settingsRewrite();
@@ -176,9 +168,11 @@ export function renderLayout() {
       switch (target.id) {
         case 'prev':
           updatedStamp = getPreviousDatestampForInterval(interval, intervalDatestamp);
+          settingsRewrite();
           break;
         case 'next':
           updatedStamp = getNextDatestampForInterval(interval, intervalDatestamp);
+          settingsRewrite();
           break;
         default:
           break;

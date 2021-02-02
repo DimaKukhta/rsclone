@@ -19,7 +19,6 @@ import { incomeCategories, expenseCategories } from '../data/translate';
 
 function drawAddExpense() {
   const addOperationLang = lang(addLangEN, addLangRU, addLangBY);
-  console.log(addOperationLang);
 
   const mainContent = document.querySelector('#main-content');
   const fragment = new DocumentFragment();
