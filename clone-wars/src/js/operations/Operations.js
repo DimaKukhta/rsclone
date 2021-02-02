@@ -58,7 +58,7 @@ export default class Operations {
     const sign = (operationType === 'expense') ? '-' : '+';
 
     // this.operations.addEventListener('click', ({ target }) => {
-    //   this.deleteRecord(target, operationType);
+    //   this.callModalWindow(target, operationType);
     // });
 
     const fragment = new DocumentFragment();
@@ -111,7 +111,7 @@ export default class Operations {
         operationLi.classList.add('record-data');
 
         const operationValue = sortedByCategories[index].value;
-        // groupDecimals(
+
         const dateText = `${addZeroes(day)} ${monthNames[lang][monthIndex]} ${year}`;
         operationLi.innerHTML = `<span class = '${textColor}'>${sign}${groupDecimals(operationValue)} <span class = 'currency ${textColor}'>${currencyNames[currency]}</span></span>
           <span>${dateText}</span>`;
@@ -121,8 +121,8 @@ export default class Operations {
         deleteBtn.dataset.id = sortedByCategories[index].id;
         deleteBtn.dataset.value = operationValue;
         deleteBtn.textContent = '✖';
-        deleteBtn.addEventListener('click', function() {
-          callModalWindow(this, operationType);
+        deleteBtn.addEventListener('click', ({ target }) => {
+          this.callModalWindow(target, operationType);
         });
 
         recordContainer.append(deleteBtn);
@@ -174,36 +174,61 @@ export default class Operations {
     operationsEl.replaceWith(this.createReport());
   }
 
-  deleteRecord(target, operationType) {
+  callModalWindow(target, operationType) {
     if (target.classList.contains('delete-record')) {
-      console.log('delete', target, operationType)
-      const operationsCopy = [...getIntervalData(operationType)];
-      console.log(operationsCopy)
-      const deleteId = target.dataset.id;
-      const deleteRecordIndex = operationsCopy.findIndex(({ id }) => id === deleteId);
+      const popUp = document.querySelector('#popUp');
+      const modalWindow = document.querySelector('#modalWindow');
+      const modalCancel = document.querySelector('#modal-cancel');
+      const modalDelete = document.querySelector('#modal-delete');
 
-      operationsCopy.splice(deleteRecordIndex, 1);
+      popUp.classList.add('popUp-visible');
+      modalWindow.classList.remove('modalWindow');
 
-      localStorage.setItem(operationType, JSON.stringify(operationsCopy));
+      modalCancel.addEventListener('click', () => {
+        popUp.classList.remove('popUp-visible');
+        modalWindow.classList.add('modalWindow');
+      });
 
-      const deleteValue = target.dataset.value;
-
-      updateSummaryForInterval(target, deleteValue, operationType);
-      updateTotalForCategory(target, deleteValue, operationType);
-      updateBalance();
-
-      const record = target.parentElement;
-      const categoryRecords = target.closest('.records').children;
-      const isOneRecord = Array.from(categoryRecords).length === 1;
-
-      if (isOneRecord) {
-        const categoryContainer = target.closest('.category-container');
-        categoryContainer.remove();
-      } else {
-        record.remove();
-      }
-      // updateData(localStorage.getItem('login'));
+      modalDelete.addEventListener('click', () => {
+        popUp.classList.remove('popUp-visible');
+        modalWindow.classList.add('modalWindow');
+        console.log(target, operationType)
+        this.deleteRecord(target, operationType);
+      });
     }
+  }
+
+  deleteRecord(target, operationType) {
+    // if (target.classList.contains('delete-record')) {
+    console.log('delete', target, operationType)
+    const operationsCopy = [...getIntervalData(operationType)];
+    console.log(operationsCopy)
+    const deleteId = target.dataset.id;
+    const deleteRecordIndex = operationsCopy.findIndex(({ id }) => id === deleteId);
+
+    // operationsCopy.splice(deleteRecordIndex, 1);
+    console.log(deleteRecordIndex, operationsCopy)
+
+    localStorage.setItem(operationType, JSON.stringify(operationsCopy));
+
+    const deleteValue = target.dataset.value;
+
+    updateSummaryForInterval(target, deleteValue, operationType);
+    updateTotalForCategory(target, deleteValue, operationType);
+    updateBalance();
+
+    const record = target.parentElement;
+    const categoryRecords = target.closest('.records').children;
+    const isOneRecord = Array.from(categoryRecords).length === 1;
+
+    if (isOneRecord) {
+      const categoryContainer = target.closest('.category-container');
+      categoryContainer.remove();
+    } else {
+      record.remove();
+    }
+    // updateData(localStorage.getItem('login'));
+    // }
   }
 
   renderIn(element) {
@@ -231,6 +256,7 @@ function expandAndCollapseList({ target }) {
 }
 
 function updateSummaryForInterval(deleteBtn, deleteValue, operationType) {
+  console.log('updatesummary', deleteBtn)
   const operation = deleteBtn.closest('.operations');
   const total = operation.querySelector('.interval-total');
   const currentValue = total.dataset.value;
@@ -249,24 +275,24 @@ function updateTotalForCategory(deleteBtn, deleteValue, operationType) {
   total.textContent = (operationType === 'expense') ? `-${groupDecimals(updateValue)}` : `+${groupDecimals(updateValue)}`;
 }
 
-function callModalWindow(target, operationType) {
-  const popUp = document.querySelector('#popUp');
-  const modalWindow = document.querySelector('#modalWindow');
-  const modalCancel = document.querySelector('#modal-cancel');
-  const modalDelete = document.querySelector('#modal-delete');
+// function callModalWindow(target, operationType) {
+//   const popUp = document.querySelector('#popUp');
+//   const modalWindow = document.querySelector('#modalWindow');
+//   const modalCancel = document.querySelector('#modal-cancel');
+//   const modalDelete = document.querySelector('#modal-delete');
 
-  popUp.classList.add('popUp-visible');
-  modalWindow.classList.remove('modalWindow');
+//   popUp.classList.add('popUp-visible');
+//   modalWindow.classList.remove('modalWindow');
 
-  modalCancel.addEventListener('click', () => {
-    popUp.classList.remove('popUp-visible');
-    modalWindow.classList.add('modalWindow');
-  });
+//   modalCancel.addEventListener('click', () => {
+//     popUp.classList.remove('popUp-visible');
+//     modalWindow.classList.add('modalWindow');
+//   });
 
-  modalDelete.addEventListener('click', () => {
-    popUp.classList.remove('popUp-visible');
-    modalWindow.classList.add('modalWindow');
-    const operations = new Operations();
-    operations.deleteRecord(target, operationType);
-  });
-}
+//   modalDelete.addEventListener('click', () => {
+//     popUp.classList.remove('popUp-visible');
+//     modalWindow.classList.add('modalWindow');
+//     const operations = new Operations();
+//     operations.deleteRecord(target, operationType);
+//   });
+// }
