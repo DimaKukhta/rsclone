@@ -8,4 +8,5 @@ import router from './js/routering/router';
 renderHTML();
 renderLayout();
 router();
+// eslint-disable-next-line no-restricted-globals
 location.hash = 'operation';
