@@ -158,7 +158,7 @@ export const operationLang = {
   expense: {
     language_en: 'Expense',
     language_ru: 'Расход',
-    language_by: 'Выдатки',
+    language_by: 'Выдаткi',
   },
   income: {
     language_en: 'Income',
