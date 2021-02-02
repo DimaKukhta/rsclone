@@ -236,8 +236,8 @@ function drawImage() {
 
 export default function addOperation() {
   const mainContent = document.querySelector('#main-content');
-  mainContent.innerHTML = '';
   location.hash = 'operation';
+  mainContent.innerHTML = '';
   drawAddExpense();
   drawAddIncome();
   drawImage();

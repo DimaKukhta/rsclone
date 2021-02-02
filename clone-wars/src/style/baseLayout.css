@@ -17,6 +17,8 @@
 
 /* MAIN */
 main {
+  display: flex;
+  justify-content: center;
   height: calc(100% - 17rem);
 }
 
