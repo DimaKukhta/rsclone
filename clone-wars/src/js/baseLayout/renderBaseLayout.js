@@ -27,12 +27,12 @@ export function renderHTML() {
         </p>
         </div>
         <div class="navigate-interval d-flex align-items-center">
-        <button class = "iteration-button btn btn-outline-success" id = "prev" accesskey="" title="hotkey '1'"> &lt; </button>
+        <button class = "iteration-button btn btn-outline-success" id = "prev" accesskey="6" title="hotkey '6'"> &lt; </button>
         <div id="interval" class="me-1 ms-1">current interval</div>
-        <button class = "iteration-button btn btn-outline-success" id = "next" accesskey="" title="hotkey '2'"> &gt; </button>
+        <button class = "iteration-button btn btn-outline-success" id = "next" accesskey="7" title="hotkey '7'"> &gt; </button>
         </div>
         <div class="d-flex col-2">
-        <select class="form-select" name="interval" id="interval-select" accesskey="" title="hotkey '3'">
+        <select class="form-select" name="interval" id="interval-select" accesskey="8" title="hotkey '8'">
             <option value="Day">${lang.day}</option>
             <option value="Month" selected>${lang.month}</option>
             <option value="Year">${lang.year}</option>
