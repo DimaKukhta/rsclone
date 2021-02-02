@@ -58,7 +58,7 @@ export default class Operations {
     const sign = (operationType === 'expense') ? '-' : '+';
 
     this.operations.addEventListener('click', ({ target }) => {
-      this.deleteRecord(target, operationType);
+      this.callModalWindow(target, operationType);
     });
 
     const fragment = new DocumentFragment();
@@ -110,11 +110,11 @@ export default class Operations {
         const operationLi = document.createElement('li');
         operationLi.classList.add('record-data');
 
-        // here will be function than returns lang from seetings
         const operationValue = sortedByCategories[index].value;
-        // groupDecimals(
+
         const dateText = `${addZeroes(day)} ${monthNames[lang][monthIndex]} ${year}`;
-        operationLi.innerHTML = `<span class = '${textColor}'>${sign}${groupDecimals(operationValue)} <span class = 'currency ${textColor}'>${currencyNames[currency]}</span></span>
+        operationLi.innerHTML = `<span class = '${textColor}'>${sign}${groupDecimals(operationValue)}
+        <span class = 'currency ${textColor}'>${currencyNames[currency]}</span></span>
           <span>${dateText}</span>`;
 
         const deleteBtn = document.createElement('button');
@@ -172,33 +172,62 @@ export default class Operations {
     operationsEl.replaceWith(this.createReport());
   }
 
-  deleteRecord(target, operationType) {
+  callModalWindow(target, operationType) {
     if (target.classList.contains('delete-record')) {
-      const operationsCopy = [...getIntervalData(operationType)];
-      const deleteId = target.dataset.id;
-      const deleteRecordIndex = operationsCopy.findIndex(({ id }) => id === deleteId);
+      const popUp = document.querySelector('#popUp');
+      const modalWindow = document.querySelector('#modalWindow');
+      const btns = document.querySelector('.modalWindow-footer');
 
-      operationsCopy.splice(deleteRecordIndex, 1);
+      popUp.classList.add('popUp-visible');
+      modalWindow.classList.remove('modalWindow');
 
-      localStorage.setItem(operationType, JSON.stringify(operationsCopy));
-
-      const deleteValue = target.dataset.value;
-      updateSummaryForInterval(target, deleteValue, operationType);
-      updateTotalForCategory(target, deleteValue, operationType);
-      updateBalance();
-
-      const record = target.parentElement;
-      const categoryRecords = target.closest('.records').children;
-      const isOneRecord = Array.from(categoryRecords).length === 1;
-
-      if (isOneRecord) {
-        const categoryContainer = target.closest('.category-container');
-        categoryContainer.remove();
-      } else {
-        record.remove();
-      }
-      // updateData(localStorage.getItem('login'));
+      btns.addEventListener('click', (e) => {
+        if (e.target.classList.contains('btn')) {
+          switch (e.target.id) {
+            case 'modal-cancel':
+              popUp.classList.remove('popUp-visible');
+              modalWindow.classList.add('modalWindow');
+              break;
+            case 'modal-delete':
+              popUp.classList.remove('popUp-visible');
+              modalWindow.classList.add('modalWindow');
+              this.deleteRecord(target, operationType);
+              break;
+            default:
+              break;
+          }
+        }
+      }, { once: true });
     }
+  }
+
+  deleteRecord(target, operationType) {
+    const operationsCopy = [...getIntervalData(operationType)];
+
+    const deleteId = target.dataset.id;
+    const deleteRecordIndex = operationsCopy.findIndex(({ id }) => id === deleteId);
+
+    operationsCopy.splice(deleteRecordIndex, 1);
+
+    localStorage.setItem(operationType, JSON.stringify(operationsCopy));
+
+    const deleteValue = target.dataset.value;
+
+    updateSummaryForInterval(target, deleteValue, operationType);
+    updateTotalForCategory(target, deleteValue, operationType);
+    updateBalance();
+
+    const record = target.parentElement;
+    const categoryRecords = target.closest('.records').children;
+    const isOneRecord = Array.from(categoryRecords).length === 1;
+
+    if (isOneRecord) {
+      const categoryContainer = target.closest('.category-container');
+      categoryContainer.remove();
+    } else {
+      record.remove();
+    }
+    // updateData(localStorage.getItem('login'));
   }
 
   renderIn(element) {

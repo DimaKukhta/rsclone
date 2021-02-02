@@ -29,12 +29,12 @@ export function renderHTML() {
         </p>
         </div>
         <div class="navigate-interval d-flex align-items-center">
-        <button class = "iteration-button btn btn-outline-success" id = "prev" accesskey="1" title="hotkey '1'"> &lt; </button>
+        <button class = "iteration-button btn btn-outline-success" id = "prev" accesskey="6" title="hotkey '6'"> &lt; </button>
         <div id="interval" class="me-1 ms-1">current interval</div>
-        <button class = "iteration-button btn btn-outline-success" id = "next" accesskey="2" title="hotkey '2'"> &gt; </button>
+        <button class = "iteration-button btn btn-outline-success" id = "next" accesskey="7" title="hotkey '7'"> &gt; </button>
         </div>
         <div class="d-flex col-2">
-        <select class="form-select" name="interval" id="interval-select" accesskey="3" title="hotkey '3'">
+        <select class="form-select" name="interval" id="interval-select" accesskey="8" title="hotkey '8'">
             <option value="Day">${lang.day}</option>
             <option value="Month" selected>${lang.month}</option>
             <option value="Year">${lang.year}</option>
@@ -45,6 +45,18 @@ export function renderHTML() {
     </div>
     </header>
     <main class="bg-light">
+    <div id="popUp" class="popUp"></div>
+    <div id="modalWindow" class="modalWindow modalWindow-visible">
+    <div class="modal-content">
+      <div class="modalWindow-body">
+        <span>Do you want to delete the entry?</span>
+      </div>
+      <div class="modalWindow-footer">
+        <button id="modal-cancel" type="button" class="btn btn-secondary me-2">Cancel</button>
+        <button id="modal-delete" type="button" class="btn btn-primary">Delete</button>
+      </div>
+    </div>    
+    </div>
     <div class="d-flex justify-content-center flex-wrap" id="main-content">
         
         <!-- all content is here -->
@@ -56,27 +68,27 @@ export function renderHTML() {
         <nav
         class="row d-flex flex-row justify-content-sm-between align-items-center mt-3 text-center"
         >
-        <button type="button" id = "btn-operations" class="btn btn-success nav-button col-2" accesskey="4" title="hotkey '4'">
+        <button type="button" id = "btn-operations" class="btn btn-success nav-button col-2" accesskey="1" title="hotkey '1'">
             <img class="footer-btn-image" src="./assets/icons/001.svg" alt="Operation" />
             <span id="operations" class="d-block">${lang.operations}</span>
         </button>
 
-        <button type="button" id="btn-report" class="btn btn-success nav-button col-2" accesskey="5" title="hotkey '5'">
+        <button type="button" id="btn-report" class="btn btn-success nav-button col-2" accesskey="2" title="hotkey '2'">
             <img class="footer-btn-image" src="./assets/icons/002.svg" alt="Report" />
             <span id="reports" class="d-block">${lang.reports}</span>
         </button>
 
-        <button type="button" id="btn-add-operation" class="col-2 btn-add-operation" accesskey="6" title="hotkey '6'">
+        <button type="button" id="btn-add-operation" class="col-2 btn-add-operation" accesskey="3" title="hotkey '3'">
             <img class="footer-btn-image" src="./assets/icons/005.svg" alt="add">
             <span id="add" class="text-nowrap d-block text-success fw-bold">${lang.add}</span>
         </button>
 
-        <button type="button" id="btn-hotkeys" class="btn btn-success col-2"  accesskey="7" title="hotkey '7'">
+        <button type="button" id="btn-hotkeys" class="btn btn-success col-2"  accesskey="4" title="hotkey '4'">
             <img class="footer-btn-image" src="./assets/icons/003.svg" alt="Category" />
             <span id="hotkeys" class="d-block">${lang.hotkeys}</span>
         </button>
 
-        <button type="button" id="settings" class="btn btn-success col-2" accesskey="8" title="hotkey '8'">
+        <button type="button" id="settings" class="btn btn-success col-2" accesskey="5" title="hotkey '5'">
             <img class="footer-btn-image" src="./assets/icons/004.svg" alt="Settings"/>
             <span id="settings_span" class="d-block">${lang.settings}</span>
         </button>
