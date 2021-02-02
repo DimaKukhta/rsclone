@@ -13,7 +13,9 @@ import {
   getCategoryLang,
 } from '../data/getData';
 
-import { monthNames, currencyNames, operationLang, noDataText } from '../data/translate';
+import {
+  monthNames, currencyNames, operationLang, noDataText,
+} from '../data/translate';
 
 import { updateBalance } from '../addOperation/processingOperation';
 import { addZeroes, groupDecimals } from '../utils/utils';
@@ -109,9 +111,6 @@ export default class Operations {
         operationLi.classList.add('record-data');
 
         // here will be function than returns lang from seetings
-        // const lang = switchLangNoBind('en', 'ru', 'by');
-
-
         const operationValue = sortedByCategories[index].value;
         // groupDecimals(
         const dateText = `${addZeroes(day)} ${monthNames[lang][monthIndex]} ${year}`;

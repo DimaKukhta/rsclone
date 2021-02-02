@@ -1,8 +1,8 @@
 /* eslint-disable import/no-duplicates */
 import { switchLang } from '../data/baselayoutLang';
 import lang from '../data/baselayoutLang';
-// import { renderHTML, renderLayout } from '../baseLayout/renderBaseLayout';
 import Operations from '../operations/Operations';
+import addReport from '../addReport/addReport';
 import addOperation from '../addOperation/addOperation';
 
 export default class Settings {
@@ -13,19 +13,8 @@ export default class Settings {
     this.sound = lang.sound;
     this.set = document.querySelector('.settings');
     this.countButtonSettings = false;
-    // theme togler mem
-    this.themeLocal = localStorage.getItem('theme');
-    if (this.themeLocal === undefined) {
-      this.checkedToggler = 'checked';
-    }
-    if (this.themeLocal === 'false') {
-      this.checkedToggler = '';
-    } else {
-      this.checkedToggler = 'checked';
-    }
 
     this.themeToggler = document.getElementsByName('onoffswitch');
-
     this.textP = document.querySelectorAll('p');
     this.textSpan = document.querySelectorAll('span');
 
@@ -37,7 +26,8 @@ export default class Settings {
     this.footer = document.querySelector('footer');
     this.currentAmount = document.getElementById('current-amount');
     this.interval = document.getElementById('interval');
-
+    this.createdBy = document.getElementById('createdBy_footer');
+    this.forRS = document.getElementById('forRS_footer');
     this.readerLocalStorage();
     this.render();
     this.handlers();
@@ -68,6 +58,16 @@ export default class Settings {
     if (this.currencyLocal === 'currency_byn') this.currencyFirstTimeBUN = 'checked';
     if (this.currencyLocal === 'currency_us') this.currencyUS = 'checked';
     if (this.currencyLocal === 'currency_eu') this.currencyEU = 'checked';
+
+    this.themeLocal = localStorage.getItem('theme');
+    if (this.themeLocal === undefined) this.checkedToggler = 'checked';
+    if (this.themeLocal === 'false') this.checkedToggler = '';
+    else this.checkedToggler = 'checked';
+
+    this.isSound = localStorage.getItem('sound');
+    if (this.isSound === undefined || !this.isSound) this.checked = 'checked';
+    if (this.isSound === 'false') this.checked = '';
+    if (this.isSound === 'true') this.checked = 'checked';
   }
 
   render() {
@@ -92,7 +92,7 @@ export default class Settings {
               <label class="form-check-label box_sound__label" for="flexCheckChecked" id="settings_sound">
                 ${this.sound}
               </label>
-              <input class="form-check-input box_sound__input" type="checkbox" value="" id="flexCheckChecked" checked>
+              <input class="form-check-input box_sound__input" type="checkbox" value="" id="flexCheckChecked" ${this.checked}>
 
             </div>
             
@@ -107,11 +107,11 @@ export default class Settings {
                   <label for="currency_byn"><span>BYN</span></label>
                 </div>
                 <div>
-                  <input type="radio" class="settings_radio form-check-input" name="currency" value="US" id="currency_us" ${this.currencyUS}>
+                  <input type="radio" class="settings_radio form-check-input" name="currency" value="$" id="currency_us" ${this.currencyUS}>
                   <label for="currency_us"><span>US</span></label>
                 </div>
                 <div>
-                  <input type="radio" class="settings_radio form-check-input" name="currency" value="EU" id="currency_eu" ${this.currencyEU}>
+                  <input type="radio" class="settings_radio form-check-input" name="currency" value="€" id="currency_eu" ${this.currencyEU}>
                   <label for="currency_eu"><span>EU</span></label>
                 </div>
               </form>
@@ -150,7 +150,6 @@ export default class Settings {
     localStorage.setItem('currency', this.id);
     this.currentCurrency = document.getElementById('current-currency');
     this.currentCurrency.innerText = (() => this.value)();
-    this.operationsS = new Operations('789');
     const isOperationsTab = document.querySelector('.operations-container');
     if (isOperationsTab) {
       const operationsL = new Operations();
@@ -169,7 +168,6 @@ export default class Settings {
     // interval
     this.isInterval = document.getElementById('interval');
     if (this.isInterval.dataset.date === '0') {
-      console.log(this.isInterval.dataset.date);
       this.isInterval.textContent = switchLang().allExpenses;
     }
     this.consoleOption = document.querySelector('#interval-select');
@@ -183,6 +181,8 @@ export default class Settings {
     this.add = document.getElementById('add');
     this.hotkeys = document.getElementById('hotkeys');
     this.settingsSpan = document.getElementById('settings_span');
+    this.createdBy = document.getElementById('createdBy_footer');
+    this.forRS = document.getElementById('forRS_footer');
 
     this.operations.innerText = switchLang().operations;
     this.reports.innerText = switchLang().reports;
@@ -199,6 +199,8 @@ export default class Settings {
     this.currencyLife.innerText = switchLang().currency;
     this.languageLife.innerText = switchLang().language;
     this.soundLife.innerText = switchLang().sound;
+    this.createdBy.innerText = switchLang().createdBy;
+    this.forRS.textContent = switchLang().createdBy;
 
     const isOperationsTab = document.querySelector('.operations-container');
     if (isOperationsTab) {
@@ -207,9 +209,15 @@ export default class Settings {
       this.isRecordExpander = document.querySelectorAll('.record-expander');
       this.isRecordExpander.forEach((el) => el.classList.add('text_dark'));
     }
+
     const isAddOperationTab = document.querySelector('.add-operation-image');
     if (isAddOperationTab) {
       addOperation();
+    }
+
+    const isReportTab = document.querySelector('.chart-container');
+    if (isReportTab) {
+      addReport();
     }
   }
 
@@ -224,6 +232,8 @@ export default class Settings {
         this.footer.classList.add('bgc_dark');
         this.currentAmount.classList.add('text_dark');
         this.interval.classList.add('text_dark');
+        this.createdBy.classList.add('text_dark');
+        this.forRS.classList.add('text_dark');
         // settings
         this.set.classList.add('bgc_dark_settings');
         // add operation
@@ -248,6 +258,8 @@ export default class Settings {
         this.footer.classList.remove('bgc_dark');
         this.currentAmount.classList.remove('text_dark');
         this.interval.classList.remove('text_dark');
+        this.createdBy.classList.remove('text_dark');
+        this.forRS.classList.remove('text_dark');
 
         this.set.classList.remove('bgc_dark_settings');
 

@@ -14,6 +14,8 @@ const enL = {
   language: 'Language:',
   balance: 'Balance',
   allExpenses: 'All expenses',
+  createdBy: 'Created by:',
+  forRS: 'for &nbsp;',
 };
 
 const ruL = {
@@ -32,6 +34,8 @@ const ruL = {
   language: 'Язык:',
   balance: 'Баланс',
   allExpenses: 'Все расходы',
+  createdBy: 'Cозданно:',
+  forRS: 'для &nbsp;',
 };
 
 const byL = {
@@ -50,6 +54,8 @@ const byL = {
   language: 'Мова:',
   balance: 'Баланс',
   allExpenses: 'Усе выдаткі',
+  createdBy: 'Створаны:',
+  forRS: 'для &nbsp;',
 };
 
 const lang = (en, ru, by) => {
