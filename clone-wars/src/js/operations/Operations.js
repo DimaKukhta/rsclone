@@ -19,6 +19,8 @@ import { addZeroes, groupDecimals } from '../utils/utils';
 
 import updateData from '../utils/updateData';
 
+import { callModalWindow, cancelModal } from './callModalWindow';
+
 export default class Operations {
   createOperations(operationType) {
     const lang = getCurrentLanguage();
@@ -54,9 +56,9 @@ export default class Operations {
     }
     const sign = (operationType === 'expense') ? '-' : '+';
 
-    this.operations.addEventListener('click', ({ target }) => {
-      this.deleteRecord(target, operationType);
-    });
+    // this.operations.addEventListener('click', ({ target }) => {
+    //   this.deleteRecord(target, operationType);
+    // });
     // function getCurrencyFromSettings
 
     const fragment = new DocumentFragment();
@@ -120,6 +122,7 @@ export default class Operations {
         deleteBtn.dataset.id = sortedByCategories[index].id;
         deleteBtn.dataset.value = operationValue;
         deleteBtn.textContent = '✖';
+        deleteBtn.addEventListener('click', callModalWindow);
 
         recordContainer.append(deleteBtn);
         recordContainer.append(operationLi);

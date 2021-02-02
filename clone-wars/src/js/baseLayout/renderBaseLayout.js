@@ -43,6 +43,18 @@ export function renderHTML() {
     </div>
     </header>
     <main class="bg-light">
+    <div id="popUp" class="popUp"></div>
+    <div id="modalWindow" class="modalWindow modalWindow-visible">
+    <div class="modal-content">
+      <div class="modalWindow-body">
+        <span>Do you want to delete the entry?</span>
+      </div>
+      <div class="modalWindow-footer">
+        <button id="modal-cancel" type="button" class="btn btn-secondary me-2">Cancel</button>
+        <button id="modal-delete" type="button" class="btn btn-primary">Delete</button>
+      </div>
+    </div>    
+    </div>
     <div class="d-flex justify-content-center flex-wrap" id="main-content">
         
         <!-- all content is here -->
