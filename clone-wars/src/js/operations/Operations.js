@@ -19,7 +19,7 @@ import { addZeroes, groupDecimals } from '../utils/utils';
 
 import updateData from '../utils/updateData';
 
-import { callModalWindow, cancelModal } from './callModalWindow';
+// import callModalWindow from './callModalWindow';
 
 export default class Operations {
   createOperations(operationType) {
@@ -59,7 +59,6 @@ export default class Operations {
     // this.operations.addEventListener('click', ({ target }) => {
     //   this.deleteRecord(target, operationType);
     // });
-    // function getCurrencyFromSettings
 
     const fragment = new DocumentFragment();
     const horisontalLine = document.createElement('hr');
@@ -110,7 +109,6 @@ export default class Operations {
         const operationLi = document.createElement('li');
         operationLi.classList.add('record-data');
 
-
         const operationValue = sortedByCategories[index].value;
         // groupDecimals(
         const dateText = `${addZeroes(day)} ${monthNames[lang][monthIndex]} ${year}`;
@@ -122,7 +120,9 @@ export default class Operations {
         deleteBtn.dataset.id = sortedByCategories[index].id;
         deleteBtn.dataset.value = operationValue;
         deleteBtn.textContent = '✖';
-        deleteBtn.addEventListener('click', callModalWindow);
+        deleteBtn.addEventListener('click', function() {
+          callModalWindow(this, operationType);
+        });
 
         recordContainer.append(deleteBtn);
         recordContainer.append(operationLi);
@@ -175,7 +175,9 @@ export default class Operations {
 
   deleteRecord(target, operationType) {
     if (target.classList.contains('delete-record')) {
+      console.log('delete', target, operationType)
       const operationsCopy = [...getIntervalData(operationType)];
+      console.log(operationsCopy)
       const deleteId = target.dataset.id;
       const deleteRecordIndex = operationsCopy.findIndex(({ id }) => id === deleteId);
 
@@ -184,6 +186,7 @@ export default class Operations {
       localStorage.setItem(operationType, JSON.stringify(operationsCopy));
 
       const deleteValue = target.dataset.value;
+
       updateSummaryForInterval(target, deleteValue, operationType);
       updateTotalForCategory(target, deleteValue, operationType);
       updateBalance();
@@ -243,4 +246,26 @@ function updateTotalForCategory(deleteBtn, deleteValue, operationType) {
 
   total.dataset.value = updateValue;
   total.textContent = (operationType === 'expense') ? `-${groupDecimals(updateValue)}` : `+${groupDecimals(updateValue)}`;
+}
+
+function callModalWindow(target, operationType) {
+  const popUp = document.querySelector('#popUp');
+  const modalWindow = document.querySelector('#modalWindow');
+  const modalCancel = document.querySelector('#modal-cancel');
+  const modalDelete = document.querySelector('#modal-delete');
+
+  popUp.classList.add('popUp-visible');
+  modalWindow.classList.remove('modalWindow');
+
+  modalCancel.addEventListener('click', () => {
+    popUp.classList.remove('popUp-visible');
+    modalWindow.classList.add('modalWindow');
+  });
+
+  modalDelete.addEventListener('click', () => {
+    popUp.classList.remove('popUp-visible');
+    modalWindow.classList.add('modalWindow');
+    const operations = new Operations();
+    operations.deleteRecord(target, operationType);
+  });
 }
