@@ -10,9 +10,6 @@ const getCurrency = () => {
     case null || 'undefined' || 'null' || undefined:
       cur = currency.currency_byn;
       break;
-    // case 'currency_byn':
-    //   cur = ru;
-    //   break;
     case 'currency_us':
       cur = currency.currency_us;
       break;

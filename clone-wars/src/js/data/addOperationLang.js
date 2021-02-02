@@ -1,4 +1,4 @@
-import { switchLangNoBind } from './baselayoutLang';
+import { switchLang, switchLangNoBind } from './baselayoutLang';
 
 const addLangEN = {
   addExpence: 'Add Expense',
@@ -38,6 +38,16 @@ const addLangBY = {
   saveIncome: 'Захаваць даход',
 
 };
-const switchLangBind = switchLangNoBind.bind(addLangEN, addLangRU, addLangBY);
-export { switchLangBind };
-export default switchLangNoBind(addLangEN, addLangRU, addLangBY);
+
+export default function lang(en, ru, by) {
+  const localSLang = localStorage.getItem('language');
+  let langL;
+  // if (localSLang === 'language_by') langL = by;
+  if (!localSLang) langL = en;
+  if (localSLang === 'language_en') langL = en;
+  if (localSLang === 'language_ru') langL = ru;
+  if (localSLang === 'language_by') langL = by;
+  return langL;
+}
+
+export { addLangEN, addLangRU, addLangBY };
