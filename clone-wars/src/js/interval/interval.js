@@ -1,6 +1,7 @@
 /* eslint-disable consistent-return */
 /* eslint-disable import/prefer-default-export */
 import { addZeroes } from '../utils/utils';
+import { switchLang, switchLangNoBind } from '../data/baselayoutLang';
 
 export function setIntervalDate(stamp) {
   const currentInterval = document.querySelector('#interval');
@@ -52,7 +53,7 @@ export function getIntervalText(stamp) {
     case 'Year':
       return `${year}`;
     case 'All':
-      return 'All expenses';
+      return switchLang().allExpenses;
     default:
       break;
   }

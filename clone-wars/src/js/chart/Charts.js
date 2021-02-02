@@ -1,5 +1,7 @@
 import Chart from 'chart.js';
-import { getOperationsForChart } from '../data/getData';
+import { getOperationsForChart, getCurrentLanguage, getCategoryLang } from '../data/getData';
+
+import { operationLang, noDataText } from '../data/translate';
 
 function getInterval() {
   const intervalSelect = document.querySelector('#interval-select');
@@ -12,9 +14,11 @@ function getStamp() {
 }
 
 function getLabels(type) {
+  const lang = getCurrentLanguage();
+
   const result = getOperationsForChart(type, getInterval(), getStamp());
   const keys = Object.keys(result);
-  return keys.length ? keys : ['No-data'];
+  return keys.length ? keys : [noDataText[lang]];
 }
 
 function getData(type) {
@@ -45,12 +49,14 @@ export default class Charts {
   }
 
   createCharts() {
+    const lang = getCurrentLanguage();
+
     const firstCtx = document.getElementById('myChart1').getContext('2d');
     const secondCtx = document.getElementById('myChart2').getContext('2d');
     const firtChart = new Chart(firstCtx, {
       type: 'doughnut',
       data: {
-        labels: getLabels('expense'),
+        labels: getLabels('expense').map((category) => getCategoryLang('expense', category, lang)),
         datasets: [{
           data: getData('expense'),
           backgroundColor: [
@@ -74,7 +80,7 @@ export default class Charts {
         maintainAspectRatio: false,
         title: {
           display: true,
-          text: 'Expense',
+          text: operationLang.expense[lang],
           fontSize: 16,
         },
       },
@@ -82,7 +88,7 @@ export default class Charts {
     const secondChart = new Chart(secondCtx, {
       type: 'doughnut',
       data: {
-        labels: getLabels('income'),
+        labels: getLabels('income').map((category) => getCategoryLang('income', category, lang)),
         datasets: [{
           data: getData('income'),
           backgroundColor: [
@@ -97,7 +103,7 @@ export default class Charts {
         maintainAspectRatio: false,
         title: {
           display: true,
-          text: 'Income',
+          text: operationLang.income[lang],
           fontSize: 16,
         },
       },

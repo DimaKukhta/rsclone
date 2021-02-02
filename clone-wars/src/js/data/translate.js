@@ -166,3 +166,9 @@ export const operationLang = {
     language_by: 'Даход',
   },
 };
+
+export const noDataText = {
+  language_en: 'no data...',
+  language_ru: 'нет данных...',
+  language_by: 'няма дадзеных...',
+};
