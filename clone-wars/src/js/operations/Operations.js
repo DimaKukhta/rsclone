@@ -20,8 +20,6 @@ import { addZeroes, groupDecimals } from '../utils/utils';
 
 import updateData from '../utils/updateData';
 
-// import callModalWindow from './callModalWindow';
-
 export default class Operations {
   createOperations(operationType) {
     const lang = getCurrentLanguage();
@@ -57,9 +55,9 @@ export default class Operations {
     }
     const sign = (operationType === 'expense') ? '-' : '+';
 
-    // this.operations.addEventListener('click', ({ target }) => {
-    //   this.callModalWindow(target, operationType);
-    // });
+    this.operations.addEventListener('click', ({ target }) => {
+      this.callModalWindow(target, operationType);
+    });
 
     const fragment = new DocumentFragment();
     const horisontalLine = document.createElement('hr');
@@ -113,7 +111,8 @@ export default class Operations {
         const operationValue = sortedByCategories[index].value;
 
         const dateText = `${addZeroes(day)} ${monthNames[lang][monthIndex]} ${year}`;
-        operationLi.innerHTML = `<span class = '${textColor}'>${sign}${groupDecimals(operationValue)} <span class = 'currency ${textColor}'>${currencyNames[currency]}</span></span>
+        operationLi.innerHTML = `<span class = '${textColor}'>${sign}${groupDecimals(operationValue)}
+        <span class = 'currency ${textColor}'>${currencyNames[currency]}</span></span>
           <span>${dateText}</span>`;
 
         const deleteBtn = document.createElement('button');
@@ -121,9 +120,6 @@ export default class Operations {
         deleteBtn.dataset.id = sortedByCategories[index].id;
         deleteBtn.dataset.value = operationValue;
         deleteBtn.textContent = '✖';
-        deleteBtn.addEventListener('click', ({ target }) => {
-          this.callModalWindow(target, operationType);
-        });
 
         recordContainer.append(deleteBtn);
         recordContainer.append(operationLi);
@@ -178,36 +174,38 @@ export default class Operations {
     if (target.classList.contains('delete-record')) {
       const popUp = document.querySelector('#popUp');
       const modalWindow = document.querySelector('#modalWindow');
-      const modalCancel = document.querySelector('#modal-cancel');
-      const modalDelete = document.querySelector('#modal-delete');
+      const btns = document.querySelector('.modalWindow-footer');
 
       popUp.classList.add('popUp-visible');
       modalWindow.classList.remove('modalWindow');
 
-      modalCancel.addEventListener('click', () => {
-        popUp.classList.remove('popUp-visible');
-        modalWindow.classList.add('modalWindow');
-      });
-
-      modalDelete.addEventListener('click', () => {
-        popUp.classList.remove('popUp-visible');
-        modalWindow.classList.add('modalWindow');
-        console.log(target, operationType)
-        this.deleteRecord(target, operationType);
-      });
+      btns.addEventListener('click', (e) => {
+        if (e.target.classList.contains('btn')) {
+          switch (e.target.id) {
+            case 'modal-cancel':
+              popUp.classList.remove('popUp-visible');
+              modalWindow.classList.add('modalWindow');
+              break;
+            case 'modal-delete':
+              popUp.classList.remove('popUp-visible');
+              modalWindow.classList.add('modalWindow');
+              this.deleteRecord(target, operationType);
+              break;
+            default:
+              break;
+          }
+        }
+      }, { once: true });
     }
   }
 
   deleteRecord(target, operationType) {
-    // if (target.classList.contains('delete-record')) {
-    console.log('delete', target, operationType)
     const operationsCopy = [...getIntervalData(operationType)];
-    console.log(operationsCopy)
+
     const deleteId = target.dataset.id;
     const deleteRecordIndex = operationsCopy.findIndex(({ id }) => id === deleteId);
 
-    // operationsCopy.splice(deleteRecordIndex, 1);
-    console.log(deleteRecordIndex, operationsCopy)
+    operationsCopy.splice(deleteRecordIndex, 1);
 
     localStorage.setItem(operationType, JSON.stringify(operationsCopy));
 
@@ -228,7 +226,6 @@ export default class Operations {
       record.remove();
     }
     // updateData(localStorage.getItem('login'));
-    // }
   }
 
   renderIn(element) {
@@ -256,7 +253,6 @@ function expandAndCollapseList({ target }) {
 }
 
 function updateSummaryForInterval(deleteBtn, deleteValue, operationType) {
-  console.log('updatesummary', deleteBtn)
   const operation = deleteBtn.closest('.operations');
   const total = operation.querySelector('.interval-total');
   const currentValue = total.dataset.value;
@@ -274,25 +270,3 @@ function updateTotalForCategory(deleteBtn, deleteValue, operationType) {
   total.dataset.value = updateValue;
   total.textContent = (operationType === 'expense') ? `-${groupDecimals(updateValue)}` : `+${groupDecimals(updateValue)}`;
 }
-
-// function callModalWindow(target, operationType) {
-//   const popUp = document.querySelector('#popUp');
-//   const modalWindow = document.querySelector('#modalWindow');
-//   const modalCancel = document.querySelector('#modal-cancel');
-//   const modalDelete = document.querySelector('#modal-delete');
-
-//   popUp.classList.add('popUp-visible');
-//   modalWindow.classList.remove('modalWindow');
-
-//   modalCancel.addEventListener('click', () => {
-//     popUp.classList.remove('popUp-visible');
-//     modalWindow.classList.add('modalWindow');
-//   });
-
-//   modalDelete.addEventListener('click', () => {
-//     popUp.classList.remove('popUp-visible');
-//     modalWindow.classList.add('modalWindow');
-//     const operations = new Operations();
-//     operations.deleteRecord(target, operationType);
-//   });
-// }
