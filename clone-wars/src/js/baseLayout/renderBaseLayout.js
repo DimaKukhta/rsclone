@@ -15,6 +15,7 @@ import {
 } from '../interval/interval';
 
 import Operations from '../operations/Operations';
+import drawOperations from '../operations/drawOperations';
 import { updateBalance } from '../addOperation/processingOperation';
 
 export function renderHTML() {
@@ -133,10 +134,7 @@ export function renderLayout() {
   setIntervalDate(currentDatestamp);
 
   btnOperations.addEventListener('click', () => {
-    const main = document.querySelector('#main-content');
-    main.innerHTML = '';
-    operations.renderIn(main);
-
+    drawOperations();
     // settings rewrite
     settingsRewrite();
   });
