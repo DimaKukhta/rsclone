@@ -108,7 +108,6 @@ export default class Operations {
         const operationLi = document.createElement('li');
         operationLi.classList.add('record-data');
 
-
         const operationValue = sortedByCategories[index].value;
         // groupDecimals(
         const dateText = `${addZeroes(day)} ${monthNames[lang][monthIndex]} ${year}`;

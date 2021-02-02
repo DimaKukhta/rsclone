@@ -5,7 +5,7 @@ export function addZeroes(num) {
 export function groupDecimals(num) {
   let [main, rest] = `${num}`.split('.');
   const result = (+main).toLocaleString();
-  rest = (rest) ? rest : '00';
+  rest = (rest) || '00';
   return `${result.replace(/,/g, ' ')}.${rest}`;
 }
 
