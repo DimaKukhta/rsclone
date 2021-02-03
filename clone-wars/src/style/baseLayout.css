@@ -1,6 +1,32 @@
 /* HEADER */
+.pig {
+  width: 88px;
+}
+
+.animation-container {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+
+  font-weight: 900;
+}
+
+.income-animation {
+  color: var(--color-green);
+
+  animation-name: scale-opacity;
+  animation-duration: 6s;
+}
+
+.expense-animation {
+  color: var(--color-red);
+
+  animation-name: scale-opacity;
+  animation-duration: 6s;
+}
+
 .header {
-  height: 7rem;
+  height: 8rem;
 }
 
 .header-image {
@@ -19,12 +45,12 @@
 main {
   display: flex;
   justify-content: center;
-  height: calc(100% - 17rem);
+  height: calc(100% - 10rem);
 }
 
 /* FOOTER */
 footer {
-  height: 10rem;
+  height: 9rem;
   margin-top: auto;
 }
 
@@ -49,7 +75,7 @@ button:focus {
 }
 
 .footer-btn-image {
-  height: 3rem;
+  height: 2rem;
 }
 
 .btn-add-operation {
@@ -83,7 +109,7 @@ button:focus {
 }
 
 .footer-text {
-  height: 3rem;
+  height: 2rem;
 }
 
 .footer-link {
@@ -107,6 +133,18 @@ button:focus {
   height: 100%;
 }
 
+@keyframes scale-opacity {
+  from {
+    transform: scale(10);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(45);
+    opacity: 0;
+  }
+}
+
 @media (max-width: 993px) {
   .footer-central-button {
     visibility: hidden;
@@ -123,8 +161,14 @@ button:focus {
   }
 }
 
-@media (max-width: 775px) {
+@media (max-width: 780px) {
   .header-image {
+    display: none;
+  }
+}
+
+@media (max-width: 575px) {
+  .footer-btn-text {
     display: none;
   }
 }
