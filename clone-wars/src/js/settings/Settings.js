@@ -315,6 +315,11 @@ export default class Settings {
           h3Table.classList.remove('text-warning');
           h4Table.forEach((el) => el.classList.remove('text-warning'));
         }
+        const isOperationsTab = document.querySelector('.operations-container');
+        if (isOperationsTab) {
+          const textPar = document.querySelectorAll('p');
+          textPar.forEach((el) => el.classList.remove('text_dark'));
+        }
         this.buttons.forEach((btn) => {
           btn.classList.remove('dark_btn');
         });
