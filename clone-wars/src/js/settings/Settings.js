@@ -247,9 +247,11 @@ export default class Settings {
       this.themeLocal = localStorage.getItem('theme');
       // dark on
       if (this.themeLocal === 'false') {
-        this.textSpan[1].classList.add('text_dark');
+        this.textSpan[2].classList.add('text_dark');
+        console.log(this.textSpan)
         this.header.classList.add('bgc_dark');
         this.main.classList.add('bgc_dark');
+      
         this.footer.classList.add('bgc_dark');
         this.currentAmount.classList.add('text_dark');
         this.interval.classList.add('text_dark');
@@ -265,11 +267,11 @@ export default class Settings {
         if (this.isRecordExpander) {
           this.isRecordExpander.forEach((el) => el.classList.add('text_dark'));
         }
-        this.textP[0].classList.add('text_dark');
+        // this.textP[0].classList.add('text_dark');
         this.buttons.forEach((btn) => {
           btn.classList.add('dark_btn');
         });
-        this.textSpan[0].classList.remove('text_dark');
+        this.textSpan[1].classList.remove('text_dark');
         this.isHotkeys = document.querySelector('.hotkeys-table');
         if (this.isHotkeys) {
           const table = document.querySelectorAll('table');
@@ -282,6 +284,8 @@ export default class Settings {
       }
       // dark off
       if (this.themeLocal === 'true') {
+        this.textSpan[2].classList.remove('text_dark');
+
         this.textSpan[1].classList.remove('text_dark');
         this.header.classList.remove('bgc_dark');
         this.main.classList.remove('bgc_dark');
