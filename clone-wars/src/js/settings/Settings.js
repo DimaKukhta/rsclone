@@ -1,9 +1,10 @@
 /* eslint-disable import/no-duplicates */
 import { switchLang } from '../data/baselayoutLang';
 import lang from '../data/baselayoutLang';
-// import { renderHTML, renderLayout } from '../baseLayout/renderBaseLayout';
 import Operations from '../operations/Operations';
-import addOperation from '../addOperation/addOperation';
+import addReport from '../addReport/addReport';
+import drawOperations from '../addOperation/addOperation';
+import drawHotKeys from '../drawHotKeys/drawHotKeys';
 
 export default class Settings {
   constructor(operationsSettings, recordExpander) {
@@ -13,19 +14,8 @@ export default class Settings {
     this.sound = lang.sound;
     this.set = document.querySelector('.settings');
     this.countButtonSettings = false;
-    // theme togler mem
-    this.themeLocal = localStorage.getItem('theme');
-    if (this.themeLocal === undefined) {
-      this.checkedToggler = 'checked';
-    }
-    if (this.themeLocal === 'false') {
-      this.checkedToggler = '';
-    } else {
-      this.checkedToggler = 'checked';
-    }
 
     this.themeToggler = document.getElementsByName('onoffswitch');
-
     this.textP = document.querySelectorAll('p');
     this.textSpan = document.querySelectorAll('span');
 
@@ -37,7 +27,8 @@ export default class Settings {
     this.footer = document.querySelector('footer');
     this.currentAmount = document.getElementById('current-amount');
     this.interval = document.getElementById('interval');
-
+    this.createdBy = document.getElementById('createdBy_footer');
+    this.forRS = document.getElementById('forRS_footer');
     this.readerLocalStorage();
     this.render();
     this.handlers();
@@ -68,6 +59,16 @@ export default class Settings {
     if (this.currencyLocal === 'currency_byn') this.currencyFirstTimeBUN = 'checked';
     if (this.currencyLocal === 'currency_us') this.currencyUS = 'checked';
     if (this.currencyLocal === 'currency_eu') this.currencyEU = 'checked';
+
+    this.themeLocal = localStorage.getItem('theme');
+    if (this.themeLocal === undefined) this.checkedToggler = 'checked';
+    if (this.themeLocal === 'false') this.checkedToggler = '';
+    else this.checkedToggler = 'checked';
+
+    this.isSound = localStorage.getItem('sound');
+    if (this.isSound === undefined || !this.isSound) this.checked = 'checked';
+    if (this.isSound === 'false') this.checked = '';
+    if (this.isSound === 'true') this.checked = 'checked';
   }
 
   render() {
@@ -92,7 +93,7 @@ export default class Settings {
               <label class="form-check-label box_sound__label" for="flexCheckChecked" id="settings_sound">
                 ${this.sound}
               </label>
-              <input class="form-check-input box_sound__input" type="checkbox" value="" id="flexCheckChecked" checked>
+              <input class="form-check-input box_sound__input" type="checkbox" value="" id="flexCheckChecked" ${this.checked}>
 
             </div>
             
@@ -107,11 +108,11 @@ export default class Settings {
                   <label for="currency_byn"><span>BYN</span></label>
                 </div>
                 <div>
-                  <input type="radio" class="settings_radio form-check-input" name="currency" value="US" id="currency_us" ${this.currencyUS}>
+                  <input type="radio" class="settings_radio form-check-input" name="currency" value="$" id="currency_us" ${this.currencyUS}>
                   <label for="currency_us"><span>US</span></label>
                 </div>
                 <div>
-                  <input type="radio" class="settings_radio form-check-input" name="currency" value="EU" id="currency_eu" ${this.currencyEU}>
+                  <input type="radio" class="settings_radio form-check-input" name="currency" value="€" id="currency_eu" ${this.currencyEU}>
                   <label for="currency_eu"><span>EU</span></label>
                 </div>
               </form>
@@ -150,7 +151,6 @@ export default class Settings {
     localStorage.setItem('currency', this.id);
     this.currentCurrency = document.getElementById('current-currency');
     this.currentCurrency.innerText = (() => this.value)();
-    this.operationsS = new Operations('789');
     const isOperationsTab = document.querySelector('.operations-container');
     if (isOperationsTab) {
       const operationsL = new Operations();
@@ -163,13 +163,9 @@ export default class Settings {
   changeLang() {
     localStorage.setItem('language', this.id);
     this.addButtonText = document.getElementById('btn-add-operation').lastElementChild;
-    // balance
-    this.balance = document.getElementById('balance');
-    this.balance.innerText = switchLang().balance;
     // interval
     this.isInterval = document.getElementById('interval');
     if (this.isInterval.dataset.date === '0') {
-      console.log(this.isInterval.dataset.date);
       this.isInterval.textContent = switchLang().allExpenses;
     }
     this.consoleOption = document.querySelector('#interval-select');
@@ -183,6 +179,8 @@ export default class Settings {
     this.add = document.getElementById('add');
     this.hotkeys = document.getElementById('hotkeys');
     this.settingsSpan = document.getElementById('settings_span');
+    this.createdBy = document.getElementById('createdBy_footer');
+    this.forRS = document.getElementById('forRS_footer');
 
     this.operations.innerText = switchLang().operations;
     this.reports.innerText = switchLang().reports;
@@ -199,6 +197,31 @@ export default class Settings {
     this.currencyLife.innerText = switchLang().currency;
     this.languageLife.innerText = switchLang().language;
     this.soundLife.innerText = switchLang().sound;
+    this.createdBy.innerText = switchLang().createdBy;
+    this.forRS.textContent = switchLang().createdBy;
+
+    const modalTitle = document.getElementById('modal_title');
+    const modalCancel = document.getElementById('modal-cancel');
+    const modalDelete = document.getElementById('modal-delete');
+    modalTitle.innerText = switchLang().modalTitle;
+    modalCancel.innerText = switchLang().modalCancel;
+    modalDelete.innerText = switchLang().modalDelete;
+
+    const isDrawHotKeys = document.querySelector('.hotkeys-table');
+    if (isDrawHotKeys) {
+      drawHotKeys();
+      // settingsRewrite();
+      this.themeLocal = localStorage.getItem('theme');
+      // dark on
+      if (this.themeLocal === 'false') {
+        const table = document.querySelectorAll('table');
+        table.forEach((tableIn) => tableIn.classList.add('text_dark'));
+        const h3Table = document.querySelector('h3');
+        const h4Table = document.querySelectorAll('h4');
+        h3Table.classList.add('text-warning');
+        h4Table.forEach((el) => el.classList.add('text-warning'));
+      }
+    }
 
     const isOperationsTab = document.querySelector('.operations-container');
     if (isOperationsTab) {
@@ -207,9 +230,15 @@ export default class Settings {
       this.isRecordExpander = document.querySelectorAll('.record-expander');
       this.isRecordExpander.forEach((el) => el.classList.add('text_dark'));
     }
-    const isAddOperationTab = document.querySelector('.add-operation-image');
+
+    const isAddOperationTab = document.querySelector('#add-expense');
     if (isAddOperationTab) {
-      addOperation();
+      drawOperations();
+    }
+
+    const isReportTab = document.querySelector('.chart-container');
+    if (isReportTab) {
+      addReport();
     }
   }
 
@@ -224,6 +253,8 @@ export default class Settings {
         this.footer.classList.add('bgc_dark');
         this.currentAmount.classList.add('text_dark');
         this.interval.classList.add('text_dark');
+        this.createdBy.classList.add('text_dark');
+        this.forRS.classList.add('text_dark');
         // settings
         this.set.classList.add('bgc_dark_settings');
         // add operation
@@ -239,6 +270,15 @@ export default class Settings {
           btn.classList.add('dark_btn');
         });
         this.textSpan[0].classList.remove('text_dark');
+        this.isHotkeys = document.querySelector('.hotkeys-table');
+        if (this.isHotkeys) {
+          const table = document.querySelectorAll('table');
+          table.forEach((tableIn) => tableIn.classList.add('text_dark'));
+          const h3Table = document.querySelector('h3');
+          const h4Table = document.querySelectorAll('h4');
+          h3Table.classList.add('text-warning');
+          h4Table.forEach((el) => el.classList.add('text-warning'));
+        }
       }
       // dark off
       if (this.themeLocal === 'true') {
@@ -248,6 +288,8 @@ export default class Settings {
         this.footer.classList.remove('bgc_dark');
         this.currentAmount.classList.remove('text_dark');
         this.interval.classList.remove('text_dark');
+        this.createdBy.classList.remove('text_dark');
+        this.forRS.classList.remove('text_dark');
 
         this.set.classList.remove('bgc_dark_settings');
 
@@ -260,6 +302,14 @@ export default class Settings {
         this.isRecordExpander = document.querySelectorAll('.record-expander');
         if (this.isRecordExpander) {
           this.isRecordExpander.forEach((el) => el.classList.add('text_dark'));
+        }
+        if (this.isHotkeys) {
+          const table = document.querySelectorAll('table');
+          table.forEach((tableIn) => tableIn.classList.remove('text_dark'));
+          const h3Table = document.querySelector('h3');
+          const h4Table = document.querySelectorAll('h4');
+          h3Table.classList.remove('text-warning');
+          h4Table.forEach((el) => el.classList.remove('text-warning'));
         }
         this.buttons.forEach((btn) => {
           btn.classList.remove('dark_btn');

@@ -1,7 +1,7 @@
 const currency = {
   currency_byn: 'BYN',
-  currency_us: 'US',
-  currency_eu: 'EU',
+  currency_us: '$',
+  currency_eu: '€',
 };
 const getCurrency = () => {
   const localCurrency = localStorage.getItem('currency');

@@ -52,16 +52,15 @@ export function renderHTML() {
     <div id="modalWindow" class="modalWindow modalWindow-visible">
     <div class="modal-content">
       <div class="modalWindow-body">
-        <span>Do you want to delete the entry?</span>
+        <span id="modal_title">${lang.modalTitle}</span>
       </div>
       <div class="modalWindow-footer">
-        <button id="modal-cancel" type="button" class="btn btn-secondary me-2">Cancel</button>
-        <button id="modal-delete" type="button" class="btn btn-primary">Delete</button>
+        <button id="modal-cancel" type="button" class="btn btn-success me-2">${lang.modalCancel}</button>
+        <button id="modal-delete" type="button" class="btn btn-danger">${lang.modalDelete}</button>
       </div>
     </div>    
     </div>
     <div class="d-flex justify-content-center flex-wrap" id="main-content">
-        
         <!-- all content is here -->
 
     </div>
@@ -97,15 +96,14 @@ export function renderHTML() {
         </button>
         </nav>
         <div class="flex-row d-flex justify-content-center align-items-end flex-wrap footer-text">
-          <span>Created by:</span>
-          <a class="footer-link" href="https://github.com/DimaKukhta">DimaKukhta, </a>
-          <a class="footer-link" href="https://github.com/natgeo89">natgeo89, </a>
-          <a class="footer-link" href="https://github.com/artemosadchuck">artemosadchuck, </a>
-          <a class="footer-link" href="https://github.com/confesssa">confesssa</a>
-          <span>for</span>
+          <span id="createdBy_footer">${lang.createdBy}</span><span>&nbsp;</span>  
+          <a class="footer-link" href="https://github.com/DimaKukhta">DimaKukhta,</a>&nbsp;
+          <a class="footer-link" href="https://github.com/natgeo89">natgeo89,</a>&nbsp;
+          <a class="footer-link" href="https://github.com/artemosadchuck">artemosadchuck,</a>&nbsp;
+          <a class="footer-link" href="https://github.com/confesssa">confesssa</a>&nbsp;
+          <span id="forRS_footer">${lang.forRS}</span>
           <a class="footer-link" href="https://rs.school/js/"><img class="footer-image" src="./assets/rss.svg"
-              alt="Rolling Scope School" />
-            Rolling Scope School</a>
+              alt="Rolling Scope School"/>Rolling Scope School</a>&nbsp;
           <span>2021</span>
         </div>
       </div>
@@ -134,8 +132,10 @@ export function renderLayout() {
 
   btnReport.addEventListener('click', addReport);
   btnAddOperation.addEventListener('click', addOperation);
-  btnHotKeys.addEventListener('click', drawHotKeys);
-
+  btnHotKeys.addEventListener('click', () => {
+    drawHotKeys();
+    settingsRewrite();
+  });
   // window.onload = addOperation;
 
   addOperation();

@@ -13,7 +13,9 @@ import {
   getCategoryLang,
 } from '../data/getData';
 
-import { monthNames, currencyNames, operationLang, noDataText } from '../data/translate';
+import {
+  monthNames, currencyNames, operationLang, noDataText,
+} from '../data/translate';
 
 import { updateBalance } from '../addOperation/processingOperation';
 import { addZeroes, groupDecimals } from '../utils/utils';
