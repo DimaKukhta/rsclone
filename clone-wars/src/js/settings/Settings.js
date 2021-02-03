@@ -230,7 +230,9 @@ export default class Settings {
       this.isRecordExpander = document.querySelectorAll('.record-expander');
       this.isRecordExpander.forEach((el) => el.classList.add('text_dark'));
       const textPar = document.querySelectorAll('p');
-      textPar.forEach((el) => el.classList.add('text_dark'));
+      const localTheme = localStorage.getItem('theme');
+      if (localTheme === 'false') textPar.forEach((el) => el.classList.add('text_dark'));
+      // textPar.forEach((el) => el.classList.add('text_dark'));
     }
 
     const isAddOperationTab = document.querySelector('#add-expense');
@@ -280,6 +282,11 @@ export default class Settings {
           const h4Table = document.querySelectorAll('h4');
           h3Table.classList.add('text-warning');
           h4Table.forEach((el) => el.classList.add('text-warning'));
+        }
+        const isOperationsTab = document.querySelector('.operations-container');
+        if (isOperationsTab) {
+          const textPar = document.querySelectorAll('p');
+          textPar.forEach((el) => el.classList.add('text_dark'));
         }
       }
       // dark off
