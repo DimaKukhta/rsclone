@@ -4,56 +4,6 @@
 
 .add-income {
   padding-left: 3rem;
-} 
-
-
-.pig {
-  min-width: 150px;
-}
-
-.add-operation-image {
-  position: relative;
-
-  margin-right: 800px;
-  margin-left: 800px;
-
-  font-size: 1px;
-
-  text-align: center;
-}
-
-.animation-container {
-  position: absolute;
-  top: 60%;
-  left: 50%;
-
-  font-weight: 900;
-}
-
-.income-animation {
-  color: var(--color-green);
-
-  animation-name: scale-opacity;
-  animation-duration: 6s;
-}
-
-.expense-animation {
-  color: var(--color-red);
-
-  animation-name: scale-opacity;
-  animation-duration: 6s;
-}
-
-@keyframes scale-opacity {
-  from {
-    transform: scale(10);
-    opacity: 1;
-  }
-
-  to {
-    transform: scale(50);
-    opacity: 0;
-  }
 }
 
 @media (max-width: 530px) {

@@ -218,21 +218,21 @@ function drawAddIncome() {
   mainContent.append(fragment);
 }
 
-function drawImage() {
-  const mainContent = document.querySelector('#main-content');
-  const fragment = new DocumentFragment();
-  const container = document.createElement('div');
-  container.classList.add('add-operation-image');
+// function drawImage() {
+//   const mainContent = document.querySelector('#main-content');
+//   const fragment = new DocumentFragment();
+//   const container = document.createElement('div');
+//   container.classList.add('add-operation-image');
 
-  const image = document.createElement('img');
-  const animationContainer = document.createElement('span');
-  animationContainer.classList.add('animation-container');
-  image.classList.add('w-100', 'mt-5', 'pig');
-  image.src = './assets/icons/Saving.svg';
-  container.append(animationContainer, image);
-  fragment.append(container);
-  mainContent.append(fragment);
-}
+//   const image = document.createElement('img');
+//   const animationContainer = document.createElement('span');
+//   animationContainer.classList.add('animation-container');
+//   image.classList.add('w-100', 'mt-5', 'pig');
+//   image.src = './assets/icons/Saving.svg';
+//   container.append(animationContainer, image);
+//   fragment.append(container);
+//   mainContent.append(fragment);
+// }
 
 export default function addOperation() {
   const mainContent = document.querySelector('#main-content');
@@ -240,5 +240,5 @@ export default function addOperation() {
 
   drawAddExpense();
   drawAddIncome();
-  drawImage();
+  // drawImage();
 }

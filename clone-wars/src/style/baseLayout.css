@@ -1,6 +1,32 @@
 /* HEADER */
+.pig {
+  width: 88px;
+}
+
+.animation-container {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+
+  font-weight: 900;
+}
+
+.income-animation {
+  color: var(--color-green);
+
+  animation-name: scale-opacity;
+  animation-duration: 6s;
+}
+
+.expense-animation {
+  color: var(--color-red);
+
+  animation-name: scale-opacity;
+  animation-duration: 6s;
+}
+
 .header {
-  height: 7rem;
+  height: 9rem;
 }
 
 .header-image {
@@ -19,7 +45,7 @@
 main {
   display: flex;
   justify-content: center;
-  height: calc(100% - 17rem);
+  height: calc(100% - 19rem);
 }
 
 /* FOOTER */
@@ -105,6 +131,18 @@ button:focus {
 #main-content {
   width: 100%;
   height: 100%;
+}
+
+@keyframes scale-opacity {
+  from {
+    transform: scale(10);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(50);
+    opacity: 0;
+  }
 }
 
 @media (max-width: 993px) {

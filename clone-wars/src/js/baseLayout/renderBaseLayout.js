@@ -20,8 +20,11 @@ import { updateBalance } from '../addOperation/processingOperation';
 export function renderHTML() {
   const html = `<header class="navbar navbar-light bg-white header border-bottom">
     <div class="container">
-        <div class="col-2">
-        <p id="balance">${lang.balance}</p>
+        <div class="text-center">
+        <div>
+        <img class="pig" src="./assets/icons/Saving.svg" alt="pig">
+        <span class="animation-container"></span>
+        </div>
         <p class="fw-bold">
             <span id="current-amount" class="current-amount balance"></span
             ><span id="current-currency">${getCurrency}</span>
