@@ -229,6 +229,8 @@ export default class Settings {
       operationsL.updateOperations();
       this.isRecordExpander = document.querySelectorAll('.record-expander');
       this.isRecordExpander.forEach((el) => el.classList.add('text_dark'));
+      const textPar = document.querySelectorAll('p');
+      textPar.forEach((el) => el.classList.add('text_dark'));
     }
 
     const isAddOperationTab = document.querySelector('#add-expense');
@@ -265,7 +267,7 @@ export default class Settings {
         if (this.isRecordExpander) {
           this.isRecordExpander.forEach((el) => el.classList.add('text_dark'));
         }
-        // this.textP[0].classList.add('text_dark');
+        this.textP[0].classList.add('text_dark');
         this.buttons.forEach((btn) => {
           btn.classList.add('dark_btn');
         });
