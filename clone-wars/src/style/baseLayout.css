@@ -140,7 +140,7 @@ button:focus {
   }
 
   to {
-    transform: scale(50);
+    transform: scale(45);
     opacity: 0;
   }
 }
@@ -161,8 +161,14 @@ button:focus {
   }
 }
 
-@media (max-width: 775px) {
+@media (max-width: 780px) {
   .header-image {
+    display: none;
+  }
+}
+
+@media (max-width: 575px) {
+  .footer-btn-text {
     display: none;
   }
 }

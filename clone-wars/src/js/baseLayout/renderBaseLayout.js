@@ -73,27 +73,27 @@ export function renderHTML() {
         >
         <button type="button" id = "btn-operations" class="btn btn-success nav-button col-2" accesskey="1" title="hotkey '1'">
             <img class="footer-btn-image" src="./assets/icons/001.svg" alt="Operation" />
-            <span id="operations" class="d-block">${lang.operations}</span>
+            <span id="operations" class="d-block footer-btn-text">${lang.operations}</span>
         </button>
 
         <button type="button" id="btn-report" class="btn btn-success nav-button col-2" accesskey="2" title="hotkey '2'">
             <img class="footer-btn-image" src="./assets/icons/002.svg" alt="Report" />
-            <span id="reports" class="d-block">${lang.reports}</span>
+            <span id="reports" class="d-block footer-btn-text">${lang.reports}</span>
         </button>
 
         <button type="button" id="btn-add-operation" class="col-2 btn-add-operation" accesskey="3" title="hotkey '3'">
             <img class="footer-btn-image" src="./assets/icons/005.svg" alt="add">
-            <span id="add" class="text-nowrap d-block text-success fw-bold">${lang.add}</span>
+            <span id="add" class="text-nowrap d-block text-success fw-bold footer-btn-text">${lang.add}</span>
         </button>
 
         <button type="button" id="btn-hotkeys" class="btn btn-success col-2"  accesskey="4" title="hotkey '4'">
             <img class="footer-btn-image" src="./assets/icons/003.svg" alt="Category" />
-            <span id="hotkeys" class="d-block">${lang.hotkeys}</span>
+            <span id="hotkeys" class="d-block footer-btn-text">${lang.hotkeys}</span>
         </button>
 
         <button type="button" id="settings" class="btn btn-success col-2" accesskey="5" title="hotkey '5'">
             <img class="footer-btn-image" src="./assets/icons/004.svg" alt="Settings"/>
-            <span id="settings_span" class="d-block">${lang.settings}</span>
+            <span id="settings_span" class="d-block footer-btn-text">${lang.settings}</span>
         </button>
         </nav>
         <div class="flex-row d-flex justify-content-center align-items-end flex-wrap footer-text">
