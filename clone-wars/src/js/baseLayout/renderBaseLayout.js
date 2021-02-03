@@ -20,7 +20,7 @@ import { updateBalance } from '../addOperation/processingOperation';
 export function renderHTML() {
   const html = `<header class="navbar navbar-light bg-white header border-bottom">
     <div class="container">
-        <div class="text-center">
+        <div class="text-center col-2">
         <div>
         <img class="pig" src="./assets/icons/Saving.svg" alt="pig">
         <span class="animation-container"></span>
