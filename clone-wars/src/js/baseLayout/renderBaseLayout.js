@@ -101,7 +101,7 @@ export function renderHTML() {
           <a class="footer-link" href="https://github.com/natgeo89">natgeo89,</a>&nbsp;
           <a class="footer-link" href="https://github.com/artemosadchuck">artemosadchuck,</a>&nbsp;
           <a class="footer-link" href="https://github.com/confesssa">confesssa</a>&nbsp;
-          <span id="forRS_footer">${lang.forRS}</span>
+          <span id="forRS_footer">${lang.forRS}</span><span>&nbsp;</span>
           <a class="footer-link" href="https://rs.school/js/"><img class="footer-image" src="./assets/rss.svg"
               alt="Rolling Scope School"/>Rolling Scope School</a>&nbsp;
           <span>2021</span>

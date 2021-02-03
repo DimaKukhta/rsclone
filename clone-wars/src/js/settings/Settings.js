@@ -198,7 +198,7 @@ export default class Settings {
     this.languageLife.innerText = switchLang().language;
     this.soundLife.innerText = switchLang().sound;
     this.createdBy.innerText = switchLang().createdBy;
-    this.forRS.textContent = switchLang().createdBy;
+    this.forRS.textContent = switchLang().forRS;
 
     const modalTitle = document.getElementById('modal_title');
     const modalCancel = document.getElementById('modal-cancel');
