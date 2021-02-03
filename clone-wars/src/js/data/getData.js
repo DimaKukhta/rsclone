@@ -21,10 +21,11 @@ export function getCategoryLang(operationType, category, lang) {
   switch (operationType) {
     case 'expense':
       categoryIndex = expenseCategories.findIndex(({ name }) => category === name);
-      return expenseCategories[categoryIndex].text[lang];
+      return (categoryIndex !== -1) ? expenseCategories[categoryIndex].text[lang] : category;
     case 'income':
       categoryIndex = incomeCategories.findIndex(({ name }) => category === name);
-      return incomeCategories[categoryIndex].text[lang];
+      return (categoryIndex !== -1) ? incomeCategories[categoryIndex].text[lang] : category;
+
     default:
       break;
   }
