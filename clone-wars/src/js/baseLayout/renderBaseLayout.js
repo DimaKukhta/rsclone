@@ -130,8 +130,10 @@ export function renderLayout() {
 
   btnReport.addEventListener('click', addReport);
   btnAddOperation.addEventListener('click', addOperation);
-  btnHotKeys.addEventListener('click', drawHotKeys);
-
+  btnHotKeys.addEventListener('click', () => {
+    drawHotKeys();
+    settingsRewrite();
+  });
   // window.onload = addOperation;
 
   addOperation();

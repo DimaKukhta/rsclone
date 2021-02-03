@@ -249,6 +249,11 @@ export default class Settings {
           btn.classList.add('dark_btn');
         });
         this.textSpan[0].classList.remove('text_dark');
+        this.isHotkeys = document.querySelector('.hotkeys-table');
+        if (this.isHotkeys) {
+          const table = document.querySelectorAll('table');
+          table.forEach((tableIn) => tableIn.classList.add('text_dark'));
+        }
       }
       // dark off
       if (this.themeLocal === 'true') {
@@ -272,6 +277,10 @@ export default class Settings {
         this.isRecordExpander = document.querySelectorAll('.record-expander');
         if (this.isRecordExpander) {
           this.isRecordExpander.forEach((el) => el.classList.add('text_dark'));
+        }
+        if (this.isHotkeys) {
+          const table = document.querySelectorAll('table');
+          table.forEach((tableIn) => tableIn.classList.remove('text_dark'));
         }
         this.buttons.forEach((btn) => {
           btn.classList.remove('dark_btn');
