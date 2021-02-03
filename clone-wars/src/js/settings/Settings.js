@@ -3,7 +3,8 @@ import { switchLang } from '../data/baselayoutLang';
 import lang from '../data/baselayoutLang';
 import Operations from '../operations/Operations';
 import addReport from '../addReport/addReport';
-import addOperation from '../addOperation/addOperation';
+import drawOperations from '../addOperation/addOperation';
+import drawHotKeys from '../drawHotKeys/drawHotKeys';
 
 export default class Settings {
   constructor(operationsSettings, recordExpander) {
@@ -209,6 +210,11 @@ export default class Settings {
     modalCancel.innerText = switchLang().modalCancel;
     modalDelete.innerText = switchLang().modalDelete;
 
+    const isDrawHotKeys = document.querySelector('.hotkeys-table');
+    if (isDrawHotKeys) {
+      drawHotKeys();
+    }
+
     const isOperationsTab = document.querySelector('.operations-container');
     if (isOperationsTab) {
       const operationsL = new Operations();
@@ -219,7 +225,7 @@ export default class Settings {
 
     const isAddOperationTab = document.querySelector('.add-operation-image');
     if (isAddOperationTab) {
-      addOperation();
+      drawOperations();
     }
 
     const isReportTab = document.querySelector('.chart-container');
@@ -260,6 +266,10 @@ export default class Settings {
         if (this.isHotkeys) {
           const table = document.querySelectorAll('table');
           table.forEach((tableIn) => tableIn.classList.add('text_dark'));
+          const h3Table = document.querySelector('h3');
+          const h4Table = document.querySelector('h4');
+          h3Table.classList.add('text-warning');
+          h4Table.classList.add('text-warning');
         }
       }
       // dark off
@@ -288,6 +298,10 @@ export default class Settings {
         if (this.isHotkeys) {
           const table = document.querySelectorAll('table');
           table.forEach((tableIn) => tableIn.classList.remove('text_dark'));
+          const h3Table = document.querySelector('h3');
+          const h4Table = document.querySelector('h4');
+          h3Table.classList.remove('text-warning');
+          h4Table.classList.remove('text-warning');
         }
         this.buttons.forEach((btn) => {
           btn.classList.remove('dark_btn');

@@ -19,6 +19,16 @@ const enL = {
   modalTitle: 'Do you want to delete the entry?',
   modalCancel: 'Cancel',
   modalDelete: 'Delete',
+  firstTableTitle: 'In the project you can use the following hotkeys',
+  secondTableTitle: 'In order to use hotkeys, find your operating system and browser in the table',
+  buttons: 'BUTTONS',
+  prevPeriod: 'Previous period',
+  nextPeriod: 'Next period',
+  selectPeriod: 'Select period',
+  hotKeys: 'Hotkeys',
+  browser: 'browser',
+  hotkey: 'hotkey',
+
 };
 
 const ruL = {
@@ -42,6 +52,15 @@ const ruL = {
   modalTitle: 'Вы хотите удалить запись?',
   modalCancel: 'Отмена',
   modalDelete: 'Удалить',
+  firstTableTitle: 'В проекте вы можете использовать следующие горячие клавиши',
+  secondTableTitle: 'Чтобы использовать горячие клавиши, найдите свою операционную систему и браузер в таблице.',
+  buttons: 'Кнопки',
+  prevPeriod: 'Предыдущий период',
+  nextPeriod: 'Следующий период',
+  selectPeriod: 'Выбор периода',
+  hotKeys: 'Горячие клавиши',
+  browser: 'Браузер',
+  hotkey: 'клавиша',
 };
 
 const byL = {
@@ -65,6 +84,15 @@ const byL = {
   modalTitle: 'Вы хочаце выдаліць запіс?',
   modalCancel: 'Адмена',
   modalDelete: 'Выдаліць',
+  firstTableTitle: 'У праекце вы можаце выкарыстоўваць наступныя гарачыя клавішы',
+  secondTableTitle: 'Каб выкарыстоўваць гарачыя клавішы, знайдзіце сваю аперацыйную сістэму і браўзэр ў табліцы.',
+  buttons: 'Кнопкі',
+  prevPeriod: 'Папярэдні перыяд',
+  nextPeriod: 'Наступны перыяд',
+  selectPeriod: 'Выбар перыяду',
+  hotKeys: 'Гарачыя клавішы',
+  browser: 'Браўзэр',
+  hotkey: 'клавіша',
 };
 
 const lang = (en, ru, by) => {
