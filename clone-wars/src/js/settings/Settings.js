@@ -202,6 +202,13 @@ export default class Settings {
     this.createdBy.innerText = switchLang().createdBy;
     this.forRS.textContent = switchLang().createdBy;
 
+    const modalTitle = document.getElementById('modal_title');
+    const modalCancel = document.getElementById('modal-cancel');
+    const modalDelete = document.getElementById('modal-delete');
+    modalTitle.innerText = switchLang().modalTitle;
+    modalCancel.innerText = switchLang().modalCancel;
+    modalDelete.innerText = switchLang().modalDelete;
+
     const isOperationsTab = document.querySelector('.operations-container');
     if (isOperationsTab) {
       const operationsL = new Operations();

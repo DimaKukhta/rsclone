@@ -16,6 +16,9 @@ const enL = {
   allExpenses: 'All expenses',
   createdBy: 'Created by:',
   forRS: 'for &nbsp;',
+  modalTitle: 'Do you want to delete the entry?',
+  modalCancel: 'Cancel',
+  modalDelete: 'Delete',
 };
 
 const ruL = {
@@ -36,6 +39,9 @@ const ruL = {
   allExpenses: 'Все расходы',
   createdBy: 'Cозданно:',
   forRS: 'для &nbsp;',
+  modalTitle: 'Вы хотите удалить запись?',
+  modalCancel: 'Отмена',
+  modalDelete: 'Удалить',
 };
 
 const byL = {
@@ -56,6 +62,9 @@ const byL = {
   allExpenses: 'Усе выдаткі',
   createdBy: 'Створаны:',
   forRS: 'для &nbsp;',
+  modalTitle: 'Вы хочаце выдаліць запіс?',
+  modalCancel: 'Адмена',
+  modalDelete: 'Выдаліць',
 };
 
 const lang = (en, ru, by) => {
