@@ -1,4 +1,5 @@
 import { renderHTML, renderLayout } from '../baseLayout/renderBaseLayout';
+import router from '../routering/router';
 
 export default class Authorization {
   constructor() {
@@ -70,6 +71,9 @@ export default class Authorization {
         this.hidden(container);
         renderHTML();
         renderLayout();
+        router();
+        // eslint-disable-next-line no-restricted-globals
+        location.hash = 'operation';
       }
     } else {
       loginInput.classList.add('is-invalid');
@@ -109,6 +113,9 @@ export default class Authorization {
         this.hidden(container);
         renderHTML();
         renderLayout();
+        router();
+        // eslint-disable-next-line no-restricted-globals
+        location.hash = 'operation';
       }
     } else {
       loginInput.classList.add('is-invalid');
