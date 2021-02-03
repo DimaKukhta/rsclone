@@ -248,10 +248,8 @@ export default class Settings {
       // dark on
       if (this.themeLocal === 'false') {
         this.textSpan[2].classList.add('text_dark');
-        console.log(this.textSpan)
         this.header.classList.add('bgc_dark');
         this.main.classList.add('bgc_dark');
-      
         this.footer.classList.add('bgc_dark');
         this.currentAmount.classList.add('text_dark');
         this.interval.classList.add('text_dark');
