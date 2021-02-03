@@ -80,7 +80,7 @@ export function isInputValid(operationType) {
   const val = +input.value;
   const isNumber = Number.isFinite(val);
 
-  return (isNumber && val > 0);
+  return (isNumber && val > 0 && val < 10000001);
 }
 
 export function validateInput(operationType) {

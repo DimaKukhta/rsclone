@@ -198,7 +198,7 @@ export default class Settings {
     this.languageLife.innerText = switchLang().language;
     this.soundLife.innerText = switchLang().sound;
     this.createdBy.innerText = switchLang().createdBy;
-    this.forRS.textContent = switchLang().createdBy;
+    this.forRS.textContent = switchLang().forRS;
 
     const modalTitle = document.getElementById('modal_title');
     const modalCancel = document.getElementById('modal-cancel');
@@ -229,6 +229,10 @@ export default class Settings {
       operationsL.updateOperations();
       this.isRecordExpander = document.querySelectorAll('.record-expander');
       this.isRecordExpander.forEach((el) => el.classList.add('text_dark'));
+      const textPar = document.querySelectorAll('p');
+      const localTheme = localStorage.getItem('theme');
+      if (localTheme === 'false') textPar.forEach((el) => el.classList.add('text_dark'));
+      // textPar.forEach((el) => el.classList.add('text_dark'));
     }
 
     const isAddOperationTab = document.querySelector('#add-expense');
@@ -247,7 +251,7 @@ export default class Settings {
       this.themeLocal = localStorage.getItem('theme');
       // dark on
       if (this.themeLocal === 'false') {
-        this.textSpan[1].classList.add('text_dark');
+        this.textSpan[2].classList.add('text_dark');
         this.header.classList.add('bgc_dark');
         this.main.classList.add('bgc_dark');
         this.footer.classList.add('bgc_dark');
@@ -269,7 +273,7 @@ export default class Settings {
         this.buttons.forEach((btn) => {
           btn.classList.add('dark_btn');
         });
-        this.textSpan[0].classList.remove('text_dark');
+        this.textSpan[1].classList.remove('text_dark');
         this.isHotkeys = document.querySelector('.hotkeys-table');
         if (this.isHotkeys) {
           const table = document.querySelectorAll('table');
@@ -279,9 +283,16 @@ export default class Settings {
           h3Table.classList.add('text-warning');
           h4Table.forEach((el) => el.classList.add('text-warning'));
         }
+        const isOperationsTab = document.querySelector('.operations-container');
+        if (isOperationsTab) {
+          const textPar = document.querySelectorAll('p');
+          textPar.forEach((el) => el.classList.add('text_dark'));
+        }
       }
       // dark off
       if (this.themeLocal === 'true') {
+        this.textSpan[2].classList.remove('text_dark');
+
         this.textSpan[1].classList.remove('text_dark');
         this.header.classList.remove('bgc_dark');
         this.main.classList.remove('bgc_dark');
@@ -310,6 +321,11 @@ export default class Settings {
           const h4Table = document.querySelectorAll('h4');
           h3Table.classList.remove('text-warning');
           h4Table.forEach((el) => el.classList.remove('text-warning'));
+        }
+        const isOperationsTab = document.querySelector('.operations-container');
+        if (isOperationsTab) {
+          const textPar = document.querySelectorAll('p');
+          textPar.forEach((el) => el.classList.remove('text_dark'));
         }
         this.buttons.forEach((btn) => {
           btn.classList.remove('dark_btn');

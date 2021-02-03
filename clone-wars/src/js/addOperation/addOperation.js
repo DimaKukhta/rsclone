@@ -71,7 +71,8 @@ function drawAddExpense() {
   labelAmount.textContent = `${addOperationLang.amount}`;
 
   const input = document.createElement('input');
-
+  input.type = 'number';
+  input.max = '10000000';
   input.addEventListener('input', () => {
     validateInput('expense');
   });
@@ -171,7 +172,8 @@ function drawAddIncome() {
   labelAmount.textContent = `${addOperationLang.amount}`;
 
   const input = document.createElement('input');
-
+  input.type = 'number';
+  input.max = '10000000';
   input.addEventListener('input', () => {
     validateInput('income');
   });
