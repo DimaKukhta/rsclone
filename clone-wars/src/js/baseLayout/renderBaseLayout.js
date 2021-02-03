@@ -28,7 +28,7 @@ export function renderHTML() {
         </div>
         <p class="fw-bold">
             <span id="current-amount" class="current-amount balance"></span
-            ><span id="current-currency">${getCurrency}</span>
+            ><span id="current-currency" max-lenth="12">${getCurrency}</span>
         </p>
         </div>
         <div class="navigate-interval d-flex align-items-center">
