@@ -3,8 +3,12 @@
 }
 
 .records-container {
-  max-height: 500px;
+  max-height: 400px;
   overflow-y: auto;
+}
+
+.operations {
+  min-width: 321px;
 }
 
 .operations-expense {
@@ -99,5 +103,19 @@
   align-items: center;
   justify-content: flex-end;
   padding: .75rem;
+}
+
+@media (max-width: 800px) {
+  .operations {
+    margin: 0;
+  }
+
+  .operations-container {
+    flex-direction: column;
+  }
+
+  .operations-income {
+    padding-top: 3rem;
+  }
 }
 
