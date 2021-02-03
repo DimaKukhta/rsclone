@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?> <svg xmlns="http://www.w3.org/2000/svg" width="48" height="36" viewBox="0 0 48 36">
+  <defs>
+    <style>
+      .a {
+        fill: #d3d4ed;
+      }
+    </style>
+  </defs>
+  <title>8 Purse</title>
+  <g>
+    <path class="a" d="M40,0H5A5,5,0,0,0,0,5V31a5,5,0,0,0,5,5H40a5,5,0,0,0,5-5V28a2,2,0,0,0-2-2H42a8,8,0,0,1-8-8h0a8,8,0,0,1,8-8h1a2,2,0,0,0,2-2V5A5,5,0,0,0,40,0Z"/>
+    <path class="a" d="M42,14h4a2,2,0,0,1,2,2v4a2,2,0,0,1-2,2H42a4,4,0,0,1-4-4v0A4,4,0,0,1,42,14Z"/>
+  </g>
+</svg>
