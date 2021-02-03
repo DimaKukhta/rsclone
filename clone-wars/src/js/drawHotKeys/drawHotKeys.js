@@ -1,5 +1,6 @@
 function drawTable() {
   const mainContent = document.querySelector('#main-content');
+  location.hash = 'hot-keys';
   mainContent.innerHTML = '';
 
   mainContent.insertAdjacentHTML('beforeend', `<div class="container-tables">

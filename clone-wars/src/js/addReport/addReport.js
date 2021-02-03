@@ -2,6 +2,7 @@ import Charts from '../chart/Charts';
 
 export default function addReport() {
   const mainContent = document.querySelector('#main-content');
+  location.hash = 'report';
   mainContent.innerHTML = '';
   const container = document.querySelector('.container');
 
@@ -9,6 +10,5 @@ export default function addReport() {
 
   container.addEventListener('click', () => {
     chart.updateCharts();
-    console.log('click');
   });
 }

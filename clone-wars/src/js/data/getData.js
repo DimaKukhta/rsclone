@@ -30,7 +30,7 @@ export function getCategoryLang(operationType, category, lang) {
   }
 }
 
-export function getIntervalData(operationType, interval = 'all', currentDatestamp) {
+export function getIntervalData(operationType, interval = 'All', currentDatestamp) {
   const operationsArray = getOperations(operationType);
 
   let intervalArray;
