@@ -12,7 +12,8 @@
 
   --color-dark-them-btn:  rgba(0, 82, 82, 0.788);
   --color-dark-them-blue: rgba(7, 197, 197, 0.788);
-
+  
+  overflow-x: hidden;
   font-size: 1rem;
   font-family: "Montserrat Mono", Verdana, Geneva, Tahoma, sans-serif;
 }

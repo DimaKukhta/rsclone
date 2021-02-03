@@ -28,6 +28,8 @@ const enL = {
   hotKeys: 'Hotkeys',
   browser: 'browser',
   hotkey: 'hotkey',
+  operaOld: 'Opera 12.1 or older:',
+  operaNew: 'Opera 15 or newer:',
 
 };
 
@@ -61,6 +63,8 @@ const ruL = {
   hotKeys: 'Горячие клавиши',
   browser: 'Браузер',
   hotkey: 'клавиша',
+  operaOld: 'Opera 12.1 или старше:',
+  operaNew: 'Opera 15 или новее:',
 };
 
 const byL = {
@@ -93,6 +97,8 @@ const byL = {
   hotKeys: 'Гарачыя клавішы',
   browser: 'Браўзэр',
   hotkey: 'клавіша',
+  operaOld: 'Opera 12.1 або старэй:',
+  operaNew: 'Opera 15 або навей:',
 };
 
 const lang = (en, ru, by) => {

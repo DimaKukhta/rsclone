@@ -163,9 +163,6 @@ export default class Settings {
   changeLang() {
     localStorage.setItem('language', this.id);
     this.addButtonText = document.getElementById('btn-add-operation').lastElementChild;
-    // balance
-    this.balance = document.getElementById('balance');
-    this.balance.innerText = switchLang().balance;
     // interval
     this.isInterval = document.getElementById('interval');
     if (this.isInterval.dataset.date === '0') {
@@ -213,6 +210,17 @@ export default class Settings {
     const isDrawHotKeys = document.querySelector('.hotkeys-table');
     if (isDrawHotKeys) {
       drawHotKeys();
+      // settingsRewrite();
+      this.themeLocal = localStorage.getItem('theme');
+      // dark on
+      if (this.themeLocal === 'false') {
+        const table = document.querySelectorAll('table');
+        table.forEach((tableIn) => tableIn.classList.add('text_dark'));
+        const h3Table = document.querySelector('h3');
+        const h4Table = document.querySelectorAll('h4');
+        h3Table.classList.add('text-warning');
+        h4Table.forEach((el) => el.classList.add('text-warning'));
+      }
     }
 
     const isOperationsTab = document.querySelector('.operations-container');
@@ -223,7 +231,7 @@ export default class Settings {
       this.isRecordExpander.forEach((el) => el.classList.add('text_dark'));
     }
 
-    const isAddOperationTab = document.querySelector('.add-operation-image');
+    const isAddOperationTab = document.querySelector('#add-expense');
     if (isAddOperationTab) {
       drawOperations();
     }
@@ -267,9 +275,9 @@ export default class Settings {
           const table = document.querySelectorAll('table');
           table.forEach((tableIn) => tableIn.classList.add('text_dark'));
           const h3Table = document.querySelector('h3');
-          const h4Table = document.querySelector('h4');
+          const h4Table = document.querySelectorAll('h4');
           h3Table.classList.add('text-warning');
-          h4Table.classList.add('text-warning');
+          h4Table.forEach((el) => el.classList.add('text-warning'));
         }
       }
       // dark off
@@ -299,9 +307,9 @@ export default class Settings {
           const table = document.querySelectorAll('table');
           table.forEach((tableIn) => tableIn.classList.remove('text_dark'));
           const h3Table = document.querySelector('h3');
-          const h4Table = document.querySelector('h4');
+          const h4Table = document.querySelectorAll('h4');
           h3Table.classList.remove('text-warning');
-          h4Table.classList.remove('text-warning');
+          h4Table.forEach((el) => el.classList.remove('text-warning'));
         }
         this.buttons.forEach((btn) => {
           btn.classList.remove('dark_btn');

@@ -17,7 +17,7 @@ function drawTable() {
         <th> ${switchLang().selectPeriod}</th>
       </tr>
       <tr>
-        <td class="fw-bold">HOTKEYS</td>
+        <td class="fw-bold">${switchLang().hotkeys.toUpperCase()}</td>
         <td>6</td>
         <td>7</td>
         <td>8</td>
@@ -35,7 +35,7 @@ function drawTable() {
           <th> ${switchLang().settings}</th>
         </tr>
         <tr>
-          <td class="fw-bold">HOTKEYS</td>
+          <td class="fw-bold">${switchLang().hotkeys.toUpperCase()}</td>
           <td>1</td>
           <td>2</td>
           <td>3</td>
@@ -87,8 +87,8 @@ function drawTable() {
       <tr>
         <td class="fw-bold">Opera</td>
         <td colspan="3">
-          <P>Opera 15 or newer: [Alt] + ${switchLang().hotkey}</P>
-          <p>Opera 12.1 or older: [Shift] + [Esc] + ${switchLang().hotkey}</p>
+          <P>${switchLang().operaNew} [Alt] + ${switchLang().hotkey}</P>
+          <p>${switchLang().operaOld} [Shift] + [Esc] + ${switchLang().hotkey}</p>
         </td>
       </tr>
     </table>
