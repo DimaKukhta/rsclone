@@ -23,7 +23,7 @@ export function renderHTML() {
     <div class="container">
         <div class="text-center col-2">
         <div>
-        <img class="pig" src="./assets/icons/Saving.svg" alt="pig">
+        <object data="./assets/icons/Saving.svg" type="image/svg+xml" class="pig"></object>
         <span class="animation-container"></span>
         </div>
         <p class="fw-bold">

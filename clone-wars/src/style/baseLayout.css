@@ -26,7 +26,7 @@
 }
 
 .header {
-  height: 9rem;
+  height: 8rem;
 }
 
 .header-image {
@@ -45,12 +45,12 @@
 main {
   display: flex;
   justify-content: center;
-  height: calc(100% - 19rem);
+  height: calc(100% - 10rem);
 }
 
 /* FOOTER */
 footer {
-  height: 10rem;
+  height: 9rem;
   margin-top: auto;
 }
 
@@ -75,7 +75,7 @@ button:focus {
 }
 
 .footer-btn-image {
-  height: 3rem;
+  height: 2rem;
 }
 
 .btn-add-operation {
@@ -109,7 +109,7 @@ button:focus {
 }
 
 .footer-text {
-  height: 3rem;
+  height: 2rem;
 }
 
 .footer-link {
